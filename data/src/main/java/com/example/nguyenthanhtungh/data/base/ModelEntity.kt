@@ -1,3 +1,3 @@
 package com.example.nguyenthanhtungh.data.base
 
-open class ModelEntity
+abstract class ModelEntity
