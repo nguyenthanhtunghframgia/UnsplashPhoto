@@ -23,9 +23,9 @@ class PhotoEntity(
 class PhotoEntityMapper(
     private val userEntityMapper: UserEntityMapper,
     private val urlsEntityMapper: UrlsEntityMapper
-) : EntityMapper<Photo, PhotoEntity> {
+) : EntityMapper<Photo?, PhotoEntity?> {
 
-    override fun mapToDomain(entity: PhotoEntity?) = Photo(
+    override fun mapToDomain(entity: PhotoEntity?): Photo? = Photo(
         id = entity?.id,
         description = entity?.description,
         user = userEntityMapper.mapToDomain(entity?.user),
@@ -34,7 +34,7 @@ class PhotoEntityMapper(
         height = entity?.height
     )
 
-    override fun mapToEntity(model: Photo?) = PhotoEntity(
+    override fun mapToEntity(model: Photo?): PhotoEntity? = PhotoEntity(
         id = model?.id,
         description = model?.description,
         user = userEntityMapper.mapToEntity(model?.user),

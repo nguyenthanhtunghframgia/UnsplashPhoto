@@ -16,16 +16,16 @@ class UserEntity(
     val bio: String? = null
 ) : ModelEntity()
 
-class UserEntityMapper : EntityMapper<User, UserEntity> {
+class UserEntityMapper : EntityMapper<User?, UserEntity?> {
 
-    override fun mapToDomain(entity: UserEntity?) = User(
+    override fun mapToDomain(entity: UserEntity?): User? = User(
         id = entity?.id,
         name = entity?.name,
         location = entity?.location,
         bio = entity?.bio
     )
 
-    override fun mapToEntity(model: User?) = UserEntity(
+    override fun mapToEntity(model: User?): UserEntity? = UserEntity(
         id = model?.id,
         name = model?.name,
         location = model?.location,
