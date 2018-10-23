@@ -10,7 +10,7 @@ class CollectionUseCase(private val collectionRepository: CollectionRepository) 
 
     override fun createObservable(param: Param?): Single<List<Collection>> {
         param?.let { return collectionRepository.getListCollection() }
-        return Single.error(Throwable(""))
+        return Single.error(Throwable("Invalid Param"))
     }
 
     override fun onCleared() {

@@ -6,5 +6,5 @@ class Collection(
     val id: String? = null,
     val title: String? = null,
     val totalPhoto: Int? = null,
-    val coverPhoto: CoverPhoto? = null
+    val urls: Urls? = null
 ) : BaseModel()

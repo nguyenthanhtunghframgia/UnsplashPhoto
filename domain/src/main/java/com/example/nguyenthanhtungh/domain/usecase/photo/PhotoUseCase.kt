@@ -9,7 +9,7 @@ class PhotoUseCase(private val photoRepository: PhotoRepository) : UseCase<Photo
 
     override fun createObservable(param: Param?): Single<List<Photo>> {
         param?.let { return photoRepository.getListPhoto(it.id) }
-        return Single.error(Throwable(""))
+        return Single.error(Throwable("Invalid Param"))
     }
 
     override fun onCleared() {
