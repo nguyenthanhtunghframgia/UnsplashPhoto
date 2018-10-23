@@ -12,13 +12,17 @@ class CoverPhotoEntity(
 
 class CoverPhotoEntityMapper(
     private val urlsEntityMapper: UrlsEntityMapper
-) : EntityMapper<CoverPhoto?, CoverPhotoEntity?> {
+) : EntityMapper<CoverPhoto, CoverPhotoEntity> {
 
-    override fun mapToDomain(entity: CoverPhotoEntity?): CoverPhoto? = CoverPhoto(
-        urls = urlsEntityMapper.mapToDomain(entity?.urls)
-    )
+    override fun mapToDomain(entity: CoverPhotoEntity): CoverPhoto {
+        return CoverPhoto(
+            urls = urlsEntityMapper.mapToDomain(entity.urls ?: return CoverPhoto())
+        )
+    }
 
-    override fun mapToEntity(model: CoverPhoto?): CoverPhotoEntity? = CoverPhotoEntity(
-        urls = urlsEntityMapper.mapToEntity(model?.urls)
-    )
+    override fun mapToEntity(model: CoverPhoto): CoverPhotoEntity {
+        return CoverPhotoEntity(
+            urls = urlsEntityMapper.mapToEntity(model.urls ?: return CoverPhotoEntity())
+        )
+    }
 }

@@ -18,19 +18,23 @@ class CollectionEntity(
 
 class CollectionEntityMapper(
     private val coverPhotoEntityMapper: CoverPhotoEntityMapper
-) : EntityMapper<Collection?, CollectionEntity?> {
+) : EntityMapper<Collection, CollectionEntity> {
 
-    override fun mapToDomain(entity: CollectionEntity?): Collection? = Collection(
-        id = entity?.id,
-        title = entity?.title,
-        totalPhoto = entity?.totalPhoto,
-        coverPhoto = coverPhotoEntityMapper.mapToDomain(entity?.coverPhoto)
-    )
+    override fun mapToDomain(entity: CollectionEntity): Collection {
+        return Collection(
+            id = entity.id,
+            title = entity.title,
+            totalPhoto = entity.totalPhoto,
+            coverPhoto = coverPhotoEntityMapper.mapToDomain(entity.coverPhoto ?: return Collection())
+        )
+    }
 
-    override fun mapToEntity(model: Collection?): CollectionEntity? = CollectionEntity(
-        id = model?.id,
-        title = model?.title,
-        totalPhoto = model?.totalPhoto,
-        coverPhoto = coverPhotoEntityMapper.mapToEntity(model?.coverPhoto)
-    )
+    override fun mapToEntity(model: Collection): CollectionEntity {
+        return CollectionEntity(
+            id = model.id,
+            title = model.title,
+            totalPhoto = model.totalPhoto,
+            coverPhoto = coverPhotoEntityMapper.mapToEntity(model.coverPhoto ?: return CollectionEntity())
+        )
+    }
 }

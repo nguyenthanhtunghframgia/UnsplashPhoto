@@ -23,23 +23,27 @@ class PhotoEntity(
 class PhotoEntityMapper(
     private val userEntityMapper: UserEntityMapper,
     private val urlsEntityMapper: UrlsEntityMapper
-) : EntityMapper<Photo?, PhotoEntity?> {
+) : EntityMapper<Photo, PhotoEntity> {
 
-    override fun mapToDomain(entity: PhotoEntity?): Photo? = Photo(
-        id = entity?.id,
-        description = entity?.description,
-        user = userEntityMapper.mapToDomain(entity?.user),
-        urls = urlsEntityMapper.mapToDomain(entity?.urls),
-        width = entity?.width,
-        height = entity?.height
-    )
+    override fun mapToDomain(entity: PhotoEntity): Photo {
+        return Photo(
+            id = entity.id,
+            description = entity.description,
+            user = userEntityMapper.mapToDomain(entity.user ?: return Photo()),
+            urls = urlsEntityMapper.mapToDomain(entity.urls ?: return Photo()),
+            width = entity.width,
+            height = entity.height
+        )
+    }
 
-    override fun mapToEntity(model: Photo?): PhotoEntity? = PhotoEntity(
-        id = model?.id,
-        description = model?.description,
-        user = userEntityMapper.mapToEntity(model?.user),
-        urls = urlsEntityMapper.mapToEntity(model?.urls),
-        width = model?.width,
-        height = model?.height
-    )
+    override fun mapToEntity(model: Photo): PhotoEntity {
+        return PhotoEntity(
+            id = model.id,
+            description = model.description,
+            user = userEntityMapper.mapToEntity(model.user ?: return PhotoEntity()),
+            urls = urlsEntityMapper.mapToEntity(model.urls ?: return PhotoEntity()),
+            width = model.width,
+            height = model.height
+        )
+    }
 }

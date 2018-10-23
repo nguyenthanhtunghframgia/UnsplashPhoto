@@ -18,21 +18,21 @@ class UrlsEntity(
     val full: String? = null
 ) : ModelEntity()
 
-class UrlsEntityMapper : EntityMapper<Urls?, UrlsEntity?> {
+class UrlsEntityMapper : EntityMapper<Urls, UrlsEntity> {
 
-    override fun mapToDomain(entity: UrlsEntity?): Urls? = Urls(
-        small = entity?.small,
-        thumb = entity?.thumb,
-        raw = entity?.raw,
-        regular = entity?.regular,
-        full = entity?.full
+    override fun mapToDomain(entity: UrlsEntity): Urls = Urls(
+        small = entity.small,
+        thumb = entity.thumb,
+        raw = entity.raw,
+        regular = entity.regular,
+        full = entity.full
     )
 
-    override fun mapToEntity(model: Urls?): UrlsEntity? = UrlsEntity(
-        small = model?.small,
-        thumb = model?.thumb,
-        raw = model?.raw,
-        regular = model?.regular,
-        full = model?.full
+    override fun mapToEntity(model: Urls): UrlsEntity = UrlsEntity(
+        small = model.small,
+        thumb = model.thumb,
+        raw = model.raw,
+        regular = model.regular,
+        full = model.full
     )
 }
