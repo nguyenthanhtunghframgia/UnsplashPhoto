@@ -20,19 +20,19 @@ class UrlsEntity(
 
 class UrlsEntityMapper : EntityMapper<Urls, UrlsEntity> {
 
-    override fun mapToDomain(entity: UrlsEntity) = Urls(
-        small = entity.small,
-        thumb = entity.thumb,
-        raw = entity.raw,
-        regular = entity.regular,
-        full = entity.full
+    override fun mapToDomain(entity: UrlsEntity?) = Urls(
+        small = entity?.small,
+        thumb = entity?.thumb,
+        raw = entity?.raw,
+        regular = entity?.regular,
+        full = entity?.full
     )
 
-    override fun mapToEntity(model: Urls) = UrlsEntity(
-        small = model.small,
-        thumb = model.thumb,
-        raw = model.raw,
-        regular = model.regular,
-        full = model.full
+    override fun mapToEntity(model: Urls?) = UrlsEntity(
+        small = model?.small,
+        thumb = model?.thumb,
+        raw = model?.raw,
+        regular = model?.regular,
+        full = model?.full
     )
 }

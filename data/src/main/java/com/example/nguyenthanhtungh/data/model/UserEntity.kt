@@ -18,17 +18,17 @@ class UserEntity(
 
 class UserEntityMapper : EntityMapper<User, UserEntity> {
 
-    override fun mapToDomain(entity: UserEntity) = User(
-        id = entity.id,
-        name = entity.name,
-        location = entity.location,
-        bio = entity.bio
+    override fun mapToDomain(entity: UserEntity?) = User(
+        id = entity?.id,
+        name = entity?.name,
+        location = entity?.location,
+        bio = entity?.bio
     )
 
-    override fun mapToEntity(model: User) = UserEntity(
-        id = model.id,
-        name = model.name,
-        location = model.location,
-        bio = model.bio
+    override fun mapToEntity(model: User?) = UserEntity(
+        id = model?.id,
+        name = model?.name,
+        location = model?.location,
+        bio = model?.bio
     )
 }
