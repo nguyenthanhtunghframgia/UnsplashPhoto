@@ -13,37 +13,30 @@ val repositoryModule = module(override = true) {
     single { createUserEntityMapper() }
     single { createCoverPhotoEntityMapper(get()) }
     single { createCollectionEntityMapper(get()) }
-    single { createPhotoEntityMapper(get(),get()) }
+    single { createPhotoEntityMapper(get(), get()) }
 
-    single { createCollectionRepositoryImpl(get(), get()) }
-    single { createPhotoRepositoryImpl(get(), get()) }
-    single { createCollectionRepository(get()) }
-    single { createPhotoRepository(get()) }
+    single { createCollectionRepository(get(), get()) }
+    single { createPhotoRepository(get(), get()) }
 }
 
 fun createUrlsEntityMapper() = UrlsEntityMapper()
 
 fun createUserEntityMapper() = UserEntityMapper()
 
-fun createCoverPhotoEntityMapper(urlsEntityMapper: UrlsEntityMapper)
-        = CoverPhotoEntityMapper(urlsEntityMapper)
+fun createCoverPhotoEntityMapper(urlsEntityMapper: UrlsEntityMapper) = CoverPhotoEntityMapper(urlsEntityMapper)
 
-fun createCollectionEntityMapper(coverPhotoEntityMapper: CoverPhotoEntityMapper)
-        = CollectionEntityMapper(coverPhotoEntityMapper)
+fun createCollectionEntityMapper(coverPhotoEntityMapper: CoverPhotoEntityMapper) =
+    CollectionEntityMapper(coverPhotoEntityMapper)
 
-fun createPhotoEntityMapper(userEntityMapper: UserEntityMapper, urlsEntityMapper: UrlsEntityMapper)
-        = PhotoEntityMapper(userEntityMapper, urlsEntityMapper)
+fun createPhotoEntityMapper(userEntityMapper: UserEntityMapper, urlsEntityMapper: UrlsEntityMapper) =
+    PhotoEntityMapper(userEntityMapper, urlsEntityMapper)
 
-fun createCollectionRepositoryImpl(apiService: ApiService,
-                               collectionEntityMapper: CollectionEntityMapper)
-        = CollectionRepositoryImpl(apiService, collectionEntityMapper)
+fun createCollectionRepository(
+    apiService: ApiService,
+    collectionEntityMapper: CollectionEntityMapper
+): CollectionRepository = CollectionRepositoryImpl(apiService, collectionEntityMapper)
 
-fun createPhotoRepositoryImpl(apiService: ApiService,
-                               photoEntityMapper: PhotoEntityMapper)
-        = PhotoRepositoryImpl(apiService, photoEntityMapper)
-
-fun createCollectionRepository(collectionRepositoryImpl: CollectionRepositoryImpl) : CollectionRepository
-        = collectionRepositoryImpl
-
-fun createPhotoRepository(photoRepositoryImpl: PhotoRepositoryImpl) : PhotoRepository
-        = photoRepositoryImpl
+fun createPhotoRepository(
+    apiService: ApiService,
+    photoEntityMapper: PhotoEntityMapper
+): PhotoRepository = PhotoRepositoryImpl(apiService, photoEntityMapper)
