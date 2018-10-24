@@ -1,40 +1,25 @@
-package com.example.data.di
+package com.example.nguyenthanhtungh.data.di
 
 import com.example.nguyenthanhtungh.data.model.*
-import com.example.nguyenthanhtungh.data.source.local.CollectionLocalDataSource
-import com.example.nguyenthanhtungh.data.source.local.PhotoLocalDataSource
-import com.example.nguyenthanhtungh.data.source.remote.CollectionRemoteDataSource
-import com.example.nguyenthanhtungh.data.source.remote.PhotoRemoteDataSource
 import com.example.nguyenthanhtungh.data.source.remote.network.ApiService
 import com.example.nguyenthanhtungh.data.source.repository.CollectionRepositoryImpl
 import com.example.nguyenthanhtungh.data.source.repository.PhotoRepositoryImpl
+import com.example.nguyenthanhtungh.domain.repository.CollectionRepository
+import com.example.nguyenthanhtungh.domain.repository.PhotoRepository
 import org.koin.dsl.module.module
 
 val repositoryModule = module(override = true) {
-    single { createCollectionLocalDataSource() }
-    single { createPhotoLocalDataSource() }
-    single { createCollectionRemoteDataSource(get()) }
-    single { createPhotoRemoteDataSource(get()) }
     single { createUrlsEntityMapper() }
     single { createUserEntityMapper() }
     single { createCoverPhotoEntityMapper(get()) }
     single { createCollectionEntityMapper(get()) }
     single { createPhotoEntityMapper(get(),get()) }
-    single { createCollectionRepository(get(), get(), get()) }
-    single { createPhotoRepository(get(), get(), get()) }
+
+    single { createCollectionRepositoryImpl(get(), get()) }
+    single { createPhotoRepositoryImpl(get(), get()) }
+    single { createCollectionRepository(get()) }
+    single { createPhotoRepository(get()) }
 }
-
-fun createCollectionLocalDataSource()
-        = CollectionLocalDataSource()
-
-fun createPhotoLocalDataSource()
-        = PhotoLocalDataSource()
-
-fun createCollectionRemoteDataSource(apiService: ApiService)
-        = CollectionRemoteDataSource(apiService)
-
-fun createPhotoRemoteDataSource(apiService: ApiService)
-        = PhotoRemoteDataSource(apiService)
 
 fun createUrlsEntityMapper() = UrlsEntityMapper()
 
@@ -49,12 +34,16 @@ fun createCollectionEntityMapper(coverPhotoEntityMapper: CoverPhotoEntityMapper)
 fun createPhotoEntityMapper(userEntityMapper: UserEntityMapper, urlsEntityMapper: UrlsEntityMapper)
         = PhotoEntityMapper(userEntityMapper, urlsEntityMapper)
 
-fun createCollectionRepository(collectionRemoteDataSource: CollectionRemoteDataSource,
-                               collectionLocalDataSource: CollectionLocalDataSource,
+fun createCollectionRepositoryImpl(apiService: ApiService,
                                collectionEntityMapper: CollectionEntityMapper)
-        = CollectionRepositoryImpl(collectionRemoteDataSource, collectionLocalDataSource, collectionEntityMapper)
+        = CollectionRepositoryImpl(apiService, collectionEntityMapper)
 
-fun createPhotoRepository(photoRemoteDataSource: PhotoRemoteDataSource,
-                               photoLocalDataSource: PhotoLocalDataSource,
+fun createPhotoRepositoryImpl(apiService: ApiService,
                                photoEntityMapper: PhotoEntityMapper)
-        = PhotoRepositoryImpl(photoRemoteDataSource, photoLocalDataSource, photoEntityMapper)
+        = PhotoRepositoryImpl(apiService, photoEntityMapper)
+
+fun createCollectionRepository(collectionRepositoryImpl: CollectionRepositoryImpl) : CollectionRepository
+        = collectionRepositoryImpl
+
+fun createPhotoRepository(photoRepositoryImpl: PhotoRepositoryImpl) : PhotoRepository
+        = photoRepositoryImpl
