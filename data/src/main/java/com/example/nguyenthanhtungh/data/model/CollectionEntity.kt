@@ -7,13 +7,13 @@ import com.google.gson.annotations.SerializedName
 
 class CollectionEntity(
     @SerializedName("id")
-    val id: String? = null,
+    var id: String = "",
     @SerializedName("title")
-    val title: String? = null,
+    var title: String? = null,
     @SerializedName("total_photos")
-    val totalPhoto: Int? = null,
+    var totalPhoto: Int? = null,
     @SerializedName("cover_photo")
-    val coverPhoto: CoverPhotoEntity? = null
+    var coverPhoto: CoverPhotoEntity? = null
 ) : ModelEntity()
 
 class CollectionEntityMapper(

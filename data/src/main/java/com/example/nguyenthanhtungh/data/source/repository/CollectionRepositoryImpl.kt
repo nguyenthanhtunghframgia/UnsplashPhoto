@@ -1,20 +1,19 @@
 package com.example.nguyenthanhtungh.data.source.repository
 
 import com.example.nguyenthanhtungh.data.model.CollectionEntityMapper
-import com.example.nguyenthanhtungh.data.source.CollectionDataSource
+import com.example.nguyenthanhtungh.data.source.remote.network.ApiService
 import com.example.nguyenthanhtungh.domain.model.Collection
 import com.example.nguyenthanhtungh.domain.repository.CollectionRepository
 import io.reactivex.Single
 
 class CollectionRepositoryImpl(
-    val remote: CollectionDataSource.Remote,
-    val local: CollectionDataSource.Local,
+    private val apiService: ApiService,
     private val collectionEntityMapper: CollectionEntityMapper
 ) : CollectionRepository {
 
     override fun getListCollection(): Single<List<Collection>> {
-        return remote.getListCollection().map {
-            it.map { collectionEntityMapper.mapToDomain(it) }
+        return apiService.getListCollection().map { listCollection ->
+            listCollection.map { collectionEntityMapper.mapToDomain(it) }
         }
     }
 }

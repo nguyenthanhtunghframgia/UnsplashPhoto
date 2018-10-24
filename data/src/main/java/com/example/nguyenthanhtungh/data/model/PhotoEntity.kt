@@ -7,17 +7,17 @@ import com.google.gson.annotations.SerializedName
 
 class PhotoEntity(
     @SerializedName("id")
-    val id: String? = null,
+    var id: String = "",
     @SerializedName("description")
-    val description: String? = null,
+    var description: String? = null,
     @SerializedName("user")
-    val user: UserEntity? = null,
+    var user: UserEntity? = null,
     @SerializedName("urls")
-    val urls: UrlsEntity? = null,
+    var urls: UrlsEntity? = null,
     @SerializedName("width")
-    val width: Int? = null,
+    var width: Int? = null,
     @SerializedName("height")
-    val height: Int? = null
+    var height: Int? = null
 ) : ModelEntity()
 
 class PhotoEntityMapper(
