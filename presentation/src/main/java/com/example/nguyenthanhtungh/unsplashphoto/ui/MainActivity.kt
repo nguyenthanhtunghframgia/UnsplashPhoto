@@ -1,12 +1,16 @@
 package com.example.nguyenthanhtungh.unsplashphoto.ui
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import com.example.nguyenthanhtungh.unsplashphoto.R
+import com.example.nguyenthanhtungh.unsplashphoto.base.BaseActivity
 
-class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+class MainActivity : BaseActivity<MainViewModel>() {
+
+    override val viewModel: MainViewModel = MainViewModel()
+
+    override fun initComponent(savedInstanceState: Bundle?) {
+        //todo
     }
+
+    override fun getLayout(): Int = R.layout.activity_main
 }

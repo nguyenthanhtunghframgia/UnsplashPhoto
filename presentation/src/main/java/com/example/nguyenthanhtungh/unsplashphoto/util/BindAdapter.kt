@@ -2,11 +2,20 @@ package com.example.nguyenthanhtungh.unsplashphoto.util
 
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
+import com.example.nguyenthanhtungh.unsplashphoto.R
 
 object BindAdapter {
     @BindingAdapter("imageUrl")
     @JvmStatic
     fun loadImage(imageView: ImageView, image: String?) {
-        //todo
+        Glide.with(imageView.context)
+            .load(image)
+            .apply(
+                RequestOptions.placeholderOf(R.drawable.ic_launcher_foreground)
+                .diskCacheStrategy(DiskCacheStrategy.DATA))
+            .into(imageView)
     }
 }
