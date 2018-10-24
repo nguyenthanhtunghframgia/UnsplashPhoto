@@ -9,8 +9,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 class FragmentHomeViewModel(
-    val collectionItemMapper: CollectionItemMapper,
-    val collectionUseCase: CollectionUseCase
+    private val collectionItemMapper: CollectionItemMapper,
+    private val collectionUseCase: CollectionUseCase
 ) : BaseViewModel() {
     var isLoading = MutableLiveData<Boolean>()
     var isRefresh = MutableLiveData<Boolean>()
@@ -19,9 +19,13 @@ class FragmentHomeViewModel(
 
     fun getListCollectionItem() {
         addDisposable(collectionUseCase.createObservable(CollectionUseCase.Param())
-            .doOnSubscribe { isLoading.value = true }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe {
+                if (isRefresh.value != true) {
+                    isLoading.value = true
+                }
+            }
             .doAfterTerminate {
                 isLoading.value = false
                 isRefresh.value = false
@@ -36,6 +40,7 @@ class FragmentHomeViewModel(
     }
 
     fun refreshData() {
+        isRefresh.value = true
         getListCollectionItem()
     }
 

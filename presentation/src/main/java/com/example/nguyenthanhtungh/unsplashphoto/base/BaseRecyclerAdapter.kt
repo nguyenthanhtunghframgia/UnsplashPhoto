@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.AsyncDifferConfig
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import java.util.concurrent.Executors
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+
 
 abstract class BaseRecyclerAdapter<T>(
     callBack: DiffUtil.ItemCallback<T>
@@ -18,7 +20,11 @@ abstract class BaseRecyclerAdapter<T>(
     abstract fun bindFirstTime(viewBinding: ViewDataBinding)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<ViewDataBinding> {
-        return BaseViewHolder(createBinding(parent = parent, viewType = viewType))
+        return BaseViewHolder(createBinding(parent = parent, viewType = viewType).apply {
+            root.setOnClickListener {
+                bindFirstTime(this)
+            }
+        })
     }
 
     override fun onBindViewHolder(holder: BaseViewHolder<ViewDataBinding>, position: Int) {

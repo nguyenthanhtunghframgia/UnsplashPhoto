@@ -42,6 +42,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, FragmentHomeViewModel>(),
                 addItemDecoration(decoration)
             }
         }
+        viewBinding.swipeLayout.setOnRefreshListener(this@HomeFragment)
 
         viewModel.apply {
             listCollectionItem.observe(this@HomeFragment, Observer {
@@ -60,7 +61,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, FragmentHomeViewModel>(),
     }
 
     private fun goToDetailFragment(it: CollectionItem) {
-        Toast.makeText(context, "Halo", Toast.LENGTH_SHORT).show()
     }
 
     override fun onRefresh() {
