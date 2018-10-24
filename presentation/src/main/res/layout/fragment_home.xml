@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View"/>
+
+        <variable name="fragmentHomeViewModel"
+                  type="com.example.nguyenthanhtungh.unsplashphoto.ui.home.FragmentHomeViewModel">
+
+        </variable>
+
+    </data>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:layout_width="match_parent"
+            android:id="@+id/swipe_layout"
+            android:layout_height="match_parent">
+
+        <FrameLayout android:layout_width="match_parent"
+                     android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:id="@+id/recycler_collection"
+                    android:layout_height="match_parent">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <ProgressBar
+                    android:layout_width="@dimen/dp_56"
+                    android:visibility="@{fragmentHomeViewModel.isLoading?View.VISIBLE:View.GONE}"
+                    android:layout_gravity="bottom|center_horizontal"
+                    android:layout_height="@dimen/dp_56"/>
+
+        </FrameLayout>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+</layout>

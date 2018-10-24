@@ -1,9 +1,11 @@
 package com.example.nguyenthanhtungh.unsplashphoto.di
 
-import com.example.nguyenthanhtungh.unsplashphoto.ui.MainViewModel
+import com.example.nguyenthanhtungh.unsplashphoto.ui.home.FragmentHomeViewModel
+import com.example.nguyenthanhtungh.unsplashphoto.ui.main.MainViewModel
 import org.koin.android.viewmodel.ext.koin.viewModel
 import org.koin.dsl.module.module
 
 val viewModelModule = module(override = true) {
-    viewModel { MainViewModel(get(), get(), get(), get()) }
+    viewModel { MainViewModel() }
+    viewModel { FragmentHomeViewModel(get(), get()) }
 }

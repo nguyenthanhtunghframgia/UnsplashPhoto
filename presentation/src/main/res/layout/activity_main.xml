@@ -1,26 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:id="@+id/frame_layout"
+             android:layout_height="match_parent">
 
-    <data>
-        <variable name="mainViewModel"
-                  type="com.example.nguyenthanhtungh.unsplashphoto.ui.MainViewModel">
-
-        </variable>
-
-    </data>
-
-    <FrameLayout
-            android:layout_width="match_parent"
-            android:id="@+id/frame_layout"
-            android:layout_height="match_parent">
-
-        <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:id="@+id/recycler_collection"
-                android:layout_height="match_parent"/>
-
-    </FrameLayout>
-
-</layout>
+</FrameLayout>
