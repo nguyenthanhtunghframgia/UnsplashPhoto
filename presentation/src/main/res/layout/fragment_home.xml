@@ -17,15 +17,25 @@
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:layout_width="match_parent"
             android:id="@+id/swipe_layout"
-            android:clickable="true"
             android:background="@android:color/white"
             android:layout_height="match_parent">
 
         <FrameLayout android:layout_width="match_parent"
                      android:layout_height="match_parent">
 
+            <androidx.appcompat.widget.Toolbar
+                    android:layout_width="match_parent"
+                    android:id="@+id/toolbar"
+                    android:layout_gravity="top"
+                    android:background="@color/colorPrimary"
+                    android:theme="@style/ToolBarStyle"
+                    android:layout_height="@dimen/dp_56">
+
+            </androidx.appcompat.widget.Toolbar>
+
             <androidx.recyclerview.widget.RecyclerView
                     android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/dp_56"
                     android:id="@+id/recycler_collection"
                     android:layout_height="match_parent">
 
@@ -34,6 +44,12 @@
             <ProgressBar
                     android:layout_width="@dimen/dp_56"
                     android:visibility="@{fragmentHomeViewModel.isLoading?View.VISIBLE:View.GONE}"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:layout_height="@dimen/dp_56"/>
+
+            <ProgressBar
+                    android:layout_width="@dimen/dp_56"
+                    android:visibility="@{fragmentHomeViewModel.isLoadMore?View.VISIBLE:View.GONE}"
                     android:layout_gravity="bottom|center_horizontal"
                     android:layout_height="@dimen/dp_56"/>
 

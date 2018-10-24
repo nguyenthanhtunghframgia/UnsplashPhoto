@@ -17,10 +17,13 @@ class PhotoEntity(
     @SerializedName("width")
     var width: Int? = null,
     @SerializedName("height")
-    var height: Int? = null
+    var height: Int? = null,
+    @SerializedName("links")
+    var linksEntity: LinksEntity? = null
 ) : ModelEntity()
 
 class PhotoEntityMapper(
+    private val linksEntityMapper: LinksEntityMapper,
     private val userEntityMapper: UserEntityMapper,
     private val urlsEntityMapper: UrlsEntityMapper
 ) : EntityMapper<Photo, PhotoEntity> {
@@ -32,7 +35,8 @@ class PhotoEntityMapper(
             user = userEntityMapper.mapToDomain(entity.user ?: return Photo()),
             urls = urlsEntityMapper.mapToDomain(entity.urls ?: return Photo()),
             width = entity.width,
-            height = entity.height
+            height = entity.height,
+            links = linksEntityMapper.mapToDomain(entity.linksEntity ?: return Photo())
         )
     }
 
@@ -43,7 +47,8 @@ class PhotoEntityMapper(
             user = userEntityMapper.mapToEntity(model.user ?: return PhotoEntity()),
             urls = urlsEntityMapper.mapToEntity(model.urls ?: return PhotoEntity()),
             width = model.width,
-            height = model.height
+            height = model.height,
+            linksEntity = linksEntityMapper.mapToEntity(model.links ?: return PhotoEntity())
         )
     }
 }

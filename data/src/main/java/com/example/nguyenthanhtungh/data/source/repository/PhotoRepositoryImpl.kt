@@ -10,8 +10,14 @@ class PhotoRepositoryImpl(
     private val apiService: ApiService,
     private val photoEntityMapper: PhotoEntityMapper
 ) : PhotoRepository {
-    override fun getListPhoto(id: String): Single<List<Photo>> {
-        return apiService.getCollectionPhotos(id).map { listPhotos ->
+    override fun searchListPhoto(query: String, page: Int): Single<List<Photo>> {
+        return apiService.getSearchPhotos(query, page).map { listPhotos ->
+            listPhotos.listPhotos?.map { photoEntityMapper.mapToDomain(it) }
+        }
+    }
+
+    override fun getListPhoto(id: String, page: Int): Single<List<Photo>> {
+        return apiService.getCollectionPhotos(id, page).map { listPhotos ->
             listPhotos.map { photoEntityMapper.mapToDomain(it) }
         }
     }

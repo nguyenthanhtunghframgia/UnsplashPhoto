@@ -13,20 +13,20 @@ class FragmentHomeViewModel(
     private val collectionUseCase: CollectionUseCase
 ) : BaseViewModel() {
     var isLoading = MutableLiveData<Boolean>()
+    var isLoadMore = MutableLiveData<Boolean>()
     var isRefresh = MutableLiveData<Boolean>()
     val errorMessage = MutableLiveData<String>()
     val listCollectionItem = MutableLiveData<List<CollectionItem>>()
+    private var currentPage = 0
 
-    fun getListCollectionItem() {
-        addDisposable(collectionUseCase.createObservable(CollectionUseCase.Param())
+    private fun getListCollectionItem(page: Int) {
+        addDisposable(collectionUseCase.createObservable(CollectionUseCase.Param(page))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .doOnSubscribe {
-                if (isRefresh.value != true) {
-                    isLoading.value = true
-                }
-            }
             .doAfterTerminate {
+                if (isLoadMore.value == true) {
+                    isLoadMore.value = false
+                }
                 isLoading.value = false
                 isRefresh.value = false
             }
@@ -34,18 +34,48 @@ class FragmentHomeViewModel(
                 listCollection.map { collectionItemMapper.mapToPresentation(it) }
             }
             .subscribe({
-                onLoadSuccess(it)
+                onLoadSuccess(page, it)
             }, { onLoadFail(it) })
         )
     }
 
-    fun refreshData() {
-        isRefresh.value = true
-        getListCollectionItem()
+    private fun isFirst() = currentPage == 0
+            && (listCollectionItem.value == null || listCollectionItem.value?.size == 0)
+
+    fun firstLoad() {
+        if (isFirst()) {
+            isLoading.value = true
+            getListCollectionItem(1)
+        }
     }
 
-    private fun onLoadSuccess(list: List<CollectionItem>) {
-        listCollectionItem.value = list
+    fun refreshData() {
+        isRefresh.value = true
+        getListCollectionItem(1)
+    }
+
+    fun onLoadMore() {
+        isLoadMore.value = true
+        getListCollectionItem(currentPage + 1)
+    }
+
+    private fun onLoadSuccess(page: Int, list: List<CollectionItem>) {
+        currentPage = page
+
+        if (isRefresh.value == true || isLoading.value == true) {
+            listCollectionItem.value = list
+            return
+        }
+
+        if (isLoadMore.value == true) {
+            val listAdd = mutableListOf<CollectionItem>()
+            listCollectionItem.value?.let {
+                listAdd.addAll(it)
+            }
+            listAdd.addAll(list)
+            listCollectionItem.value = listAdd
+            return
+        }
     }
 
     private fun onLoadFail(throwable: Throwable) {

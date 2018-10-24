@@ -13,10 +13,12 @@ class PhotoItem(
     val user: UserItem? = null,
     val urls: UrlsItem? = null,
     val width: Int? = null,
-    val height: Int? = null
+    val height: Int? = null,
+    val linksItem: LinksItem? = null
 ) : ModelItem(), Parcelable
 
 class PhotoItemMapper(
+    private val linksItemMapper: LinksItemMapper,
     private val userItemMapper: UserItemMapper,
     private val urlsItemMapper: UrlsItemMapper
 ) : ItemMapper<Photo, PhotoItem> {
@@ -28,7 +30,8 @@ class PhotoItemMapper(
             user = userItemMapper.mapToPresentation(model.user ?: return PhotoItem()),
             urls = urlsItemMapper.mapToPresentation(model.urls ?: return PhotoItem()),
             width = model.width,
-            height = model.height
+            height = model.height,
+            linksItem = linksItemMapper.mapToPresentation(model.links ?: return PhotoItem())
         )
     }
 
@@ -39,7 +42,8 @@ class PhotoItemMapper(
             user = userItemMapper.mapToDomain(modelItem.user ?: return Photo()),
             urls = urlsItemMapper.mapToDomain(modelItem.urls ?: return Photo()),
             width = modelItem.width,
-            height = modelItem.height
+            height = modelItem.height,
+            links = linksItemMapper.mapToDomain(modelItem.linksItem ?: return Photo())
         )
     }
 }
