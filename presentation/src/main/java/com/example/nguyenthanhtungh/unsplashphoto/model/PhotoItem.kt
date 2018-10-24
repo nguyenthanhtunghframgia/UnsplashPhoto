@@ -6,7 +6,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 class PhotoItem(
-    val id: String? = null,
+    val id: String = "",
     val description: String? = null,
     val user: UserItem? = null,
     val urls: UrlsItem? = null,

@@ -7,13 +7,13 @@ import com.example.nguyenthanhtungh.domain.repository.CollectionRepository
 import io.reactivex.Single
 
 class CollectionRepositoryImpl(
-    val apiService: ApiService,
+    private val apiService: ApiService,
     private val collectionEntityMapper: CollectionEntityMapper
 ) : CollectionRepository {
 
     override fun getListCollection(): Single<List<Collection>> {
-        return apiService.getListCollection().map {
-            it.map { collectionEntityMapper.mapToDomain(it) }
+        return apiService.getListCollection().map { listCollection ->
+            listCollection.map { collectionEntityMapper.mapToDomain(it) }
         }
     }
 }
