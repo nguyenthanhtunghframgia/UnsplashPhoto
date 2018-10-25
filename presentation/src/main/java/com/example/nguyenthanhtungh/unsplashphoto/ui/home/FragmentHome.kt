@@ -100,14 +100,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, FragmentHomeViewModel>(),
     }
 
     private fun goToDetailFragment(it: CollectionItem) {
-        if (activity is MainActivity)
-            (activity as MainActivity).apply {
-                val movieDetailFragment = CollectionDetailFragment.newInstance(it.id, it.title?: return)
-                replaceFragment(
-                    movieDetailFragment,
-                    R.id.frame_layout, CollectionDetailFragment.TAG, true
-                )
-            }
+        val movieDetailFragment = CollectionDetailFragment.newInstance(it.id, it.title ?: return)
+        replaceFragment(
+            R.id.frame_layout, movieDetailFragment, CollectionDetailFragment.TAG, true
+        )
     }
 
     override fun onRefresh() {
