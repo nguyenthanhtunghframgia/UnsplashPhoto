@@ -1,11 +1,10 @@
 package com.example.nguyenthanhtungh.unsplashphoto.di
 
-import com.example.nguyenthanhtungh.data.model.LinksEntityMapper
 import com.example.nguyenthanhtungh.unsplashphoto.model.*
 import org.koin.dsl.module.module
 
 val itemMapperModule = module(override = true) {
-    single { LinksEntityMapper() }
+    single { LinksItemMapper() }
     single { UrlsItemMapper() }
     single { UserItemMapper() }
     single { createCoverPhotoItemMapper(get()) }
