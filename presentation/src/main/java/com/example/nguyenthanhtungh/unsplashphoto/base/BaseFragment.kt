@@ -28,7 +28,7 @@ abstract class BaseFragment<ViewBinding : ViewDataBinding, ViewModel : BaseViewM
     }
 
     fun replaceFragment(container: Int, fragment: Fragment, tag: String, addToBackStack: Boolean = false) {
-        activity?.supportFragmentManager?.beginTransaction()?.replace(container, fragment)?.apply {
+       fragmentManager?.beginTransaction()?.replace(container, fragment)?.apply {
             if (addToBackStack) addToBackStack(tag)
         }?.commit()
     }
