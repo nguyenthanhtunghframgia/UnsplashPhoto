@@ -13,7 +13,6 @@ import com.example.nguyenthanhtungh.unsplashphoto.base.EndlessScrollListener
 import com.example.nguyenthanhtungh.unsplashphoto.base.RecyclerItemDecoration
 import com.example.nguyenthanhtungh.unsplashphoto.databinding.FragmentCollectionDetailBinding
 import com.example.nguyenthanhtungh.unsplashphoto.model.PhotoItem
-import com.example.nguyenthanhtungh.unsplashphoto.ui.main.MainActivity
 import com.example.nguyenthanhtungh.unsplashphoto.ui.photodetail.PhotoDetailFragment
 import com.example.nguyenthanhtungh.unsplashphoto.util.ITEM_DECORATION
 import com.example.nguyenthanhtungh.unsplashphoto.util.SPAN_COUNT
@@ -48,11 +47,7 @@ class CollectionDetailFragment : BaseFragment<FragmentCollectionDetailBinding, C
         )
 
         viewDataBinding.onBackPress = View.OnClickListener {
-            if (activity is MainActivity) {
-                (activity as MainActivity).apply {
-                    onBackPressed()
-                }
-            }
+            onBackPress()
         }
 
         arguments?.apply {
@@ -99,13 +94,10 @@ class CollectionDetailFragment : BaseFragment<FragmentCollectionDetailBinding, C
     }
 
     private fun goToDetailFragment(it: PhotoItem) {
-        if (activity is MainActivity)
-            (activity as MainActivity).apply {
-                val photoDetailFragment = PhotoDetailFragment.newInstance(it)
-                replaceFragment(
-                    photoDetailFragment, R.id.frame_layout, PhotoDetailFragment.TAG, true
-                )
-            }
+        val photoDetailFragment = PhotoDetailFragment.newInstance(it)
+        replaceFragment(
+            R.id.frame_layout, photoDetailFragment, PhotoDetailFragment.TAG, true
+        )
     }
 
     override fun onRefresh() {

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import com.example.nguyenthanhtungh.unsplashphoto.ui.main.MainActivity
 
 abstract class BaseFragment<ViewBinding : ViewDataBinding, ViewModel : BaseViewModel> : Fragment() {
     abstract val bindingVariable: Int
@@ -24,6 +25,20 @@ abstract class BaseFragment<ViewBinding : ViewDataBinding, ViewModel : BaseViewM
             executePendingBindings()
         }
         return viewBinding.root
+    }
+
+    fun replaceFragment(container: Int, fragment: Fragment, tag: String, addToBackStack: Boolean = false) {
+        activity?.supportFragmentManager?.beginTransaction()?.replace(container, fragment)?.apply {
+            if (addToBackStack) addToBackStack(tag)
+        }?.commit()
+    }
+
+    fun onBackPress() {
+        if (activity is MainActivity) {
+            (activity as MainActivity).apply {
+                onBackPressed()
+            }
+        }
     }
 
     abstract fun initComponent(viewDataBinding: ViewBinding)
