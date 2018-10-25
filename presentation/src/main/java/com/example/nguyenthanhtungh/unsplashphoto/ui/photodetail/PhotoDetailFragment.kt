@@ -9,6 +9,7 @@ import com.example.nguyenthanhtungh.unsplashphoto.base.BaseFragment
 import com.example.nguyenthanhtungh.unsplashphoto.databinding.FragmentPhotoDetailBinding
 import com.example.nguyenthanhtungh.unsplashphoto.model.PhotoItem
 import com.example.nguyenthanhtungh.unsplashphoto.ui.main.MainActivity
+import com.example.nguyenthanhtungh.unsplashphoto.util.LEVEL_DOWNLOADABLE
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class PhotoDetailFragment : BaseFragment<FragmentPhotoDetailBinding, PhotoDetailViewModel>() {
@@ -31,8 +32,12 @@ class PhotoDetailFragment : BaseFragment<FragmentPhotoDetailBinding, PhotoDetail
 
     override fun initComponent(viewDataBinding: FragmentPhotoDetailBinding) {
 
+        val photoItem = arguments?.getParcelable<PhotoItem>(PHOTO_ITEM)
+
         viewDataBinding.onDownloadClick = View.OnClickListener {
-            viewModel.downloadPhoto()
+            if (viewModel.levelDownload.value == LEVEL_DOWNLOADABLE) {
+                viewModel.downloadPhoto()
+            }
         }
 
         viewDataBinding.onBackPress = View.OnClickListener {

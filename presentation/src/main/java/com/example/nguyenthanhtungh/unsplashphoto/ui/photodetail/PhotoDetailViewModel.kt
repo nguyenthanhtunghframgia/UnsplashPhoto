@@ -6,11 +6,16 @@ import com.example.nguyenthanhtungh.unsplashphoto.model.PhotoItem
 
 class PhotoDetailViewModel : BaseViewModel() {
     val photoItem = MutableLiveData<PhotoItem>()
-    val levelDownload = MutableLiveData<Int>().apply { value = 0 }
+    val levelDownload = MutableLiveData<Int>()
     val isDownloading = MutableLiveData<Boolean>()
 
+
+    fun checkDownloaded() {
+        //todo
+    }
+
+
     fun downloadPhoto() {
-        isDownloading.value = true
-        levelDownload.value = 1
+        //todo
     }
 }
