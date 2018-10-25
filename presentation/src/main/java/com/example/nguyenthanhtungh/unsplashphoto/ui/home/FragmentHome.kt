@@ -38,7 +38,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, FragmentHomeViewModel>(),
     }
 
     override fun initComponent(viewDataBinding: FragmentHomeBinding) {
-        (activity as MainActivity).setSupportActionBar(viewDataBinding.toolbar)
+
+        if (activity is MainActivity) {
+            (activity as MainActivity).setSupportActionBar(viewDataBinding.toolbar)
+        }
 
         val fragmentHomeAdapter = FragmentHomeAdapter(
             onItemClick = {

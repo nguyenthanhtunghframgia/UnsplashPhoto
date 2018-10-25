@@ -6,8 +6,6 @@ import androidx.recyclerview.widget.AsyncDifferConfig
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import java.util.concurrent.Executors
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
-
 
 abstract class BaseRecyclerAdapter<T>(
     callBack: DiffUtil.ItemCallback<T>

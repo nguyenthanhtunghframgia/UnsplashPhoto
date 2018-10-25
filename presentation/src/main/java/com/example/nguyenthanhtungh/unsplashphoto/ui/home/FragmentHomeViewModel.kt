@@ -17,16 +17,14 @@ class FragmentHomeViewModel(
     var isRefresh = MutableLiveData<Boolean>()
     val errorMessage = MutableLiveData<String>()
     val listCollectionItem = MutableLiveData<List<CollectionItem>>()
-    private var currentPage = 0
+    private var currentPage = MutableLiveData<Int>().apply { value = 0 }
 
     private fun getListCollectionItem(page: Int) {
         addDisposable(collectionUseCase.createObservable(CollectionUseCase.Param(page))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doAfterTerminate {
-                if (isLoadMore.value == true) {
-                    isLoadMore.value = false
-                }
+                isLoadMore.value = false
                 isLoading.value = false
                 isRefresh.value = false
             }
@@ -39,7 +37,7 @@ class FragmentHomeViewModel(
         )
     }
 
-    private fun isFirst() = currentPage == 0
+    private fun isFirst() = currentPage.value == 0
             && (listCollectionItem.value == null || listCollectionItem.value?.size == 0)
 
     fun firstLoad() {
@@ -56,11 +54,11 @@ class FragmentHomeViewModel(
 
     fun onLoadMore() {
         isLoadMore.value = true
-        getListCollectionItem(currentPage + 1)
+        getListCollectionItem(currentPage.value?.plus(1) ?: 1)
     }
 
     private fun onLoadSuccess(page: Int, list: List<CollectionItem>) {
-        currentPage = page
+        currentPage.value = page
 
         if (isRefresh.value == true || isLoading.value == true) {
             listCollectionItem.value = list
