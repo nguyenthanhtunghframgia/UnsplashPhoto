@@ -7,18 +7,7 @@ val entityMapperModule = module(override = true) {
     single { LinksEntityMapper() }
     single { UrlsEntityMapper() }
     single { UserEntityMapper() }
-    single { createCoverPhotoEntityMapper(get()) }
-    single { createCollectionEntityMapper(get()) }
-    single { createPhotoEntityMapper(get(), get(), get()) }
+    single { CoverPhotoEntityMapper(get()) }
+    single { CollectionEntityMapper(get()) }
+    single { PhotoEntityMapper(get(), get(), get()) }
 }
-
-fun createCoverPhotoEntityMapper(urlsEntityMapper: UrlsEntityMapper) = CoverPhotoEntityMapper(urlsEntityMapper)
-
-fun createCollectionEntityMapper(coverPhotoEntityMapper: CoverPhotoEntityMapper) =
-    CollectionEntityMapper(coverPhotoEntityMapper)
-
-fun createPhotoEntityMapper(
-    linksEntityMapper: LinksEntityMapper,
-    userEntityMapper: UserEntityMapper,
-    urlsEntityMapper: UrlsEntityMapper
-) = PhotoEntityMapper(linksEntityMapper, userEntityMapper, urlsEntityMapper)
