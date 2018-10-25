@@ -8,5 +8,6 @@ class Photo(
     val user: User? = null,
     val urls: Urls? = null,
     val width: Int? = null,
-    val height: Int? = null
+    val height: Int? = null,
+    val links: Links? = null
 ) : BaseModel()

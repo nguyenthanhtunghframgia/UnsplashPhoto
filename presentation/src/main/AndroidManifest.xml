@@ -4,6 +4,8 @@
           android:versionName="1.0"
           package="com.example.nguyenthanhtungh.unsplashphoto">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
             android:name=".MainApplication"
             android:allowBackup="true"
@@ -13,7 +15,7 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".ui.MainActivity">
+        <activity android:name=".ui.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

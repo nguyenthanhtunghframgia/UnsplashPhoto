@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable name="collection"
+                  type="com.example.nguyenthanhtungh.unsplashphoto.model.CollectionItem">
+
+        </variable>
+    </data>
+
+    <androidx.cardview.widget.CardView
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_200">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <ImageView
+                    android:id="@+id/collection_item_image"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/dp_150"
+                    android:scaleType="centerCrop"
+                    imageUrl="@{collection.coverPhotoItem.urlsItem.regular}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                    android:id="@+id/collection_item_name"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:autoSizeMaxTextSize="@dimen/sp_24"
+                    android:autoSizeMinTextSize="@dimen/sp_12"
+                    android:autoSizeTextType="uniform"
+                    android:ellipsize="end"
+                    android:text="@{collection.title}"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/black"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/collection_item_image"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>

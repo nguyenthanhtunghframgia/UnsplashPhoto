@@ -4,21 +4,21 @@ import com.example.nguyenthanhtungh.data.model.*
 import org.koin.dsl.module.module
 
 val entityMapperModule = module(override = true) {
-    single { createUrlsEntityMapper() }
-    single { createUserEntityMapper() }
+    single { LinksEntityMapper() }
+    single { UrlsEntityMapper() }
+    single { UserEntityMapper() }
     single { createCoverPhotoEntityMapper(get()) }
     single { createCollectionEntityMapper(get()) }
-    single { createPhotoEntityMapper(get(), get()) }
+    single { createPhotoEntityMapper(get(), get(), get()) }
 }
-
-fun createUrlsEntityMapper() = UrlsEntityMapper()
-
-fun createUserEntityMapper() = UserEntityMapper()
 
 fun createCoverPhotoEntityMapper(urlsEntityMapper: UrlsEntityMapper) = CoverPhotoEntityMapper(urlsEntityMapper)
 
 fun createCollectionEntityMapper(coverPhotoEntityMapper: CoverPhotoEntityMapper) =
     CollectionEntityMapper(coverPhotoEntityMapper)
 
-fun createPhotoEntityMapper(userEntityMapper: UserEntityMapper, urlsEntityMapper: UrlsEntityMapper) =
-    PhotoEntityMapper(userEntityMapper, urlsEntityMapper)
+fun createPhotoEntityMapper(
+    linksEntityMapper: LinksEntityMapper,
+    userEntityMapper: UserEntityMapper,
+    urlsEntityMapper: UrlsEntityMapper
+) = PhotoEntityMapper(linksEntityMapper, userEntityMapper, urlsEntityMapper)
