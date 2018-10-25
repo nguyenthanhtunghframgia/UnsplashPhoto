@@ -17,6 +17,7 @@ import com.example.nguyenthanhtungh.unsplashphoto.databinding.FragmentHomeBindin
 import com.example.nguyenthanhtungh.unsplashphoto.model.CollectionItem
 import com.example.nguyenthanhtungh.unsplashphoto.ui.collectiondetail.CollectionDetailFragment
 import com.example.nguyenthanhtungh.unsplashphoto.ui.main.MainActivity
+import com.example.nguyenthanhtungh.unsplashphoto.ui.search.SearchFragment
 import com.example.nguyenthanhtungh.unsplashphoto.util.ITEM_DECORATION
 import com.example.nguyenthanhtungh.unsplashphoto.util.SPAN_COUNT
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -41,7 +42,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, FragmentHomeViewModel>(),
     override fun initComponent(viewDataBinding: FragmentHomeBinding) {
 
         if (activity is MainActivity) {
-            (activity as MainActivity).setSupportActionBar(viewDataBinding.toolbar)
+            (activity as MainActivity).apply {
+                setSupportActionBar(viewDataBinding.toolbar)
+                setTitle(getString(R.string.collection))
+            }
+
         }
 
         val fragmentHomeAdapter = FragmentHomeAdapter(
@@ -90,6 +95,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, FragmentHomeViewModel>(),
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 searchItem.collapseActionView()
+                goToSearchFragment(query)
                 return true
             }
 
@@ -97,6 +103,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, FragmentHomeViewModel>(),
                 return false
             }
         })
+    }
+
+    private fun goToSearchFragment(query: String?) {
+        val searchFragment = SearchFragment.newInstance(query)
+        replaceFragment(
+            R.id.frame_layout, searchFragment, CollectionDetailFragment.TAG, true
+        )
     }
 
     private fun goToDetailFragment(it: CollectionItem) {
