@@ -15,6 +15,7 @@ import com.example.nguyenthanhtungh.unsplashphoto.base.EndlessScrollListener
 import com.example.nguyenthanhtungh.unsplashphoto.base.RecyclerItemDecoration
 import com.example.nguyenthanhtungh.unsplashphoto.databinding.FragmentHomeBinding
 import com.example.nguyenthanhtungh.unsplashphoto.model.CollectionItem
+import com.example.nguyenthanhtungh.unsplashphoto.ui.collectiondetail.CollectionDetailFragment
 import com.example.nguyenthanhtungh.unsplashphoto.ui.main.MainActivity
 import com.example.nguyenthanhtungh.unsplashphoto.util.ITEM_DECORATION
 import com.example.nguyenthanhtungh.unsplashphoto.util.SPAN_COUNT
@@ -99,6 +100,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, FragmentHomeViewModel>(),
     }
 
     private fun goToDetailFragment(it: CollectionItem) {
+        if (activity is MainActivity)
+            (activity as MainActivity).apply {
+                val movieDetailFragment = CollectionDetailFragment.newInstance(it.id, it.title?: return)
+                replaceFragment(
+                    movieDetailFragment,
+                    R.id.frame_layout, CollectionDetailFragment.TAG, true
+                )
+            }
     }
 
     override fun onRefresh() {
