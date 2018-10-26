@@ -18,7 +18,8 @@ class SearchViewModel(
     private val collectionItemMapper: CollectionItemMapper
 ) : BaseViewModel() {
     val queryString = MutableLiveData<String>()
-    val isLoading = MutableLiveData<Boolean>()
+    val isLoadingPhoto = MutableLiveData<Boolean>()
+    val isLoadingCollection = MutableLiveData<Boolean>()
     val isRefresh = MutableLiveData<Boolean>()
     val isLoadMore = MutableLiveData<Boolean>()
     val errorMessage = MutableLiveData<String>()
@@ -31,7 +32,7 @@ class SearchViewModel(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doAfterTerminate {
-                isLoading.value = false
+                isLoadingCollection.value = false
             }
             .map { listCollectionItem ->
                 listCollectionItem.map { collectionItemMapper.mapToPresentation(it) }
@@ -48,7 +49,7 @@ class SearchViewModel(
             .observeOn(AndroidSchedulers.mainThread())
             .doAfterTerminate {
                 isLoadMore.value = false
-                isLoading.value = false
+                isLoadingPhoto.value = false
                 isRefresh.value = false
             }
             .map { listCollectionItem ->
@@ -62,11 +63,12 @@ class SearchViewModel(
 
     private fun isFirst() = currentPage.value == 0
             && (listSearchPhotos.value == null || listSearchPhotos.value?.size == 0)
-            && (listSearchCollection.value == null || listSearchCollection.value?.size == 0)
+            || (listSearchCollection.value == null || listSearchCollection.value?.size == 0)
 
     fun firstLoad(query: String) {
         if (isFirst()) {
-            isLoading.value = true
+            isLoadingPhoto.value = true
+            isLoadingCollection.value = true
             getListSearchCollection(query, 1)
             getListSearchPhoto(query, 1)
         }
@@ -85,7 +87,7 @@ class SearchViewModel(
     private fun onLoadSuccess(page: Int, list: List<PhotoItem>) {
         currentPage.value = page
 
-        if (isRefresh.value == true || isLoading.value == true) {
+        if (isRefresh.value == true || isLoadingPhoto.value == true) {
             listSearchPhotos.value = list
             return
         }

@@ -78,7 +78,7 @@
             <ProgressBar android:layout_width="@dimen/dp_56"
                          android:id="@+id/progress_load"
                          android:layout_height="@dimen/dp_56"
-                         android:visibility="@{searchViewModel.isLoading?View.VISIBLE:View.GONE}"
+                         android:visibility="@{searchViewModel.isLoadingPhoto?View.VISIBLE:View.GONE}"
                          app:layout_constraintTop_toTopOf="@+id/text_title"
                          app:layout_constraintBottom_toBottomOf="parent"
                          app:layout_constraintEnd_toEndOf="parent"
