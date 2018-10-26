@@ -50,16 +50,6 @@ class CollectionDetailFragment : BaseFragment<FragmentCollectionDetailBinding, C
             onBackPress()
         }
 
-        arguments?.apply {
-            getString(COLLECTION_ID)?.apply {
-                viewModel.collectionId.value = this
-            }
-
-            getString(COLLECTION_TITLE)?.apply {
-                viewModel.collectionTitle.value = this
-            }
-        }
-
         val endlessScrollListener = EndlessScrollListener { viewModel.onLoadMore(id) }
         val decoration = RecyclerItemDecoration(ITEM_DECORATION)
         viewDataBinding.apply {
@@ -73,6 +63,11 @@ class CollectionDetailFragment : BaseFragment<FragmentCollectionDetailBinding, C
         viewBinding.swipeLayout.setOnRefreshListener(this@CollectionDetailFragment)
 
         viewModel.apply {
+
+            collectionId.value = arguments?.getString(COLLECTION_ID)
+
+            collectionTitle.value = arguments?.getString(COLLECTION_TITLE)
+
             listCollectionPhotoItem.observe(this@CollectionDetailFragment, Observer {
                 collectionDetailAdapter.submitList(it)
             })

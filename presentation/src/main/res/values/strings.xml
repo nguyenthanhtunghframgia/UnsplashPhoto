@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">UnSplash Photo</string>
     <string name="search_hint">Search</string>
+    <string name="collection">UnSplash Collections</string>
 </resources>
