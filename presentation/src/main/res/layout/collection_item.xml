@@ -35,7 +35,6 @@
                     android:text="@{collection.title}"
                     android:gravity="center"
                     android:maxLines="1"
-                    android:textAllCaps="false"
                     android:textColor="@android:color/black"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

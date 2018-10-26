@@ -96,7 +96,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>(),
             firstLoad(query)
 
             isLoadMore.observe(this@SearchFragment, Observer {
-                if (it == null) return@Observer
+                if (it == true) return@Observer
                 endlessScrollListener.isLoading = it
             })
 

@@ -27,7 +27,6 @@
                     android:text="@{collection.title}"
                     android:gravity="center"
                     android:maxLines="1"
-                    android:textAllCaps="false"
                     android:textColor="@android:color/white"/>
 
         </FrameLayout>
