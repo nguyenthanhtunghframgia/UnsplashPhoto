@@ -58,11 +58,6 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>(),
                     goToDetailFragment(it)
                 }
             )
-        arguments?.apply {
-            getString(QUERY_STRING)?.apply {
-                viewModel.queryString.value = this
-            }
-        }
 
         viewDataBinding.onBackPress = View.OnClickListener {
             onBackPress()
@@ -88,6 +83,9 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>(),
         viewBinding.searchSwipeLayout.setOnRefreshListener(this@SearchFragment)
 
         viewModel.apply {
+
+            queryString.value = arguments?.getString(QUERY_STRING)
+
             listSearchCollection.observe(this@SearchFragment, Observer {
                 searchCollectionAdapter.submitList(it)
             })

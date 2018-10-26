@@ -13,7 +13,7 @@ abstract class AppDataBase : RoomDatabase() {
     abstract fun historyDao(): HistoryDao
 
     companion object {
-        private const val DB_NAME: String = "movie_db"
+        private const val DB_NAME: String = "unsplash"
 
         fun getAppDatabase(context: Context): AppDataBase {
             return Room.databaseBuilder(

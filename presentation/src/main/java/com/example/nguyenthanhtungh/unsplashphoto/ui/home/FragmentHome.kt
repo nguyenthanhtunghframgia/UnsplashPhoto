@@ -54,8 +54,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, FragmentHomeViewModel>(),
                 goToDetailFragment(it)
             }
         )
+
         val endlessScrollListener = EndlessScrollListener { viewModel.onLoadMore() }
         val decoration = RecyclerItemDecoration(ITEM_DECORATION)
+
         viewDataBinding.apply {
             recyclerCollection.apply {
                 adapter = fragmentHomeAdapter
@@ -64,6 +66,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, FragmentHomeViewModel>(),
                 addOnScrollListener(endlessScrollListener)
             }
         }
+
         viewBinding.swipeLayout.setOnRefreshListener(this@HomeFragment)
 
         viewModel.apply {
@@ -108,7 +111,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, FragmentHomeViewModel>(),
     private fun goToSearchFragment(query: String?) {
         val searchFragment = SearchFragment.newInstance(query)
         replaceFragment(
-            R.id.frame_layout, searchFragment, CollectionDetailFragment.TAG, true
+            R.id.frame_layout, searchFragment, SearchFragment.TAG, true
         )
     }
 

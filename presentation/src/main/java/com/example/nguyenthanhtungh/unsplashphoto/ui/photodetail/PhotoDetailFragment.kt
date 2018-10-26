@@ -31,8 +31,6 @@ class PhotoDetailFragment : BaseFragment<FragmentPhotoDetailBinding, PhotoDetail
 
     override fun initComponent(viewDataBinding: FragmentPhotoDetailBinding) {
 
-        val photoItem = arguments?.getParcelable<PhotoItem>(PHOTO_ITEM)
-
         viewDataBinding.onDownloadClick = View.OnClickListener {
             if (viewModel.levelDownload.value == LEVEL_DOWNLOADABLE) {
                 viewModel.downloadPhoto()
@@ -43,13 +41,10 @@ class PhotoDetailFragment : BaseFragment<FragmentPhotoDetailBinding, PhotoDetail
             onBackPress()
         }
 
-        arguments?.apply {
-            getParcelable<PhotoItem>(PHOTO_ITEM)?.apply {
-                viewModel.photoItem.value = this
-            }
-        }
-
         viewModel.apply {
+
+            photoItem.value = arguments?.getParcelable(PHOTO_ITEM)
+
             levelDownload.observe(this@PhotoDetailFragment, Observer {
                 viewDataBinding.photoDetailDownload.setImageLevel(it)
             })
