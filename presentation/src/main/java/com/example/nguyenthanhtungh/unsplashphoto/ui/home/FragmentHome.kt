@@ -22,12 +22,12 @@ import com.example.nguyenthanhtungh.unsplashphoto.util.ITEM_DECORATION
 import com.example.nguyenthanhtungh.unsplashphoto.util.SPAN_COUNT
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class HomeFragment : BaseFragment<FragmentHomeBinding, FragmentHomeViewModel>(),
+class FragmentHome : BaseFragment<FragmentHomeBinding, FragmentHomeViewModel>(),
     SwipeRefreshLayout.OnRefreshListener {
 
     companion object {
         const val TAG = "HomeFragment"
-        fun newInstance() = HomeFragment()
+        fun newInstance() = FragmentHome()
     }
 
     override val layoutId = R.layout.fragment_home
@@ -67,24 +67,24 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, FragmentHomeViewModel>(),
             }
         }
 
-        viewBinding.swipeLayout.setOnRefreshListener(this@HomeFragment)
+        viewBinding.swipeLayout.setOnRefreshListener(this@FragmentHome)
 
         viewModel.apply {
-            listCollectionItem.observe(this@HomeFragment, Observer {
+            listCollectionItem.observe(this@FragmentHome, Observer {
                 fragmentHomeAdapter.submitList(it)
             })
             firstLoad()
 
-            isLoadMore.observe(this@HomeFragment, Observer {
+            isLoadMore.observe(this@FragmentHome, Observer {
                 if (it == null) return@Observer
                 endlessScrollListener.isLoading = it
             })
 
-            isRefresh.observe(this@HomeFragment, Observer {
+            isRefresh.observe(this@FragmentHome, Observer {
                 viewBinding.swipeLayout.apply { isRefreshing = it == true }
             })
 
-            errorMessage.observe(this@HomeFragment, Observer {
+            errorMessage.observe(this@FragmentHome, Observer {
                 Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
             })
         }

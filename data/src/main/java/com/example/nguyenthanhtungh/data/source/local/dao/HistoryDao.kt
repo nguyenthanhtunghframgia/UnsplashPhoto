@@ -12,7 +12,10 @@ interface HistoryDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertHistory(historyEntity: HistoryEntity)
 
-    @Query("SELECT * FROM history LIMIT 5")
+    @Query("DELETE FROM history where id NOT IN (SELECT id from history ORDER BY id DESC LIMIT 5)")
+    fun limitRecord()
+
+    @Query("SELECT * FROM history ORDER BY id DESC LIMIT 5")
     fun getHistory(): Single<List<HistoryEntity>>
 
     @Query("DELETE FROM history")

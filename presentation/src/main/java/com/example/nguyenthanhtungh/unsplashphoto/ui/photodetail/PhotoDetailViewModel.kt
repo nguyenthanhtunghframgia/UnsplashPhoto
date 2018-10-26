@@ -8,12 +8,11 @@ class PhotoDetailViewModel : BaseViewModel() {
     val photoItem = MutableLiveData<PhotoItem>()
     val levelDownload = MutableLiveData<Int>()
     val isDownloading = MutableLiveData<Boolean>()
-
+    val isPermissionGranted = MutableLiveData<Boolean>()
 
     fun checkDownloaded() {
         //todo
     }
-
 
     fun downloadPhoto() {
         //todo
