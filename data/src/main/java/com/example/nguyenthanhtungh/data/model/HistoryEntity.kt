@@ -4,22 +4,22 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.nguyenthanhtungh.data.base.EntityMapper
 import com.example.nguyenthanhtungh.data.base.ModelEntity
-import com.example.nguyenthanhtungh.domain.model.SearchHistory
+import com.example.nguyenthanhtungh.domain.model.History
 
 @Entity(tableName = "history")
 class HistoryEntity(
-    @PrimaryKey(autoGenerate = false)
-    var id: Int = 0,
-    val query: String = ""
+    @PrimaryKey(autoGenerate = true)
+    var id: Int,
+    val query: String
 ) : ModelEntity()
 
-class HistoryEntityMapper : EntityMapper<SearchHistory, HistoryEntity> {
-    override fun mapToDomain(entity: HistoryEntity) = SearchHistory(
+class HistoryEntityMapper : EntityMapper<History, HistoryEntity> {
+    override fun mapToDomain(entity: HistoryEntity) = History(
         id = entity.id,
         query = entity.query
     )
 
-    override fun mapToEntity(model: SearchHistory) = HistoryEntity(
+    override fun mapToEntity(model: History) = HistoryEntity(
         id = model.id,
         query = model.query
     )

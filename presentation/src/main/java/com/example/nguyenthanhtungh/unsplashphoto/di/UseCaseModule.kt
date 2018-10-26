@@ -1,9 +1,11 @@
 package com.example.nguyenthanhtungh.unsplashphoto.di
 
 import com.example.nguyenthanhtungh.domain.repository.CollectionRepository
+import com.example.nguyenthanhtungh.domain.repository.HistoryRepository
 import com.example.nguyenthanhtungh.domain.repository.PhotoRepository
 import com.example.nguyenthanhtungh.domain.usecase.collection.CollectionUseCase
 import com.example.nguyenthanhtungh.domain.usecase.collection.SearchCollectionUseCase
+import com.example.nguyenthanhtungh.domain.usecase.history.GetHistoryUseCase
 import com.example.nguyenthanhtungh.domain.usecase.photo.PhotoUseCase
 import com.example.nguyenthanhtungh.domain.usecase.photo.SearchPhotoUseCase
 import org.koin.dsl.module.module
@@ -13,6 +15,7 @@ val useCaseModule = module(override = true) {
     single { createCollectionUseCase(get()) }
     single { createSearchCollectionUseCase(get()) }
     single { createSearchPhotoUseCase(get()) }
+    single { createGetHistoryUseCase(get()) }
 }
 
 fun createPhotoUseCase(photoRepository: PhotoRepository)
@@ -26,3 +29,6 @@ fun createSearchCollectionUseCase(collectionRepository: CollectionRepository)
 
 fun createSearchPhotoUseCase(photoRepository: PhotoRepository)
         = SearchPhotoUseCase(photoRepository)
+
+fun createGetHistoryUseCase(historyRepository: HistoryRepository)
+        = GetHistoryUseCase(historyRepository)
