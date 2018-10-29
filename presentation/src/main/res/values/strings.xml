@@ -2,4 +2,6 @@
     <string name="app_name">UnSplash Photo</string>
     <string name="search_hint">Search</string>
     <string name="collection">UnSplash Collections</string>
+    <string name="download_success">Download Success</string>
+    <string name="download_fail">Download Fail</string>
 </resources>
