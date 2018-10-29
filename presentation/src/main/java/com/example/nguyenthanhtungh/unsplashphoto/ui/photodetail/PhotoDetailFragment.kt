@@ -131,20 +131,20 @@ class PhotoDetailFragment : BaseFragment<FragmentPhotoDetailBinding, PhotoDetail
 
     private fun downloadPhoto(link: String) {
         try {
-            viewModel.apply {
-                isDownloading.value = true
-                val uri = Uri.parse(link)
-                val request = DownloadManager.Request(uri)
-                request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI or DownloadManager.Request.NETWORK_MOBILE)
-                request.setAllowedOverRoaming(false)
-                request.setTitle(photoItem.value?.id)
-                request.setDescription(photoItem.value?.description)
-                request.setVisibleInDownloadsUi(true)
-                request.setDestinationInExternalPublicDir(
-                    Environment.DIRECTORY_DOWNLOADS, photoItem.value?.description.plus(IMAGE_EXTEND)
+            viewModel.isDownloading.value = true
+            val uri = Uri.parse(link)
+            val request = DownloadManager.Request(uri)
+            request.apply {
+                setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI or DownloadManager.Request.NETWORK_MOBILE)
+                setAllowedOverRoaming(false)
+                setTitle(viewModel.photoItem.value?.id)
+                setDescription(viewModel.photoItem.value?.description)
+                setVisibleInDownloadsUi(true)
+                setDestinationInExternalPublicDir(
+                    Environment.DIRECTORY_DOWNLOADS, viewModel.photoItem.value?.description.plus(IMAGE_EXTEND)
                 )
-                downLoadId.value = downloadManager.enqueue(request)
             }
+            viewModel.downLoadId.value = downloadManager.enqueue(request)
 
         } catch (exception: IllegalStateException) {
             viewModel.errorMessage.value = exception.message
