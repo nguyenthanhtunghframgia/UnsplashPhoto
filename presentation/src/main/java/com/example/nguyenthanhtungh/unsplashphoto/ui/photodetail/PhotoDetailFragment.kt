@@ -15,7 +15,6 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import com.example.nguyenthanhtungh.unsplashphoto.BR
-import com.example.nguyenthanhtungh.unsplashphoto.BuildConfig
 import com.example.nguyenthanhtungh.unsplashphoto.R
 import com.example.nguyenthanhtungh.unsplashphoto.base.BaseFragment
 import com.example.nguyenthanhtungh.unsplashphoto.databinding.FragmentPhotoDetailBinding
@@ -64,8 +63,7 @@ class PhotoDetailFragment : BaseFragment<FragmentPhotoDetailBinding, PhotoDetail
             ) {
                 viewModel.apply {
                     downloadPhoto(
-                        photoItem.value?.urls?.full
-                            .plus(DOWNLOAD_AUTH).plus(BuildConfig.API_KEY)
+                        photoItem.value?.urls?.full ?: return@OnClickListener
                     )
 
                     errorMessage.observe(this@PhotoDetailFragment, Observer {
@@ -92,17 +90,10 @@ class PhotoDetailFragment : BaseFragment<FragmentPhotoDetailBinding, PhotoDetail
                             when (it) {
                                 DownloadManager.STATUS_SUCCESSFUL -> {
                                     levelDownload.value = LEVEL_DOWNLOADED
-
-                                    Toast.makeText(
-                                        context, getString(R.string.download_success),
-                                        Toast.LENGTH_SHORT
-                                    ).show()
+                                    DialogUtils.showToast(context, getString(R.string.download_success))
                                 }
                                 else ->
-                                    Toast.makeText(
-                                        context, getString(R.string.download_fail),
-                                        Toast.LENGTH_SHORT
-                                    ).show()
+                                    DialogUtils.showToast(context, getString(R.string.download_fail))
                             }
                         })
                     }
@@ -140,18 +131,20 @@ class PhotoDetailFragment : BaseFragment<FragmentPhotoDetailBinding, PhotoDetail
 
     private fun downloadPhoto(link: String) {
         try {
-            viewModel.isDownloading.value = true
-            val uri = Uri.parse(link)
-            val request = DownloadManager.Request(uri)
-            request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI or DownloadManager.Request.NETWORK_MOBILE)
-            request.setAllowedOverRoaming(false)
-            request.setTitle(viewModel.photoItem.value?.id)
-            request.setDescription(viewModel.photoItem.value?.description)
-            request.setVisibleInDownloadsUi(true)
-            request.setDestinationInExternalPublicDir(
-                Environment.DIRECTORY_DOWNLOADS, viewModel.photoItem.value?.description.plus(IMAGE_EXTEND)
-            )
-            viewModel.downLoadId.value = downloadManager.enqueue(request)
+            viewModel.apply {
+                isDownloading.value = true
+                val uri = Uri.parse(link)
+                val request = DownloadManager.Request(uri)
+                request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI or DownloadManager.Request.NETWORK_MOBILE)
+                request.setAllowedOverRoaming(false)
+                request.setTitle(photoItem.value?.id)
+                request.setDescription(photoItem.value?.description)
+                request.setVisibleInDownloadsUi(true)
+                request.setDestinationInExternalPublicDir(
+                    Environment.DIRECTORY_DOWNLOADS, photoItem.value?.description.plus(IMAGE_EXTEND)
+                )
+                downLoadId.value = downloadManager.enqueue(request)
+            }
 
         } catch (exception: IllegalStateException) {
             viewModel.errorMessage.value = exception.message
@@ -159,23 +152,26 @@ class PhotoDetailFragment : BaseFragment<FragmentPhotoDetailBinding, PhotoDetail
     }
 
     private fun getDownloadStatus() {
-        val query = DownloadManager.Query()
-        query.setFilterById(viewModel.downLoadId.value ?: -1)
-        val cursor = downloadManager.query(query)
-        if (cursor.moveToFirst()) {
-            val columnIndex = cursor.getColumnIndex(DownloadManager.COLUMN_STATUS)
-            viewModel.downLoadStatus.value = cursor.getInt(columnIndex)
-        } else {
-            viewModel.downLoadStatus.value = DownloadManager.ERROR_UNKNOWN
+        viewModel.apply {
+            val query = DownloadManager.Query()
+            query.setFilterById(downLoadId.value ?: -1)
+            val cursor = downloadManager.query(query)
+            if (cursor.moveToFirst()) {
+                val columnIndex = cursor.getColumnIndex(DownloadManager.COLUMN_STATUS)
+                downLoadStatus.value = cursor.getInt(columnIndex)
+            } else {
+                downLoadStatus.value = DownloadManager.ERROR_UNKNOWN
+            }
+            isDownloading.value = false
         }
-        viewModel.isDownloading.value = false
     }
 
     private fun cancelDownLoad() {
-        downloadManager.remove(viewModel.downLoadId.value ?: -1)
         viewModel.apply {
+            downloadManager.remove(downLoadId.value ?: -1)
             isDownloading.value = false
             levelDownload.value = LEVEL_DOWNLOADABLE
+
         }
     }
 }
