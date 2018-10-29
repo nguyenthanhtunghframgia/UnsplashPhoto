@@ -4,4 +4,8 @@
     <string name="collection">UnSplash Collections</string>
     <string name="download_success">Download Success</string>
     <string name="download_fail">Download Fail</string>
+    <string name="title_user">My Photo</string>
+    <string name="title_discover">Discover</string>
+    <string name="title_collection">Collections</string>
+    <string name="discover">Discover Photos</string>
 </resources>

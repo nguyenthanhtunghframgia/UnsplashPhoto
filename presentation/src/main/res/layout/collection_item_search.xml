@@ -27,6 +27,7 @@
                     android:text="@{collection.title}"
                     android:gravity="center"
                     android:maxLines="1"
+                    android:background="@drawable/ic_round_corner_button"
                     android:textColor="@android:color/white"/>
 
         </FrameLayout>

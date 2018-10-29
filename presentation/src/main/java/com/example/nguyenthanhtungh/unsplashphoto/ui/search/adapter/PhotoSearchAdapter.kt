@@ -10,7 +10,7 @@ import com.example.nguyenthanhtungh.unsplashphoto.base.BaseRecyclerAdapter
 import com.example.nguyenthanhtungh.unsplashphoto.databinding.PhotoItemBinding
 import com.example.nguyenthanhtungh.unsplashphoto.model.PhotoItem
 
-class PhotoAdapter(val onItemClick: (PhotoItem) -> Unit) : BaseRecyclerAdapter<PhotoItem>(
+class PhotoSearchAdapter(val onItemClick: (PhotoItem) -> Unit) : BaseRecyclerAdapter<PhotoItem>(
     object : DiffUtil.ItemCallback<PhotoItem>() {
 
         override fun areContentsTheSame(oldItem: PhotoItem, newItem: PhotoItem): Boolean {

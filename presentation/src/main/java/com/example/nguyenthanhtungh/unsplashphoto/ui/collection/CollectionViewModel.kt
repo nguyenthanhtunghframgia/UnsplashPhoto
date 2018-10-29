@@ -1,4 +1,4 @@
-package com.example.nguyenthanhtungh.unsplashphoto.ui.home
+package com.example.nguyenthanhtungh.unsplashphoto.ui.collection
 
 import androidx.lifecycle.MutableLiveData
 import com.example.nguyenthanhtungh.domain.usecase.collection.CollectionUseCase
@@ -8,7 +8,7 @@ import com.example.nguyenthanhtungh.unsplashphoto.model.CollectionItemMapper
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-class FragmentHomeViewModel(
+class CollectionViewModel(
     private val collectionItemMapper: CollectionItemMapper,
     private val collectionUseCase: CollectionUseCase
 ) : BaseViewModel() {

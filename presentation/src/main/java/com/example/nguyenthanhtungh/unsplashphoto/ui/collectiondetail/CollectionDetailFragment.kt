@@ -2,7 +2,6 @@ package com.example.nguyenthanhtungh.unsplashphoto.ui.collectiondetail
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -14,6 +13,7 @@ import com.example.nguyenthanhtungh.unsplashphoto.base.RecyclerItemDecoration
 import com.example.nguyenthanhtungh.unsplashphoto.databinding.FragmentCollectionDetailBinding
 import com.example.nguyenthanhtungh.unsplashphoto.model.PhotoItem
 import com.example.nguyenthanhtungh.unsplashphoto.ui.photodetail.PhotoDetailFragment
+import com.example.nguyenthanhtungh.unsplashphoto.util.DialogUtils
 import com.example.nguyenthanhtungh.unsplashphoto.util.ITEM_DECORATION
 import com.example.nguyenthanhtungh.unsplashphoto.util.SPAN_COUNT
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -83,7 +83,7 @@ class CollectionDetailFragment : BaseFragment<FragmentCollectionDetailBinding, C
             })
 
             errorMessage.observe(this@CollectionDetailFragment, Observer {
-                Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+                DialogUtils.showToast(context, it)
             })
         }
     }
