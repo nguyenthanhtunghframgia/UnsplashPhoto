@@ -21,7 +21,6 @@ import com.example.nguyenthanhtungh.unsplashphoto.model.PhotoItem
 import com.example.nguyenthanhtungh.unsplashphoto.util.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
-
 class PhotoDetailFragment : BaseFragment<FragmentPhotoDetailBinding, PhotoDetailViewModel>() {
 
     companion object {
@@ -49,6 +48,11 @@ class PhotoDetailFragment : BaseFragment<FragmentPhotoDetailBinding, PhotoDetail
         viewModel.apply {
 
             photoItem.value = arguments?.getParcelable(PHOTO_ITEM)
+
+            checkDownloaded(
+                (Environment.getExternalStorageDirectory().toString())
+                    .plus(photoItem.value?.id.plus(IMAGE_EXTEND))
+            )
 
             levelDownload.observe(this@PhotoDetailFragment, Observer {
                 viewDataBinding.photoDetailDownload.setImageLevel(it)
@@ -143,7 +147,7 @@ class PhotoDetailFragment : BaseFragment<FragmentPhotoDetailBinding, PhotoDetail
                 setDescription(viewModel.photoItem.value?.description)
                 setVisibleInDownloadsUi(true)
                 setDestinationInExternalPublicDir(
-                    Environment.DIRECTORY_DOWNLOADS, viewModel.photoItem.value?.description.plus(IMAGE_EXTEND)
+                    Environment.DIRECTORY_DOWNLOADS, viewModel.photoItem.value?.id.plus(IMAGE_EXTEND)
                 )
             }
             viewModel.downLoadId.value = downloadManager.enqueue(request)

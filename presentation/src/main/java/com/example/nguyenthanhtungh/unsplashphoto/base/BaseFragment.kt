@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
@@ -28,7 +29,7 @@ abstract class BaseFragment<ViewBinding : ViewDataBinding, ViewModel : BaseViewM
     }
 
     fun replaceFragment(container: Int, fragment: Fragment, tag: String, addToBackStack: Boolean = false) {
-       fragmentManager?.beginTransaction()?.replace(container, fragment)?.apply {
+        fragmentManager?.beginTransaction()?.replace(container, fragment)?.apply {
             if (addToBackStack) addToBackStack(tag)
         }?.commit()
     }
@@ -37,6 +38,15 @@ abstract class BaseFragment<ViewBinding : ViewDataBinding, ViewModel : BaseViewM
         if (activity is MainActivity) {
             (activity as MainActivity).apply {
                 onBackPressed()
+            }
+        }
+    }
+
+    fun setToolbar(toolbar: Toolbar, title: String) {
+        if (activity is MainActivity) {
+            (activity as MainActivity).apply {
+                setSupportActionBar(toolbar)
+                setTitle(title)
             }
         }
     }

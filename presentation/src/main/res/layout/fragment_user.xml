@@ -1,7 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-</LinearLayout>
+    <data>
+
+        <import type="android.view.View"/>
+
+        <variable name="userViewModel"
+                  type="com.example.nguyenthanhtungh.unsplashphoto.ui.user.UserViewModel">
+
+        </variable>
+
+    </data>
+
+    <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.Toolbar
+                android:layout_width="match_parent"
+                android:id="@+id/toolbar"
+                android:layout_gravity="top"
+                android:background="@color/colorPrimary"
+                android:theme="@style/ToolBarStyle"
+                android:layout_height="@dimen/dp_56">
+
+        </androidx.appcompat.widget.Toolbar>
+
+    </FrameLayout>
+
+</layout>

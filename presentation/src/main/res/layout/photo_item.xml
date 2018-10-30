@@ -35,7 +35,7 @@
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:ellipsize="end"
-                    android:text="@{photo.description}"
+                    text="@{photo.description}"
                     android:gravity="center"
                     android:maxLines="1"
                     android:textColor="@android:color/black"

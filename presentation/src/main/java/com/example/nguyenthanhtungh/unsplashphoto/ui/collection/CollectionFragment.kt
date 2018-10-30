@@ -41,12 +41,7 @@ class CollectionFragment : BaseFragment<FragmentCollectionBinding, CollectionVie
 
     override fun initComponent(viewDataBinding: FragmentCollectionBinding) {
 
-        if (activity is MainActivity) {
-            (activity as MainActivity).apply {
-                setSupportActionBar(viewDataBinding.toolbar)
-                setTitle(getString(R.string.collection))
-            }
-        }
+        setToolbar(viewDataBinding.toolbar,getString(R.string.collection))
 
         val fragmentHomeAdapter = CollectionAdapter(
             onItemClick = {
