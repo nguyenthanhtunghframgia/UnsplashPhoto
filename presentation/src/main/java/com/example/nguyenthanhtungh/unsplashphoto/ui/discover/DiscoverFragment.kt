@@ -42,12 +42,7 @@ class DiscoverFragment : BaseFragment<FragmentDiscoverBinding, DiscoverViewModel
 
     override fun initComponent(viewDataBinding: FragmentDiscoverBinding) {
 
-        if (activity is MainActivity) {
-            (activity as MainActivity).apply {
-                setSupportActionBar(viewDataBinding.toolbar)
-                setTitle(getString(R.string.discover))
-            }
-        }
+        setToolbar(viewDataBinding.toolbar, getString(R.string.discover))
 
         val discoverAdapter = DiscoverAdapter(
             onItemClick = {

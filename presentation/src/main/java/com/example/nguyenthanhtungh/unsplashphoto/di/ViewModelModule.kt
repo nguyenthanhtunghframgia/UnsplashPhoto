@@ -6,6 +6,7 @@ import com.example.nguyenthanhtungh.unsplashphoto.ui.discover.DiscoverViewModel
 import com.example.nguyenthanhtungh.unsplashphoto.ui.main.MainViewModel
 import com.example.nguyenthanhtungh.unsplashphoto.ui.photodetail.PhotoDetailViewModel
 import com.example.nguyenthanhtungh.unsplashphoto.ui.search.SearchViewModel
+import com.example.nguyenthanhtungh.unsplashphoto.ui.user.UserViewModel
 import org.koin.android.viewmodel.experimental.builder.viewModel
 import org.koin.dsl.module.module
 
@@ -16,4 +17,5 @@ val viewModelModule = module(override = true) {
     viewModel<PhotoDetailViewModel>()
     viewModel<SearchViewModel>()
     viewModel<DiscoverViewModel>()
+    viewModel<UserViewModel>()
 }

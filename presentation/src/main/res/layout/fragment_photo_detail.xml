@@ -55,7 +55,7 @@
                 app:layout_constraintBottom_toTopOf="@+id/photo_owner_name"/>
 
         <TextView
-                android:text="@{photoDetail.photoItem.description}"
+                text="@{photoDetail.photoItem.description}"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/dp_56"
                 android:background="@color/colorPrimary"

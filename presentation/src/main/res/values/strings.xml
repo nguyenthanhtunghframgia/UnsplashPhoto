@@ -8,4 +8,5 @@
     <string name="title_discover">Discover</string>
     <string name="title_collection">Collections</string>
     <string name="discover">Discover Photos</string>
+    <string name="user">User</string>
 </resources>
