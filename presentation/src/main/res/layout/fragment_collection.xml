@@ -5,8 +5,8 @@
 
         <import type="android.view.View"/>
 
-        <variable name="fragmentHomeViewModel"
-                  type="com.example.nguyenthanhtungh.unsplashphoto.ui.home.FragmentHomeViewModel">
+        <variable name="collectionViewModel"
+                  type="com.example.nguyenthanhtungh.unsplashphoto.ui.collection.CollectionViewModel">
 
         </variable>
 
@@ -41,13 +41,13 @@
 
             <ProgressBar
                     android:layout_width="@dimen/dp_56"
-                    android:visibility="@{fragmentHomeViewModel.isLoading?View.VISIBLE:View.GONE}"
+                    android:visibility="@{collectionViewModel.isLoading?View.VISIBLE:View.GONE}"
                     android:layout_gravity="center_vertical|center_horizontal"
                     android:layout_height="@dimen/dp_56"/>
 
             <ProgressBar
                     android:layout_width="@dimen/dp_56"
-                    android:visibility="@{fragmentHomeViewModel.isLoadMore?View.VISIBLE:View.GONE}"
+                    android:visibility="@{collectionViewModel.isLoadMore?View.VISIBLE:View.GONE}"
                     android:layout_gravity="bottom|center_horizontal"
                     android:layout_height="@dimen/dp_56"/>
 

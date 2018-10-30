@@ -11,7 +11,6 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.view.View
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import com.example.nguyenthanhtungh.unsplashphoto.BR
@@ -58,16 +57,19 @@ class PhotoDetailFragment : BaseFragment<FragmentPhotoDetailBinding, PhotoDetail
 
         viewDataBinding.onDownloadClick = View.OnClickListener {
             requestPermission()
-            if (viewModel.levelDownload.value == LEVEL_DOWNLOADABLE
-                && viewModel.isPermissionGranted.value == true
-            ) {
+            if (viewModel.levelDownload.value == LEVEL_DOWNLOADABLE) {
                 viewModel.apply {
-                    downloadPhoto(
-                        photoItem.value?.urls?.full ?: return@OnClickListener
-                    )
+
+                    isPermissionGranted.observe(this@PhotoDetailFragment, Observer {
+                        when (isPermissionGranted.value) {
+                            true -> downloadPhoto(
+                                photoItem.value?.urls?.full ?: return@Observer
+                            )
+                        }
+                    })
 
                     errorMessage.observe(this@PhotoDetailFragment, Observer {
-                        Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+                        DialogUtils.showToast(context, it)
                         isDownloading.value = false
                         levelDownload.value = LEVEL_DOWNLOADABLE
                     })
@@ -171,7 +173,6 @@ class PhotoDetailFragment : BaseFragment<FragmentPhotoDetailBinding, PhotoDetail
             downloadManager.remove(downLoadId.value ?: -1)
             isDownloading.value = false
             levelDownload.value = LEVEL_DOWNLOADABLE
-
         }
     }
 }

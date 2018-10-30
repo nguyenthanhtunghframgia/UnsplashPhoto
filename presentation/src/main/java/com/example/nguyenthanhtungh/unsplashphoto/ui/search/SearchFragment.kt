@@ -2,7 +2,6 @@ package com.example.nguyenthanhtungh.unsplashphoto.ui.search
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,8 +16,9 @@ import com.example.nguyenthanhtungh.unsplashphoto.model.CollectionItem
 import com.example.nguyenthanhtungh.unsplashphoto.model.PhotoItem
 import com.example.nguyenthanhtungh.unsplashphoto.ui.collectiondetail.CollectionDetailFragment
 import com.example.nguyenthanhtungh.unsplashphoto.ui.photodetail.PhotoDetailFragment
-import com.example.nguyenthanhtungh.unsplashphoto.ui.search.adapter.CollectionAdapter
-import com.example.nguyenthanhtungh.unsplashphoto.ui.search.adapter.PhotoAdapter
+import com.example.nguyenthanhtungh.unsplashphoto.ui.search.adapter.CollectionSearchAdapter
+import com.example.nguyenthanhtungh.unsplashphoto.ui.search.adapter.PhotoSearchAdapter
+import com.example.nguyenthanhtungh.unsplashphoto.util.DialogUtils
 import com.example.nguyenthanhtungh.unsplashphoto.util.ITEM_DECORATION
 import com.example.nguyenthanhtungh.unsplashphoto.util.SPAN_COUNT
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -46,14 +46,14 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>(),
         val query = arguments?.getString(QUERY_STRING) ?: return
 
         val searchCollectionAdapter =
-            CollectionAdapter(
+            CollectionSearchAdapter(
                 onItemClick = {
                     goToCollectionDetailFragment(it)
                 }
             )
 
         val searchPhotoAdapter =
-            PhotoAdapter(
+            PhotoSearchAdapter(
                 onItemClick = {
                     goToDetailFragment(it)
                 }
@@ -105,7 +105,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>(),
             })
 
             errorMessage.observe(this@SearchFragment, Observer {
-                Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+                DialogUtils.showToast(context, it)
             })
         }
     }

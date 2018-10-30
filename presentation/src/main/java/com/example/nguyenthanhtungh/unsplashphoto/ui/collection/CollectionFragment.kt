@@ -1,9 +1,8 @@
-package com.example.nguyenthanhtungh.unsplashphoto.ui.home
+package com.example.nguyenthanhtungh.unsplashphoto.ui.collection
 
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
-import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
@@ -13,43 +12,43 @@ import com.example.nguyenthanhtungh.unsplashphoto.R
 import com.example.nguyenthanhtungh.unsplashphoto.base.BaseFragment
 import com.example.nguyenthanhtungh.unsplashphoto.base.EndlessScrollListener
 import com.example.nguyenthanhtungh.unsplashphoto.base.RecyclerItemDecoration
-import com.example.nguyenthanhtungh.unsplashphoto.databinding.FragmentHomeBinding
+import com.example.nguyenthanhtungh.unsplashphoto.databinding.FragmentCollectionBinding
 import com.example.nguyenthanhtungh.unsplashphoto.model.CollectionItem
 import com.example.nguyenthanhtungh.unsplashphoto.ui.collectiondetail.CollectionDetailFragment
 import com.example.nguyenthanhtungh.unsplashphoto.ui.main.MainActivity
 import com.example.nguyenthanhtungh.unsplashphoto.ui.search.SearchFragment
+import com.example.nguyenthanhtungh.unsplashphoto.util.DialogUtils
 import com.example.nguyenthanhtungh.unsplashphoto.util.ITEM_DECORATION
 import com.example.nguyenthanhtungh.unsplashphoto.util.SPAN_COUNT
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class FragmentHome : BaseFragment<FragmentHomeBinding, FragmentHomeViewModel>(),
+class CollectionFragment : BaseFragment<FragmentCollectionBinding, CollectionViewModel>(),
     SwipeRefreshLayout.OnRefreshListener {
 
     companion object {
-        const val TAG = "HomeFragment"
-        fun newInstance() = FragmentHome()
+        const val TAG = "CollectionFragment"
+        fun newInstance() = CollectionFragment()
     }
 
-    override val layoutId = R.layout.fragment_home
-    override val viewModel by viewModel<FragmentHomeViewModel>()
-    override val bindingVariable: Int = BR.fragmentHomeViewModel
+    override val layoutId = R.layout.fragment_collection
+    override val viewModel by viewModel<CollectionViewModel>()
+    override val bindingVariable: Int = BR.collectionViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
     }
 
-    override fun initComponent(viewDataBinding: FragmentHomeBinding) {
+    override fun initComponent(viewDataBinding: FragmentCollectionBinding) {
 
         if (activity is MainActivity) {
             (activity as MainActivity).apply {
                 setSupportActionBar(viewDataBinding.toolbar)
                 setTitle(getString(R.string.collection))
             }
-
         }
 
-        val fragmentHomeAdapter = FragmentHomeAdapter(
+        val fragmentHomeAdapter = CollectionAdapter(
             onItemClick = {
                 goToDetailFragment(it)
             }
@@ -67,25 +66,25 @@ class FragmentHome : BaseFragment<FragmentHomeBinding, FragmentHomeViewModel>(),
             }
         }
 
-        viewBinding.swipeLayout.setOnRefreshListener(this@FragmentHome)
+        viewBinding.swipeLayout.setOnRefreshListener(this@CollectionFragment)
 
         viewModel.apply {
-            listCollectionItem.observe(this@FragmentHome, Observer {
+            listCollectionItem.observe(this@CollectionFragment, Observer {
                 fragmentHomeAdapter.submitList(it)
             })
             firstLoad()
 
-            isLoadMore.observe(this@FragmentHome, Observer {
+            isLoadMore.observe(this@CollectionFragment, Observer {
                 if (it == null) return@Observer
                 endlessScrollListener.isLoading = it
             })
 
-            isRefresh.observe(this@FragmentHome, Observer {
+            isRefresh.observe(this@CollectionFragment, Observer {
                 viewBinding.swipeLayout.apply { isRefreshing = it == true }
             })
 
-            errorMessage.observe(this@FragmentHome, Observer {
-                Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+            errorMessage.observe(this@CollectionFragment, Observer {
+                DialogUtils.showToast(context, it)
             })
         }
     }

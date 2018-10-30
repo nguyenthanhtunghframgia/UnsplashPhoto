@@ -2,6 +2,7 @@ package com.example.nguyenthanhtungh.data
 
 const val BASE_URL = "https://api.unsplash.com/"
 const val COLLECTION_LIST = "collections/"
+const val DISCOVER_LIST = "/photos"
 const val SEARCH_COLLECTION_LIST = "search/collections/"
 const val SEARCH_PHOTOS = "/search/photos"
 const val COLLECTION_PHOTOS = "collections/{id}/photos"

@@ -11,6 +11,11 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiService {
+    @GET(DISCOVER_LIST)
+    fun getListDiscover(
+        @Query(PATH_PAGE) page: Int
+    ): Single<List<PhotoEntity>>
+
     @GET(COLLECTION_LIST)
     fun getListCollection(
         @Query(PATH_PAGE) page: Int
