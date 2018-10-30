@@ -9,4 +9,6 @@
     <string name="title_collection">Collections</string>
     <string name="discover">Discover Photos</string>
     <string name="user">User</string>
+    <string name="delete_complete">Delete complete</string>
+    <string name="delete_fail">Delete fail</string>
 </resources>

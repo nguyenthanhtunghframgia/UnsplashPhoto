@@ -7,3 +7,4 @@ const val LEVEL_DOWNLOADED = 1
 const val MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 100
 const val IMAGE_EXTEND = ".jpg"
 const val DOWNLOAD_AUTH = "?client_id="
+const val DIVIDE = "/"

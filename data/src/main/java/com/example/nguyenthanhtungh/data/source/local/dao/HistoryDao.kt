@@ -10,14 +10,14 @@ import io.reactivex.Single
 @Dao
 interface HistoryDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertHistory(historyEntity: HistoryEntity)
+    fun insertHistory(historyEntity: HistoryEntity): Long
 
-    @Query("DELETE FROM history where id NOT IN (SELECT id from history ORDER BY id DESC LIMIT 5)")
-    fun limitRecord()
+    @Query("DELETE FROM history where id NOT IN (SELECT id from history ORDER BY id DESC LIMIT 10)")
+    fun limitRecord() : Int
 
-    @Query("SELECT * FROM history ORDER BY id DESC LIMIT 5")
+    @Query("SELECT * FROM history")
     fun getHistory(): Single<List<HistoryEntity>>
 
     @Query("DELETE FROM history")
-    fun deleteAll()
+    fun deleteAll() : Int
 }

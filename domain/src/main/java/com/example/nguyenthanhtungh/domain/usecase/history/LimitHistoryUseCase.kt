@@ -1,15 +1,18 @@
 package com.example.nguyenthanhtungh.domain.usecase.history
 
-import com.example.nguyenthanhtungh.domain.model.History
 import com.example.nguyenthanhtungh.domain.repository.HistoryRepository
 import com.example.nguyenthanhtungh.domain.usecase.UseCase
 import io.reactivex.Single
 
-class GetHistoryUseCase(private val historyRepository: HistoryRepository) :
-    UseCase<GetHistoryUseCase.Param, Single<List<History>>>() {
+class LimitHistoryUseCase(private val historyRepository: HistoryRepository) :
+    UseCase<LimitHistoryUseCase.Param, Single<Int>>() {
 
-    override fun createObservable(param: Param?): Single<List<History>> {
-        param?.let { return historyRepository.getHistory() }
+    override fun createObservable(param: Param?): Single<Int> {
+        param?.let {
+            return Single.defer {
+                Single.just(historyRepository.limitRecord())
+            }
+        }
         return Single.error(Throwable("Invalid Param"))
     }
 

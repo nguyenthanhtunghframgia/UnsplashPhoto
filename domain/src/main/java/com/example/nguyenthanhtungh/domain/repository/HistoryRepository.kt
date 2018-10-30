@@ -6,7 +6,9 @@ import io.reactivex.Single
 interface HistoryRepository {
     fun getHistory(): Single<List<History>>
 
-    fun insertHistory(history: History)
+    fun insertHistory(history: History): Long
 
-    fun deleteHistory()
+    fun deleteHistory(): Int
+
+    fun limitRecord(): Int
 }

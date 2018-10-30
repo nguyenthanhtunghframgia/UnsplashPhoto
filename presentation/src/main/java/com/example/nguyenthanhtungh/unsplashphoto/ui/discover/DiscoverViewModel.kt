@@ -1,8 +1,12 @@
 package com.example.nguyenthanhtungh.unsplashphoto.ui.discover
 
 import androidx.lifecycle.MutableLiveData
+import com.example.nguyenthanhtungh.domain.usecase.history.InsertHistoryUseCase
+import com.example.nguyenthanhtungh.domain.usecase.history.LimitHistoryUseCase
 import com.example.nguyenthanhtungh.domain.usecase.photo.DiscoverPhotoUseCase
 import com.example.nguyenthanhtungh.unsplashphoto.base.BaseViewModel
+import com.example.nguyenthanhtungh.unsplashphoto.model.HistoryItem
+import com.example.nguyenthanhtungh.unsplashphoto.model.HistoryItemMapper
 import com.example.nguyenthanhtungh.unsplashphoto.model.PhotoItem
 import com.example.nguyenthanhtungh.unsplashphoto.model.PhotoItemMapper
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -10,7 +14,10 @@ import io.reactivex.schedulers.Schedulers
 
 class DiscoverViewModel(
     private val photoItemMapper: PhotoItemMapper,
-    private val discoverPhotoUseCase: DiscoverPhotoUseCase
+    private val historyItemMapper: HistoryItemMapper,
+    private val discoverPhotoUseCase: DiscoverPhotoUseCase,
+    private val insertHistoryUseCase: InsertHistoryUseCase,
+    private val limitHistoryUseCase: LimitHistoryUseCase
 ) : BaseViewModel() {
     var isLoading = MutableLiveData<Boolean>()
     var isLoadMore = MutableLiveData<Boolean>()
@@ -78,5 +85,24 @@ class DiscoverViewModel(
 
     private fun onLoadFail(throwable: Throwable) {
         errorMessage.value = throwable.message
+    }
+
+    fun insertHistory(historyItem: HistoryItem) {
+        addDisposable(
+            insertHistoryUseCase.createObservable(
+                InsertHistoryUseCase.Param(
+                    historyItemMapper.mapToDomain(historyItem)
+                )
+            )
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe()
+        )
+        addDisposable(
+            limitHistoryUseCase.createObservable(LimitHistoryUseCase.Param())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe()
+        )
     }
 }

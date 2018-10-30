@@ -2,13 +2,20 @@ package com.example.nguyenthanhtungh.unsplashphoto.ui.collection
 
 import androidx.lifecycle.MutableLiveData
 import com.example.nguyenthanhtungh.domain.usecase.collection.CollectionUseCase
+import com.example.nguyenthanhtungh.domain.usecase.history.InsertHistoryUseCase
+import com.example.nguyenthanhtungh.domain.usecase.history.LimitHistoryUseCase
 import com.example.nguyenthanhtungh.unsplashphoto.base.BaseViewModel
 import com.example.nguyenthanhtungh.unsplashphoto.model.CollectionItem
 import com.example.nguyenthanhtungh.unsplashphoto.model.CollectionItemMapper
+import com.example.nguyenthanhtungh.unsplashphoto.model.HistoryItem
+import com.example.nguyenthanhtungh.unsplashphoto.model.HistoryItemMapper
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 class CollectionViewModel(
+    private val historyItemMapper: HistoryItemMapper,
+    private val insertHistoryUseCase: InsertHistoryUseCase,
+    private val limitHistoryUseCase: LimitHistoryUseCase,
     private val collectionItemMapper: CollectionItemMapper,
     private val collectionUseCase: CollectionUseCase
 ) : BaseViewModel() {
@@ -78,5 +85,24 @@ class CollectionViewModel(
 
     private fun onLoadFail(throwable: Throwable) {
         errorMessage.value = throwable.message
+    }
+
+    fun insertHistory(historyItem: HistoryItem) {
+        addDisposable(
+            insertHistoryUseCase.createObservable(
+                InsertHistoryUseCase.Param(
+                    historyItemMapper.mapToDomain(historyItem)
+                )
+            )
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe()
+        )
+        addDisposable(
+            limitHistoryUseCase.createObservable(LimitHistoryUseCase.Param())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe()
+        )
     }
 }

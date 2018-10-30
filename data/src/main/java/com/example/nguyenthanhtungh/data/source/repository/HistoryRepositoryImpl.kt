@@ -11,17 +11,21 @@ class HistoryRepositoryImpl(
     private val historyEntityMapper: HistoryEntityMapper
 ) : HistoryRepository {
 
+    override fun limitRecord(): Int {
+        return historyDao.limitRecord()
+    }
+
     override fun getHistory(): Single<List<History>> {
         return historyDao.getHistory().map { listHistory ->
             listHistory.map { historyEntityMapper.mapToDomain(it) }
         }
     }
 
-    override fun insertHistory(history: History) {
+    override fun insertHistory(history: History): Long {
         return historyDao.insertHistory(historyEntityMapper.mapToEntity(history))
     }
 
-    override fun deleteHistory() {
+    override fun deleteHistory(): Int {
         return historyDao.deleteAll()
     }
 }
