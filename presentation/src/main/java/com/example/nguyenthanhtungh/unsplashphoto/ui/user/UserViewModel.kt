@@ -20,6 +20,7 @@ class UserViewModel(
 ) : BaseViewModel() {
     val errorMessage = MutableLiveData<String>()
     val isDelete = MutableLiveData<Boolean>()
+    val isEmpty = MutableLiveData<Boolean>()
     val listHistory = MutableLiveData<List<HistoryItem>>()
 
     fun getListHistory() {
@@ -52,9 +53,15 @@ class UserViewModel(
 
     private fun onLoadSuccess(list: List<HistoryItem>) {
         listHistory.value = list
+        if (list.isEmpty()) {
+            isEmpty.value = true
+            return
+        }
+        isEmpty.value = false
     }
 
     private fun onLoadFail(throwable: Throwable) {
+        isEmpty.value = true
         errorMessage.value = throwable.message
     }
 

@@ -9,7 +9,7 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 open class HistoryItem(
     val id: Int,
-    val query: String
+    val query: String? = null
 ) : ModelItem(), Parcelable
 
 class HistoryItemMapper : ItemMapper<History, HistoryItem> {

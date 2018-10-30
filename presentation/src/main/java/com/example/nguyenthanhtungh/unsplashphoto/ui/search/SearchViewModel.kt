@@ -19,11 +19,13 @@ class SearchViewModel(
 ) : BaseViewModel() {
     val queryString = MutableLiveData<String>()
     val isLoadingPhoto = MutableLiveData<Boolean>()
-    val isLoadingCollection = MutableLiveData<Boolean>()
+    private val isLoadingCollection = MutableLiveData<Boolean>()
     val isRefresh = MutableLiveData<Boolean>()
     val isLoadMore = MutableLiveData<Boolean>()
+    val isCollectionEmpty = MutableLiveData<Boolean>()
+    val isPhotoEmpty = MutableLiveData<Boolean>()
     val errorMessage = MutableLiveData<String>()
-    val currentPage = MutableLiveData<Int>().apply { value = 0 }
+    private val currentPage = MutableLiveData<Int>().apply { value = 0 }
     val listSearchCollection = MutableLiveData<List<CollectionItem>>()
     val listSearchPhotos = MutableLiveData<List<PhotoItem>>()
 
@@ -39,6 +41,7 @@ class SearchViewModel(
             }
             .subscribe({
                 listSearchCollection.value = it
+                isCollectionEmpty.value = it.isEmpty()
             }, { onLoadFail(it) })
         )
     }
@@ -85,6 +88,10 @@ class SearchViewModel(
     }
 
     private fun onLoadSuccess(page: Int, list: List<PhotoItem>) {
+        if (page == 1 && list.isEmpty()) {
+            isPhotoEmpty.value = true
+            return
+        }
         currentPage.value = page
 
         if (isRefresh.value == true || isLoadingPhoto.value == true) {

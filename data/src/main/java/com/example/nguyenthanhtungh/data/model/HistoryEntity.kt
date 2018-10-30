@@ -10,7 +10,7 @@ import com.example.nguyenthanhtungh.domain.model.History
 class HistoryEntity(
     @PrimaryKey(autoGenerate = true)
     var id: Int,
-    val query: String
+    val query: String? = null
 ) : ModelEntity()
 
 class HistoryEntityMapper : EntityMapper<History, HistoryEntity> {

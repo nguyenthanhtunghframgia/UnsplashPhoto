@@ -59,6 +59,11 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>(),
                 }
             )
 
+        viewDataBinding.apply {
+            textCollectionEmpty.text = getString(R.string.empty_collection_search)
+            textPhotoEmpty.text = getString(R.string.empty_photo_search)
+        }
+
         viewDataBinding.onBackPress = View.OnClickListener {
             onBackPress()
         }

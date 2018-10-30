@@ -117,7 +117,7 @@
                 android:layout_width="0dp"
                 android:layout_height="@dimen/dp_56"
                 android:id="@+id/photo_owner_name"
-                android:gravity="left|center_vertical"
+                android:gravity="start|center_vertical"
                 android:textSize="@dimen/sp_24"
                 android:maxLines="1"
                 android:ellipsize="end"

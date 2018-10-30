@@ -6,7 +6,6 @@ import android.view.MenuInflater
 import android.view.View
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.nguyenthanhtungh.unsplashphoto.BR
@@ -50,6 +49,12 @@ class UserFragment : BaseFragment<FragmentUserBinding, UserViewModel>() {
                 }
             )
 
+        viewDataBinding.apply {
+            textClearRecent.text = getString(R.string.clear_history)
+            textRecentSearch.text = getString(R.string.recent_history)
+            textEmpty.text = getString(R.string.empty_history)
+        }
+
         val decoration = RecyclerItemDecoration(ITEM_DECORATION)
         viewDataBinding.apply {
             recyclerRecentSearch.apply {
@@ -88,7 +93,7 @@ class UserFragment : BaseFragment<FragmentUserBinding, UserViewModel>() {
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 searchItem.collapseActionView()
-                viewModel.insertHistory(HistoryItem(0, query ?: ""))
+                viewModel.insertHistory(HistoryItem(0, query))
                 goToSearchFragment(query)
                 return true
             }
