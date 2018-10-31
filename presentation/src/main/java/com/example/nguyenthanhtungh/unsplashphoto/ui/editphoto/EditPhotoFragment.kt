@@ -36,6 +36,5 @@ class EditPhotoFragment : BaseFragment<FragmentEditPhotoBinding, EditPhotoViewMo
         viewDataBinding.onBackPress = View.OnClickListener {
             onBackPress()
         }
-
     }
 }

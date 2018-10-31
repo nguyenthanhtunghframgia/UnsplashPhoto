@@ -24,4 +24,6 @@
     <string name="undo">Undo</string>
     <string name="redo">Redo</string>
     <string name="save_edit">Save</string>
+    <string name="downloaded_photo">Downloaded photos</string>
+    <string name="like_photo">Like photos</string>
 </resources>
