@@ -47,6 +47,7 @@
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/dp_56"
+                android:text="@string/recent_history"
                 android:gravity="start|center_vertical"
                 android:id="@+id/text_recent_search"
                 android:background="@android:color/transparent"
@@ -60,6 +61,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/dp_56"
                 android:id="@+id/text_clear_recent"
+                android:text="@string/clear_history"
                 android:background="@android:color/transparent"
                 android:gravity="end|center_vertical"
                 android:onClick="@{onClearClick}"
@@ -74,6 +76,7 @@
                   android:layout_height="@dimen/dp_56"
                   android:id="@+id/text_empty"
                   android:gravity="center"
+                  android:text="@string/empty_history"
                   android:visibility="@{userViewModel.isEmpty?View.VISIBLE:View.GONE}"
                   app:layout_constraintTop_toBottomOf="@+id/text_clear_recent"
                   app:layout_constraintEnd_toEndOf="parent"

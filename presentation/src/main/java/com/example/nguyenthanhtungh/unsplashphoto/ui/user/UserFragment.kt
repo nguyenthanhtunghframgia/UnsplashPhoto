@@ -49,12 +49,6 @@ class UserFragment : BaseFragment<FragmentUserBinding, UserViewModel>() {
                 }
             )
 
-        viewDataBinding.apply {
-            textClearRecent.text = getString(R.string.clear_history)
-            textRecentSearch.text = getString(R.string.recent_history)
-            textEmpty.text = getString(R.string.empty_history)
-        }
-
         val decoration = RecyclerItemDecoration(ITEM_DECORATION)
         viewDataBinding.apply {
             recyclerRecentSearch.apply {
