@@ -51,5 +51,21 @@ abstract class BaseFragment<ViewBinding : ViewDataBinding, ViewModel : BaseViewM
         }
     }
 
+    fun showBottomView() {
+        if (activity is MainActivity) {
+            (activity as MainActivity).apply {
+               showBottom()
+            }
+        }
+    }
+
+    fun hideBottomView() {
+        if (activity is MainActivity) {
+            (activity as MainActivity).apply {
+               hideBottom()
+            }
+        }
+    }
+
     abstract fun initComponent(viewDataBinding: ViewBinding)
 }

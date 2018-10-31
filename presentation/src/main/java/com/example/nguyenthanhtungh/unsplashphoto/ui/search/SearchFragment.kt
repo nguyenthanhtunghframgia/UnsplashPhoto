@@ -43,6 +43,9 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>(),
     override val layoutId: Int = R.layout.fragment_search
 
     override fun initComponent(viewDataBinding: FragmentSearchBinding) {
+
+        hideBottomView()
+
         val query = arguments?.getString(QUERY_STRING) ?: return
 
         val searchCollectionAdapter =

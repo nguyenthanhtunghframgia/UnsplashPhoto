@@ -18,6 +18,12 @@
 
         </variable>
 
+        <variable
+                name="onEditClick"
+                type="android.view.View.OnClickListener">
+
+        </variable>
+
         <variable name="photoDetail"
                   type="com.example.nguyenthanhtungh.unsplashphoto.ui.photodetail.PhotoDetailViewModel">
 
@@ -105,6 +111,7 @@
                 android:layout_width="@dimen/dp_56"
                 android:layout_height="@dimen/dp_56"
                 android:src="@drawable/ic_edit"
+                android:onClick="@{onEditClick}"
                 android:id="@+id/button_edit_photo"
                 android:scaleType="centerInside"
                 android:background="@android:color/transparent"

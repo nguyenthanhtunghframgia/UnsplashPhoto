@@ -41,6 +41,8 @@ class DiscoverFragment : BaseFragment<FragmentDiscoverBinding, DiscoverViewModel
 
     override fun initComponent(viewDataBinding: FragmentDiscoverBinding) {
 
+        showBottomView()
+
         setToolbar(viewDataBinding.toolbar, getString(R.string.discover))
 
         val discoverAdapter = DiscoverAdapter(

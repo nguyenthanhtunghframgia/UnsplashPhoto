@@ -18,6 +18,7 @@ import com.example.nguyenthanhtungh.unsplashphoto.R
 import com.example.nguyenthanhtungh.unsplashphoto.base.BaseFragment
 import com.example.nguyenthanhtungh.unsplashphoto.databinding.FragmentPhotoDetailBinding
 import com.example.nguyenthanhtungh.unsplashphoto.model.PhotoItem
+import com.example.nguyenthanhtungh.unsplashphoto.ui.editphoto.EditPhotoFragment
 import com.example.nguyenthanhtungh.unsplashphoto.util.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -42,6 +43,8 @@ class PhotoDetailFragment : BaseFragment<FragmentPhotoDetailBinding, PhotoDetail
     override val layoutId: Int = R.layout.fragment_photo_detail
 
     override fun initComponent(viewDataBinding: FragmentPhotoDetailBinding) {
+
+        hideBottomView()
 
         downloadManager = context?.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
 
@@ -83,6 +86,10 @@ class PhotoDetailFragment : BaseFragment<FragmentPhotoDetailBinding, PhotoDetail
 
         viewDataBinding.onBackPress = View.OnClickListener {
             onBackPress()
+        }
+
+        viewDataBinding.onEditClick = View.OnClickListener {
+            showEditFragment(viewModel.photoItem.value ?: return@OnClickListener)
         }
 
         val intentFilter = IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE)
@@ -178,5 +185,12 @@ class PhotoDetailFragment : BaseFragment<FragmentPhotoDetailBinding, PhotoDetail
             isDownloading.value = false
             levelDownload.value = LEVEL_DOWNLOADABLE
         }
+    }
+
+    private fun showEditFragment(photoItem: PhotoItem) {
+        val editPhotoFragment = EditPhotoFragment.newInstance(photoItem)
+        replaceFragment(
+            R.id.frame_layout, editPhotoFragment, EditPhotoFragment.TAG, true
+        )
     }
 }
