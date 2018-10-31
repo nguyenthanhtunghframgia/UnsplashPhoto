@@ -16,4 +16,12 @@
     <string name="empty_history">No recent search</string>
     <string name="empty_collection_search">No collection found</string>
     <string name="empty_photo_search">No photo found</string>
+    <string name="photo_filter">Filter</string>
+    <string name="photo_crop">Crop</string>
+    <string name="photo_draw">Draw</string>
+    <string name="photo_effects">Effects</string>
+    <string name="photo_add_icon">Add Icon</string>
+    <string name="undo">Undo</string>
+    <string name="redo">Redo</string>
+    <string name="save_edit">Save</string>
 </resources>

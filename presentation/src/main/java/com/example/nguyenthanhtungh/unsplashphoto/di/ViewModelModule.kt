@@ -3,6 +3,7 @@ package com.example.nguyenthanhtungh.unsplashphoto.di
 import com.example.nguyenthanhtungh.unsplashphoto.ui.collectiondetail.CollectionDetailViewModel
 import com.example.nguyenthanhtungh.unsplashphoto.ui.collection.CollectionViewModel
 import com.example.nguyenthanhtungh.unsplashphoto.ui.discover.DiscoverViewModel
+import com.example.nguyenthanhtungh.unsplashphoto.ui.editphoto.EditPhotoViewModel
 import com.example.nguyenthanhtungh.unsplashphoto.ui.main.MainViewModel
 import com.example.nguyenthanhtungh.unsplashphoto.ui.photodetail.PhotoDetailViewModel
 import com.example.nguyenthanhtungh.unsplashphoto.ui.search.SearchViewModel
@@ -18,4 +19,5 @@ val viewModelModule = module(override = true) {
     viewModel<SearchViewModel>()
     viewModel<DiscoverViewModel>()
     viewModel<UserViewModel>()
+    viewModel<EditPhotoViewModel>()
 }

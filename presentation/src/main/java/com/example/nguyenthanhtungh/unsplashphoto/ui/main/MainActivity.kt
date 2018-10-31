@@ -2,6 +2,7 @@ package com.example.nguyenthanhtungh.unsplashphoto.ui.main
 
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import com.example.nguyenthanhtungh.unsplashphoto.R
 import com.example.nguyenthanhtungh.unsplashphoto.base.BaseActivity
 import com.example.nguyenthanhtungh.unsplashphoto.ui.collection.CollectionFragment
@@ -45,5 +46,13 @@ class MainActivity : BaseActivity<MainViewModel>(), BottomNavigationView.OnNavig
             )
         }
         return true
+    }
+
+    fun showBottom() {
+        frame_layout_bottom.visibility =View.VISIBLE
+    }
+
+    fun hideBottom() {
+        frame_layout_bottom.visibility =View.GONE
     }
 }

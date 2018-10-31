@@ -40,6 +40,8 @@ class UserFragment : BaseFragment<FragmentUserBinding, UserViewModel>() {
 
     override fun initComponent(viewDataBinding: FragmentUserBinding) {
 
+        showBottomView()
+
         setToolbar(viewDataBinding.toolbar, getString(R.string.user))
 
         val userAdapter =

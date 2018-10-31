@@ -40,6 +40,8 @@ class CollectionDetailFragment : BaseFragment<FragmentCollectionDetailBinding, C
     override fun initComponent(viewDataBinding: FragmentCollectionDetailBinding) {
         val id = arguments?.getString(COLLECTION_ID) ?: return
 
+        hideBottomView()
+
         val collectionDetailAdapter = CollectionDetailAdapter(
             onItemClick = {
                 goToDetailFragment(it)
