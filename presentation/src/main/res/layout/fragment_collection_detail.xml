@@ -3,67 +3,71 @@
 
     <data>
 
-        <import type="android.view.View"/>
+        <import type="android.view.View" />
 
         <variable
-                name="onBackPress"
-                type="android.view.View.OnClickListener">
+            name="onBackPress"
+            type="android.view.View.OnClickListener">
 
         </variable>
 
-        <variable name="fragmentCollectionDetailViewModel"
-                  type="com.example.nguyenthanhtungh.unsplashphoto.ui.collectiondetail.CollectionDetailViewModel">
+        <variable
+            name="fragmentCollectionDetailViewModel"
+            type="com.example.nguyenthanhtungh.unsplashphoto.ui.collectiondetail.CollectionDetailViewModel">
 
         </variable>
 
     </data>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white">
+
+        <FrameLayout
             android:layout_width="match_parent"
-            android:id="@+id/swipe_layout"
-            android:background="@android:color/white"
             android:layout_height="match_parent">
 
-        <FrameLayout android:layout_width="match_parent"
-                     android:layout_height="match_parent">
+            <ImageButton
+                android:layout_width="@dimen/dp_56"
+                android:layout_height="@dimen/dp_56"
+                android:layout_gravity="start|top"
+                android:background="@color/colorPrimary"
+                android:onClick="@{onBackPress}"
+                android:src="@drawable/ic_back" />
 
-            <ImageButton android:layout_width="@dimen/dp_56"
-                         android:layout_gravity="start|top"
-                         android:onClick="@{onBackPress}"
-                         android:background="@color/colorPrimary"
-                         android:src="@drawable/ic_back"
-                         android:layout_height="@dimen/dp_56"/>
-
-            <TextView android:layout_width="match_parent"
-                      android:layout_gravity="top"
-                      android:gravity="center"
-                      android:textColor="@android:color/white"
-                      android:textSize="@dimen/sp_24"
-                      android:layout_marginStart="@dimen/dp_56"
-                      android:ellipsize="end"
-                      android:background="@color/colorPrimary"
-                      android:text="@{fragmentCollectionDetailViewModel.collectionTitle}"
-                      android:layout_height="@dimen/dp_56"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_56"
+                android:layout_gravity="top"
+                android:layout_marginStart="@dimen/dp_56"
+                android:background="@color/colorPrimary"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:text="@{fragmentCollectionDetailViewModel.collectionTitle}"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/sp_24" />
 
             <androidx.recyclerview.widget.RecyclerView
-                    android:layout_width="match_parent"
-                    android:layout_marginTop="@dimen/dp_56"
-                    android:id="@+id/recycler_collection_photos"
-                    android:layout_height="match_parent">
+                android:id="@+id/recycler_collection_photos"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/dp_56">
 
             </androidx.recyclerview.widget.RecyclerView>
 
             <ProgressBar
-                    android:layout_width="@dimen/dp_56"
-                    android:visibility="@{fragmentCollectionDetailViewModel.isLoading?View.VISIBLE:View.GONE}"
-                    android:layout_gravity="center_vertical|center_horizontal"
-                    android:layout_height="@dimen/dp_56"/>
+                android:layout_width="@dimen/dp_56"
+                android:layout_height="@dimen/dp_56"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:visibility="@{fragmentCollectionDetailViewModel.isLoading?View.VISIBLE:View.GONE}" />
 
             <ProgressBar
-                    android:layout_width="@dimen/dp_56"
-                    android:visibility="@{fragmentCollectionDetailViewModel.isLoadMore?View.VISIBLE:View.GONE}"
-                    android:layout_gravity="bottom|center_horizontal"
-                    android:layout_height="@dimen/dp_56"/>
+                android:layout_width="@dimen/dp_56"
+                android:layout_height="@dimen/dp_56"
+                android:layout_gravity="bottom|center_horizontal"
+                android:visibility="@{fragmentCollectionDetailViewModel.isLoadMore?View.VISIBLE:View.GONE}" />
 
         </FrameLayout>
 

@@ -1,5 +1,6 @@
 package com.example.nguyenthanhtungh.unsplashphoto.base
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +16,14 @@ abstract class BaseFragment<ViewBinding : ViewDataBinding, ViewModel : BaseViewM
     lateinit var viewBinding: ViewBinding
     abstract val viewModel: ViewModel
     abstract val layoutId: Int
+    lateinit var activity : MainActivity
+
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        if (activity is MainActivity) {
+            activity as MainActivity
+        }
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         viewBinding = DataBindingUtil.inflate(inflater, layoutId, container, false)
@@ -35,36 +44,22 @@ abstract class BaseFragment<ViewBinding : ViewDataBinding, ViewModel : BaseViewM
     }
 
     fun onBackPress() {
-        if (activity is MainActivity) {
-            (activity as MainActivity).apply {
-                onBackPressed()
-            }
-        }
+        activity.onBackPressed()
     }
 
     fun setToolbar(toolbar: Toolbar, title: String) {
-        if (activity is MainActivity) {
-            (activity as MainActivity).apply {
-                setSupportActionBar(toolbar)
-                setTitle(title)
-            }
+        activity.apply {
+            setSupportActionBar(toolbar)
+            setTitle(title)
         }
     }
 
     fun showBottomView() {
-        if (activity is MainActivity) {
-            (activity as MainActivity).apply {
-               showBottom()
-            }
-        }
+        activity.showBottom()
     }
 
     fun hideBottomView() {
-        if (activity is MainActivity) {
-            (activity as MainActivity).apply {
-               hideBottom()
-            }
-        }
+        activity.hideBottom()
     }
 
     abstract fun initComponent(viewDataBinding: ViewBinding)

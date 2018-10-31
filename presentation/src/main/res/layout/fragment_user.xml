@@ -1,89 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
-        <import type="android.view.View"/>
+        <import type="android.view.View" />
 
-        <variable name="onClearClick"
-                  type="android.view.View.OnClickListener">
+        <variable
+            name="onClearClick"
+            type="android.view.View.OnClickListener">
 
         </variable>
 
-        <variable name="userViewModel"
-                  type="com.example.nguyenthanhtungh.unsplashphoto.ui.user.UserViewModel">
+        <variable
+            name="userViewModel"
+            type="com.example.nguyenthanhtungh.unsplashphoto.ui.user.UserViewModel">
 
         </variable>
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_marginBottom="@dimen/dp_56"
-            android:layout_height="match_parent">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/dp_56">
 
         <androidx.appcompat.widget.Toolbar
-                android:layout_width="match_parent"
-                android:id="@+id/toolbar"
-                android:layout_gravity="top"
-                android:background="@color/colorPrimary"
-                android:theme="@style/ToolBarStyle"
-                android:layout_height="@dimen/dp_56"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_56"
+            android:layout_gravity="top"
+            android:background="@color/colorPrimary"
+            android:theme="@style/ToolBarStyle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
         </androidx.appcompat.widget.Toolbar>
 
         <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="0dp"
-                android:layout_height="@dimen/dp_200"
-                android:id="@+id/recycler_recent_search"
-                android:layout_marginTop="@dimen/dp_8"
-                app:layout_constraintTop_toBottomOf="@+id/text_recent_search"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"/>
+            android:id="@+id/recycler_recent_search"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_200"
+            android:layout_marginTop="@dimen/dp_8"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_recent_search" />
 
         <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/dp_56"
-                android:text="@string/recent_history"
-                android:gravity="start|center_vertical"
-                android:id="@+id/text_recent_search"
-                android:background="@android:color/transparent"
-                android:layout_marginTop="@dimen/dp_16"
-                android:textColor="@android:color/holo_purple"
-                app:layout_constraintTop_toBottomOf="@+id/toolbar"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="@dimen/dp_8"/>
+            android:id="@+id/text_recent_search"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_56"
+            android:layout_marginStart="@dimen/dp_8"
+            android:layout_marginTop="@dimen/dp_16"
+            android:background="@android:color/transparent"
+            android:gravity="start|center_vertical"
+            android:text="@string/recent_history"
+            android:textColor="@android:color/holo_purple"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
         <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/dp_56"
-                android:id="@+id/text_clear_recent"
-                android:text="@string/clear_history"
-                android:background="@android:color/transparent"
-                android:gravity="end|center_vertical"
-                android:onClick="@{onClearClick}"
-                android:visibility="@{userViewModel.isEmpty?View.GONE:View.VISIBLE}"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:textColor="@android:color/holo_purple"
-                android:layout_marginEnd="@dimen/dp_8"
-                android:layout_marginTop="@dimen/dp_16"
-                app:layout_constraintTop_toBottomOf="@+id/toolbar"/>
+            android:id="@+id/text_clear_recent"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_56"
+            android:layout_marginTop="@dimen/dp_16"
+            android:layout_marginEnd="@dimen/dp_8"
+            android:background="@android:color/transparent"
+            android:gravity="end|center_vertical"
+            android:onClick="@{onClearClick}"
+            android:text="@string/clear_history"
+            android:textColor="@android:color/holo_purple"
+            android:visibility="@{userViewModel.isEmpty?View.GONE:View.VISIBLE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
-        <TextView android:layout_width="0dp"
-                  android:layout_height="@dimen/dp_56"
-                  android:id="@+id/text_empty"
-                  android:gravity="center"
-                  android:text="@string/empty_history"
-                  android:visibility="@{userViewModel.isEmpty?View.VISIBLE:View.GONE}"
-                  app:layout_constraintTop_toBottomOf="@+id/text_clear_recent"
-                  app:layout_constraintEnd_toEndOf="parent"
-                  app:layout_constraintStart_toStartOf="parent"
-                  app:layout_constraintBottom_toBottomOf="@+id/recycler_recent_search"
-                  android:layout_marginTop="@dimen/dp_16"/>
+        <TextView
+            android:id="@+id/text_empty"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_56"
+            android:layout_marginTop="@dimen/dp_16"
+            android:gravity="center"
+            android:text="@string/empty_history"
+            android:visibility="@{userViewModel.isEmpty?View.VISIBLE:View.GONE}"
+            app:layout_constraintBottom_toBottomOf="@+id/recycler_recent_search"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_clear_recent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
