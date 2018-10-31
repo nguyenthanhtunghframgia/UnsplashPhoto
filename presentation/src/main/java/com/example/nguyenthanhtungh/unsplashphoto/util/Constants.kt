@@ -8,3 +8,4 @@ const val MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 100
 const val IMAGE_EXTEND = ".jpg"
 const val DOWNLOAD_AUTH = "?client_id="
 const val DIVIDE = "/"
+const val TOTAL_ITEM_PER_PAGE = 8

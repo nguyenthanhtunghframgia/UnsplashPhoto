@@ -20,102 +20,109 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="@dimen/dp_56">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_56"
-            android:layout_gravity="top"
-            android:background="@color/colorPrimary"
-            android:theme="@style/ToolBarStyle"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/dp_56">
 
-        </androidx.appcompat.widget.Toolbar>
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_56"
+                android:layout_gravity="top"
+                android:background="@color/colorPrimary"
+                android:theme="@style/ToolBarStyle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_recent_search"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/dp_200"
-            android:layout_marginTop="@dimen/dp_8"
-            android:background="@drawable/ic_round_corner_blank"
-            android:padding="@dimen/dp_8"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_recent_search" />
+            </androidx.appcompat.widget.Toolbar>
 
-        <TextView
-            android:id="@+id/text_recent_search"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/dp_56"
-            android:layout_marginStart="@dimen/dp_8"
-            android:layout_marginTop="@dimen/dp_16"
-            android:background="@android:color/transparent"
-            android:gravity="start|center_vertical"
-            android:text="@string/recent_history"
-            android:textColor="@android:color/holo_purple"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_recent_search"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dp_200"
+                android:layout_marginTop="@dimen/dp_8"
+                android:background="@drawable/ic_round_corner_blank"
+                android:padding="@dimen/dp_8"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_recent_search" />
 
-        <TextView
-            android:id="@+id/text_clear_recent"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/dp_56"
-            android:layout_marginTop="@dimen/dp_16"
-            android:layout_marginEnd="@dimen/dp_8"
-            android:background="@android:color/transparent"
-            android:gravity="end|center_vertical"
-            android:onClick="@{onClearClick}"
-            android:text="@string/clear_history"
-            android:textColor="@android:color/holo_purple"
-            android:visibility="@{userViewModel.isEmpty?View.GONE:View.VISIBLE}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+            <TextView
+                android:id="@+id/text_recent_search"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp_56"
+                android:layout_marginStart="@dimen/dp_8"
+                android:layout_marginTop="@dimen/dp_16"
+                android:background="@android:color/transparent"
+                android:gravity="start|center_vertical"
+                android:text="@string/recent_history"
+                android:textColor="@android:color/holo_purple"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
-        <TextView
-            android:id="@+id/text_empty"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/dp_56"
-            android:layout_marginTop="@dimen/dp_16"
-            android:gravity="center"
-            android:text="@string/empty_history"
-            android:visibility="@{userViewModel.isEmpty?View.VISIBLE:View.GONE}"
-            app:layout_constraintBottom_toBottomOf="@+id/recycler_recent_search"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_clear_recent" />
+            <TextView
+                android:id="@+id/text_clear_recent"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp_56"
+                android:layout_marginTop="@dimen/dp_16"
+                android:layout_marginEnd="@dimen/dp_8"
+                android:background="@android:color/transparent"
+                android:gravity="end|center_vertical"
+                android:onClick="@{onClearClick}"
+                android:text="@string/clear_history"
+                android:textColor="@android:color/holo_purple"
+                android:visibility="@{userViewModel.isEmpty?View.GONE:View.VISIBLE}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
-        <Button
-            android:id="@+id/button_downloaded_photo"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/dp_56"
-            android:layout_marginStart="@dimen/dp_16"
-            android:layout_marginTop="@dimen/dp_16"
-            android:background="@android:color/transparent"
-            android:drawableTop="@drawable/ic_download_purple"
-            android:text="@string/downloaded_photo"
-            android:textColor="@android:color/holo_purple"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/recycler_recent_search" />
+            <TextView
+                android:id="@+id/text_empty"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dp_56"
+                android:layout_marginTop="@dimen/dp_16"
+                android:gravity="center"
+                android:text="@string/empty_history"
+                android:visibility="@{userViewModel.isEmpty?View.VISIBLE:View.GONE}"
+                app:layout_constraintBottom_toBottomOf="@+id/recycler_recent_search"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_clear_recent" />
 
-        <Button
-            android:id="@+id/button_like_photo"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/dp_56"
-            android:layout_marginTop="@dimen/dp_16"
-            android:layout_marginEnd="@dimen/dp_16"
-            android:background="@android:color/transparent"
-            android:drawableTop="@drawable/ic_favourite"
-            android:text="@string/like_photo"
-            android:textColor="@android:color/holo_purple"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/recycler_recent_search" />
+            <Button
+                android:id="@+id/button_downloaded_photo"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp_56"
+                android:layout_marginStart="@dimen/dp_16"
+                android:layout_marginTop="@dimen/dp_16"
+                android:background="@android:color/transparent"
+                android:drawableTop="@drawable/ic_download_purple"
+                android:text="@string/downloaded_photo"
+                android:textColor="@android:color/holo_purple"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/recycler_recent_search" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <Button
+                android:id="@+id/button_like_photo"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dp_56"
+                android:layout_marginTop="@dimen/dp_16"
+                android:layout_marginEnd="@dimen/dp_16"
+                android:background="@android:color/transparent"
+                android:drawableTop="@drawable/ic_favourite"
+                android:text="@string/like_photo"
+                android:textColor="@android:color/holo_purple"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/recycler_recent_search" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
 </layout>

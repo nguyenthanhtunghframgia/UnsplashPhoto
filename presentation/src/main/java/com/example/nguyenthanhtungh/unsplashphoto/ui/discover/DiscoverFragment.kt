@@ -69,6 +69,10 @@ class DiscoverFragment : BaseFragment<FragmentDiscoverBinding, DiscoverViewModel
                 //todo
             })
 
+            errorInsertMessage.observe(this@DiscoverFragment, Observer {
+                DialogUtils.showToast(context, it)
+            })
+
             listDiscoverPhotoItem.observe(this@DiscoverFragment, Observer {
                 discoverAdapter.submitList(it)
             })

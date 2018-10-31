@@ -24,6 +24,7 @@ class CollectionViewModel(
     var isRefresh = MutableLiveData<Boolean>()
     var isInsertComplete = MutableLiveData<Boolean>()
     val errorMessage = MutableLiveData<String>()
+    val errorInsertMessage = MutableLiveData<String>()
     val listCollectionItem = MutableLiveData<List<CollectionItem>>()
     private var currentPage = MutableLiveData<Int>().apply { value = 0 }
 
@@ -101,7 +102,7 @@ class CollectionViewModel(
                     isInsertComplete.value = true
                 },{
                     isInsertComplete.value = false
-                    errorMessage.value = it.message
+                    errorInsertMessage.value = it.message
                 })
         )
         addDisposable(
@@ -112,7 +113,7 @@ class CollectionViewModel(
                     isInsertComplete.value = true
                 },{
                     isInsertComplete.value = false
-                    errorMessage.value = it.message
+                    errorInsertMessage.value = it.message
                 })
         )
     }

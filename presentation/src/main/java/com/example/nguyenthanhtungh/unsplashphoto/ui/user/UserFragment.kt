@@ -76,6 +76,10 @@ class UserFragment : BaseFragment<FragmentUserBinding, UserViewModel>() {
                 //todo
             })
 
+            errorInsertMessage.observe(this@UserFragment, Observer {
+                DialogUtils.showToast(context, it)
+            })
+
             isDelete.observe(this@UserFragment, Observer {
                 when (it) {
                     true -> DialogUtils.showToast(context, getString(R.string.delete_complete))

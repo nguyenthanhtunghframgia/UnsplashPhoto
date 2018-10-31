@@ -75,6 +75,10 @@ class CollectionFragment : BaseFragment<FragmentCollectionBinding, CollectionVie
                 //todo
             })
 
+            errorInsertMessage.observe(this@CollectionFragment, Observer {
+                DialogUtils.showToast(context, it)
+            })
+
             isLoadMore.observe(this@CollectionFragment, Observer {
                 if (it == null) return@Observer
                 endlessScrollListener.isLoading = it
