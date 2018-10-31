@@ -14,7 +14,7 @@ class UserAdapter(val onItemClick: (HistoryItem) -> Unit) : BaseRecyclerAdapter<
     object : DiffUtil.ItemCallback<HistoryItem>() {
 
         override fun areContentsTheSame(oldItem: HistoryItem, newItem: HistoryItem): Boolean {
-            return oldItem.id == newItem.id
+            return oldItem == newItem
         }
 
         override fun areItemsTheSame(oldItem: HistoryItem, newItem: HistoryItem): Boolean {

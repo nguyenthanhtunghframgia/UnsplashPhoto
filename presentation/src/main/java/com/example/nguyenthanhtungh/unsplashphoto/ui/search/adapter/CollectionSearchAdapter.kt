@@ -14,11 +14,11 @@ class CollectionSearchAdapter(val onItemClick: (CollectionItem) -> Unit) : BaseR
     object : DiffUtil.ItemCallback<CollectionItem>() {
 
         override fun areContentsTheSame(oldItem: CollectionItem, newItem: CollectionItem): Boolean {
-            return oldItem.id == newItem.id
+            return oldItem == newItem
         }
 
         override fun areItemsTheSame(oldItem: CollectionItem, newItem: CollectionItem): Boolean {
-            return oldItem.title == newItem.title
+            return oldItem.id == newItem.id
         }
     }
 ) {
