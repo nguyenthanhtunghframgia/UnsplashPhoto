@@ -21,6 +21,7 @@ class UserViewModel(
     val errorMessage = MutableLiveData<String>()
     val isDelete = MutableLiveData<Boolean>()
     val isEmpty = MutableLiveData<Boolean>()
+    val isInsertComplete = MutableLiveData<Boolean>()
     val listHistory = MutableLiveData<List<HistoryItem>>()
 
     fun getListHistory() {
@@ -74,13 +75,23 @@ class UserViewModel(
             )
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe()
+                .subscribe({
+                    isInsertComplete.value = true
+                },{
+                    isInsertComplete.value = false
+                    errorMessage.value = it.message
+                })
         )
         addDisposable(
             limitHistoryUseCase.createObservable(LimitHistoryUseCase.Param())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe()
+                .subscribe({
+                    isInsertComplete.value = true
+                },{
+                    isInsertComplete.value = false
+                    errorMessage.value = it.message
+                })
         )
     }
 }

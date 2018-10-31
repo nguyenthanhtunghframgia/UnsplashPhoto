@@ -69,6 +69,10 @@ class CollectionFragment : BaseFragment<FragmentCollectionBinding, CollectionVie
             })
             firstLoad()
 
+            isInsertComplete.observe(this@CollectionFragment, Observer {
+                //todo
+            })
+
             isLoadMore.observe(this@CollectionFragment, Observer {
                 if (it == null) return@Observer
                 endlessScrollListener.isLoading = it

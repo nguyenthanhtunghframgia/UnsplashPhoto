@@ -22,6 +22,7 @@ class CollectionViewModel(
     var isLoading = MutableLiveData<Boolean>()
     var isLoadMore = MutableLiveData<Boolean>()
     var isRefresh = MutableLiveData<Boolean>()
+    var isInsertComplete = MutableLiveData<Boolean>()
     val errorMessage = MutableLiveData<String>()
     val listCollectionItem = MutableLiveData<List<CollectionItem>>()
     private var currentPage = MutableLiveData<Int>().apply { value = 0 }
@@ -96,13 +97,23 @@ class CollectionViewModel(
             )
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe()
+                .subscribe({
+                    isInsertComplete.value = true
+                },{
+                    isInsertComplete.value = false
+                    errorMessage.value = it.message
+                })
         )
         addDisposable(
             limitHistoryUseCase.createObservable(LimitHistoryUseCase.Param())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe()
+                .subscribe({
+                    isInsertComplete.value = true
+                },{
+                    isInsertComplete.value = false
+                    errorMessage.value = it.message
+                })
         )
     }
 }

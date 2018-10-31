@@ -63,6 +63,10 @@ class DiscoverFragment : BaseFragment<FragmentDiscoverBinding, DiscoverViewModel
 
         viewModel.apply {
 
+            isInsertComplete.observe(this@DiscoverFragment, Observer {
+                //todo
+            })
+
             listDiscoverPhotoItem.observe(this@DiscoverFragment, Observer {
                 discoverAdapter.submitList(it)
             })

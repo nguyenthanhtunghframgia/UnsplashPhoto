@@ -70,6 +70,10 @@ class UserFragment : BaseFragment<FragmentUserBinding, UserViewModel>() {
 
             getListHistory()
 
+            isInsertComplete.observe(this@UserFragment, Observer {
+                //todo
+            })
+
             isDelete.observe(this@UserFragment, Observer {
                 when (it) {
                     true -> DialogUtils.showToast(context, getString(R.string.delete_complete))
