@@ -19,6 +19,7 @@ class UserViewModel(
     private val deleteHistoryUseCase: DeleteHistoryUseCase
 ) : BaseViewModel() {
     val errorMessage = MutableLiveData<String>()
+    val errorInsertMessage = MutableLiveData<String>()
     val isDelete = MutableLiveData<Boolean>()
     val isEmpty = MutableLiveData<Boolean>()
     val isInsertComplete = MutableLiveData<Boolean>()
@@ -79,7 +80,7 @@ class UserViewModel(
                     isInsertComplete.value = true
                 },{
                     isInsertComplete.value = false
-                    errorMessage.value = it.message
+                    errorInsertMessage.value = it.message
                 })
         )
         addDisposable(
@@ -90,7 +91,7 @@ class UserViewModel(
                     isInsertComplete.value = true
                 },{
                     isInsertComplete.value = false
-                    errorMessage.value = it.message
+                    errorInsertMessage.value = it.message
                 })
         )
     }

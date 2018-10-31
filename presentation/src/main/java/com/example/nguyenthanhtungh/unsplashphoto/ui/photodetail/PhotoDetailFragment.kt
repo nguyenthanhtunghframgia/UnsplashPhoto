@@ -63,10 +63,9 @@ class PhotoDetailFragment : BaseFragment<FragmentPhotoDetailBinding, PhotoDetail
         }
 
         viewDataBinding.onDownloadClick = View.OnClickListener {
-            requestPermission()
             if (viewModel.levelDownload.value == LEVEL_DOWNLOADABLE) {
+                requestPermission()
                 viewModel.apply {
-
                     isPermissionGranted.observe(this@PhotoDetailFragment, Observer {
                         when (isPermissionGranted.value) {
                             true -> downloadPhoto(
@@ -81,6 +80,8 @@ class PhotoDetailFragment : BaseFragment<FragmentPhotoDetailBinding, PhotoDetail
                         levelDownload.value = LEVEL_DOWNLOADABLE
                     })
                 }
+            } else {
+                DialogUtils.showToast(context, getString(R.string.photo_downloaded))
             }
         }
 
