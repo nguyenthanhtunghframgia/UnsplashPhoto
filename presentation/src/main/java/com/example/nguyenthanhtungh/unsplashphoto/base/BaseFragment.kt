@@ -16,12 +16,12 @@ abstract class BaseFragment<ViewBinding : ViewDataBinding, ViewModel : BaseViewM
     lateinit var viewBinding: ViewBinding
     abstract val viewModel: ViewModel
     abstract val layoutId: Int
-    lateinit var activity : MainActivity
+    private lateinit var mainActivity: MainActivity
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         if (activity is MainActivity) {
-            activity as MainActivity
+            mainActivity = activity as MainActivity
         }
     }
 
@@ -44,22 +44,22 @@ abstract class BaseFragment<ViewBinding : ViewDataBinding, ViewModel : BaseViewM
     }
 
     fun onBackPress() {
-        activity.onBackPressed()
+        mainActivity.onBackPressed()
     }
 
     fun setToolbar(toolbar: Toolbar, title: String) {
-        activity.apply {
+        mainActivity.apply {
             setSupportActionBar(toolbar)
             setTitle(title)
         }
     }
 
     fun showBottomView() {
-        activity.showBottom()
+        mainActivity.showBottom()
     }
 
     fun hideBottomView() {
-        activity.hideBottom()
+        mainActivity.hideBottom()
     }
 
     abstract fun initComponent(viewDataBinding: ViewBinding)
