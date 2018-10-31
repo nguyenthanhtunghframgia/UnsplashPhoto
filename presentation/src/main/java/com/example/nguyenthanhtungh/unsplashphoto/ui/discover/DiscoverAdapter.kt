@@ -14,7 +14,7 @@ class DiscoverAdapter(val onItemClick: (PhotoItem) -> Unit) : BaseRecyclerAdapte
     object : DiffUtil.ItemCallback<PhotoItem>() {
 
         override fun areContentsTheSame(oldItem: PhotoItem, newItem: PhotoItem): Boolean {
-            return oldItem.id == newItem.id
+            return oldItem == newItem
         }
 
         override fun areItemsTheSame(oldItem: PhotoItem, newItem: PhotoItem): Boolean {

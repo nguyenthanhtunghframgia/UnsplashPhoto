@@ -14,7 +14,7 @@ class CollectionDetailAdapter(val onItemClick: (PhotoItem) -> Unit) : BaseRecycl
     object : DiffUtil.ItemCallback<PhotoItem>() {
 
         override fun areContentsTheSame(oldItem: PhotoItem, newItem: PhotoItem): Boolean {
-            return oldItem.linksItem?.self == newItem.linksItem?.self
+            return oldItem == newItem
         }
 
         override fun areItemsTheSame(oldItem: PhotoItem, newItem: PhotoItem): Boolean {
