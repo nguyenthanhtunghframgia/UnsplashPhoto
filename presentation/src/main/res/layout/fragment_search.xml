@@ -92,6 +92,33 @@
                          app:layout_constraintStart_toStartOf="parent"
                          app:layout_constraintBottom_toBottomOf="@+id/recycler_photo"/>
 
+            <TextView android:layout_width="0dp"
+                      android:id="@+id/text_collection_empty"
+                      android:gravity="center"
+                      android:text="@string/empty_collection_search"
+                      android:layout_height="@dimen/dp_56"
+                      android:visibility="@{searchViewModel.isCollectionEmpty?View.VISIBLE:View.GONE}"
+                      android:layout_marginTop="@dimen/dp_8"
+                      app:layout_constraintTop_toBottomOf="@+id/text_title"
+                      app:layout_constraintEnd_toEndOf="parent"
+                      android:textColor="@color/colorPrimaryDark"
+                      android:layout_marginEnd="@dimen/dp_8"
+                      app:layout_constraintStart_toStartOf="parent"
+                      android:layout_marginStart="@dimen/dp_8"/>
+
+            <TextView android:layout_width="0dp"
+                      android:id="@+id/text_photo_empty"
+                      android:gravity="center"
+                      android:text="@string/empty_photo_search"
+                      android:textColor="@color/colorPrimaryDark"
+                      android:layout_height="0dp"
+                      android:visibility="@{searchViewModel.isPhotoEmpty?View.VISIBLE:View.GONE}"
+                      android:layout_marginTop="@dimen/dp_8"
+                      app:layout_constraintTop_toBottomOf="@+id/recycler_collection"
+                      app:layout_constraintEnd_toEndOf="parent"
+                      app:layout_constraintStart_toStartOf="parent"
+                      app:layout_constraintBottom_toBottomOf="parent"/>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

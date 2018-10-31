@@ -2,12 +2,19 @@ package com.example.nguyenthanhtungh.domain.usecase.history
 
 import com.example.nguyenthanhtungh.domain.repository.HistoryRepository
 import com.example.nguyenthanhtungh.domain.usecase.UseCase
+import io.reactivex.Single
+
 
 class DeleteHistoryUseCase(private val historyRepository: HistoryRepository) :
-    UseCase<DeleteHistoryUseCase.Param, Unit>() {
+    UseCase<DeleteHistoryUseCase.Param, Single<Int>>() {
 
-    override fun createObservable(param: Param?): Unit {
-        param?.let { return historyRepository.deleteHistory() }
+    override fun createObservable(param: Param?): Single<Int> {
+        param?.let {
+            return Single.defer {
+                Single.just(historyRepository.deleteHistory())
+            }
+        }
+        return Single.error(Throwable("Invalid Param"))
     }
 
     override fun onCleared() {

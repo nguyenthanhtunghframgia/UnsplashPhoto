@@ -18,7 +18,7 @@ class PhotoDetailViewModel : BaseViewModel() {
 
     fun checkDownloaded(path: String) {
         val file = File(path)
-        if (!file.canRead()) {
+        if (file.exists()) {
             levelDownload.value = LEVEL_DOWNLOADED
             return
         }

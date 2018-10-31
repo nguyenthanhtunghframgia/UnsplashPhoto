@@ -3,12 +3,21 @@ package com.example.nguyenthanhtungh.unsplashphoto.ui.user
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
+import android.view.View
 import androidx.appcompat.widget.SearchView
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.nguyenthanhtungh.unsplashphoto.BR
 import com.example.nguyenthanhtungh.unsplashphoto.R
 import com.example.nguyenthanhtungh.unsplashphoto.base.BaseFragment
+import com.example.nguyenthanhtungh.unsplashphoto.base.RecyclerItemDecoration
 import com.example.nguyenthanhtungh.unsplashphoto.databinding.FragmentUserBinding
+import com.example.nguyenthanhtungh.unsplashphoto.model.HistoryItem
 import com.example.nguyenthanhtungh.unsplashphoto.ui.search.SearchFragment
+import com.example.nguyenthanhtungh.unsplashphoto.util.DialogUtils
+import com.example.nguyenthanhtungh.unsplashphoto.util.ITEM_DECORATION
+import com.example.nguyenthanhtungh.unsplashphoto.util.SPAN_COUNT
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class UserFragment : BaseFragment<FragmentUserBinding, UserViewModel>() {
@@ -33,6 +42,45 @@ class UserFragment : BaseFragment<FragmentUserBinding, UserViewModel>() {
 
         setToolbar(viewDataBinding.toolbar, getString(R.string.user))
 
+        val userAdapter =
+            UserAdapter(
+                onItemClick = {
+                    goToSearchFragment(it)
+                }
+            )
+
+        val decoration = RecyclerItemDecoration(ITEM_DECORATION)
+        viewDataBinding.apply {
+            recyclerRecentSearch.apply {
+                adapter = userAdapter
+                layoutManager = StaggeredGridLayoutManager(SPAN_COUNT, LinearLayoutManager.HORIZONTAL)
+                addItemDecoration(decoration)
+            }
+        }
+
+        viewDataBinding.onClearClick = View.OnClickListener {
+            viewModel.deleteHistory()
+        }
+
+        viewModel.apply {
+
+            listHistory.observe(this@UserFragment, Observer {
+                userAdapter.submitList(it)
+            })
+
+            getListHistory()
+
+            isInsertComplete.observe(this@UserFragment, Observer {
+                //todo
+            })
+
+            isDelete.observe(this@UserFragment, Observer {
+                when (it) {
+                    true -> DialogUtils.showToast(context, getString(R.string.delete_complete))
+                    false -> DialogUtils.showToast(context, getString(R.string.delete_fail))
+                }
+            })
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
@@ -43,6 +91,7 @@ class UserFragment : BaseFragment<FragmentUserBinding, UserViewModel>() {
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 searchItem.collapseActionView()
+                viewModel.insertHistory(HistoryItem(0, query))
                 goToSearchFragment(query)
                 return true
             }
@@ -55,6 +104,13 @@ class UserFragment : BaseFragment<FragmentUserBinding, UserViewModel>() {
 
     private fun goToSearchFragment(query: String?) {
         val searchFragment = SearchFragment.newInstance(query)
+        replaceFragment(
+            R.id.frame_layout, searchFragment, SearchFragment.TAG, true
+        )
+    }
+
+    private fun goToSearchFragment(it: HistoryItem) {
+        val searchFragment = SearchFragment.newInstance(it.query)
         replaceFragment(
             R.id.frame_layout, searchFragment, SearchFragment.TAG, true
         )

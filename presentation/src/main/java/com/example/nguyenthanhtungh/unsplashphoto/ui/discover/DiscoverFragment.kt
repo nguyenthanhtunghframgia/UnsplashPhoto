@@ -13,14 +13,13 @@ import com.example.nguyenthanhtungh.unsplashphoto.base.BaseFragment
 import com.example.nguyenthanhtungh.unsplashphoto.base.EndlessScrollListener
 import com.example.nguyenthanhtungh.unsplashphoto.base.RecyclerItemDecoration
 import com.example.nguyenthanhtungh.unsplashphoto.databinding.FragmentDiscoverBinding
+import com.example.nguyenthanhtungh.unsplashphoto.model.HistoryItem
 import com.example.nguyenthanhtungh.unsplashphoto.model.PhotoItem
-import com.example.nguyenthanhtungh.unsplashphoto.ui.main.MainActivity
 import com.example.nguyenthanhtungh.unsplashphoto.ui.photodetail.PhotoDetailFragment
 import com.example.nguyenthanhtungh.unsplashphoto.ui.search.SearchFragment
 import com.example.nguyenthanhtungh.unsplashphoto.util.DialogUtils
 import com.example.nguyenthanhtungh.unsplashphoto.util.ITEM_DECORATION
 import com.example.nguyenthanhtungh.unsplashphoto.util.SPAN_COUNT
-import kotlinx.android.synthetic.main.fragment_discover.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class DiscoverFragment : BaseFragment<FragmentDiscoverBinding, DiscoverViewModel>(),
@@ -64,6 +63,10 @@ class DiscoverFragment : BaseFragment<FragmentDiscoverBinding, DiscoverViewModel
 
         viewModel.apply {
 
+            isInsertComplete.observe(this@DiscoverFragment, Observer {
+                //todo
+            })
+
             listDiscoverPhotoItem.observe(this@DiscoverFragment, Observer {
                 discoverAdapter.submitList(it)
             })
@@ -92,6 +95,7 @@ class DiscoverFragment : BaseFragment<FragmentDiscoverBinding, DiscoverViewModel
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 searchItem.collapseActionView()
+                viewModel.insertHistory(HistoryItem(0, query))
                 goToSearchFragment(query)
                 return true
             }

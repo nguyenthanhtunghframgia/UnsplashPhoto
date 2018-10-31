@@ -5,6 +5,7 @@ import com.example.nguyenthanhtungh.domain.usecase.collection.SearchCollectionUs
 import com.example.nguyenthanhtungh.domain.usecase.history.DeleteHistoryUseCase
 import com.example.nguyenthanhtungh.domain.usecase.history.GetHistoryUseCase
 import com.example.nguyenthanhtungh.domain.usecase.history.InsertHistoryUseCase
+import com.example.nguyenthanhtungh.domain.usecase.history.LimitHistoryUseCase
 import com.example.nguyenthanhtungh.domain.usecase.photo.DiscoverPhotoUseCase
 import com.example.nguyenthanhtungh.domain.usecase.photo.PhotoUseCase
 import com.example.nguyenthanhtungh.domain.usecase.photo.SearchPhotoUseCase
@@ -18,5 +19,6 @@ val useCaseModule = module(override = true) {
     single { GetHistoryUseCase(get()) }
     single { InsertHistoryUseCase(get()) }
     single { DeleteHistoryUseCase(get()) }
+    single { LimitHistoryUseCase(get()) }
     single { DiscoverPhotoUseCase(get()) }
 }

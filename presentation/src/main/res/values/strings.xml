@@ -8,5 +8,12 @@
     <string name="title_discover">Discover</string>
     <string name="title_collection">Collections</string>
     <string name="discover">Discover Photos</string>
-    <string name="user">User</string>
+    <string name="user">User Information</string>
+    <string name="delete_complete">Delete complete</string>
+    <string name="delete_fail">Delete fail</string>
+    <string name="clear_history">Clear</string>
+    <string name="recent_history">Recent Search</string>
+    <string name="empty_history">No recent search</string>
+    <string name="empty_collection_search">No collection found</string>
+    <string name="empty_photo_search">No photo found</string>
 </resources>

@@ -28,7 +28,7 @@
                      android:layout_height="match_parent">
 
             <ImageButton android:layout_width="@dimen/dp_56"
-                         android:layout_gravity="left|top"
+                         android:layout_gravity="start|top"
                          android:onClick="@{onBackPress}"
                          android:background="@color/colorPrimary"
                          android:src="@drawable/ic_back"
@@ -39,7 +39,7 @@
                       android:gravity="center"
                       android:textColor="@android:color/white"
                       android:textSize="@dimen/sp_24"
-                      android:layout_marginLeft="@dimen/dp_56"
+                      android:layout_marginStart="@dimen/dp_56"
                       android:ellipsize="end"
                       android:background="@color/colorPrimary"
                       android:text="@{fragmentCollectionDetailViewModel.collectionTitle}"

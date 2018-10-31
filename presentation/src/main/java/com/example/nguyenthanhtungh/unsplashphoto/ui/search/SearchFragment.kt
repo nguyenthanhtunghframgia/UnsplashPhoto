@@ -118,9 +118,9 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>(),
     }
 
     private fun goToCollectionDetailFragment(it: CollectionItem) {
-        val movieDetailFragment = CollectionDetailFragment.newInstance(it.id, it.title ?: return)
+        val collectionDetailFragment = CollectionDetailFragment.newInstance(it.id, it.title ?: return)
         replaceFragment(
-            R.id.frame_layout, movieDetailFragment, CollectionDetailFragment.TAG, true
+            R.id.frame_layout, collectionDetailFragment, CollectionDetailFragment.TAG, true
         )
     }
 

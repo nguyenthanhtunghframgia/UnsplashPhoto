@@ -14,8 +14,8 @@ import com.example.nguyenthanhtungh.unsplashphoto.base.EndlessScrollListener
 import com.example.nguyenthanhtungh.unsplashphoto.base.RecyclerItemDecoration
 import com.example.nguyenthanhtungh.unsplashphoto.databinding.FragmentCollectionBinding
 import com.example.nguyenthanhtungh.unsplashphoto.model.CollectionItem
+import com.example.nguyenthanhtungh.unsplashphoto.model.HistoryItem
 import com.example.nguyenthanhtungh.unsplashphoto.ui.collectiondetail.CollectionDetailFragment
-import com.example.nguyenthanhtungh.unsplashphoto.ui.main.MainActivity
 import com.example.nguyenthanhtungh.unsplashphoto.ui.search.SearchFragment
 import com.example.nguyenthanhtungh.unsplashphoto.util.DialogUtils
 import com.example.nguyenthanhtungh.unsplashphoto.util.ITEM_DECORATION
@@ -41,7 +41,7 @@ class CollectionFragment : BaseFragment<FragmentCollectionBinding, CollectionVie
 
     override fun initComponent(viewDataBinding: FragmentCollectionBinding) {
 
-        setToolbar(viewDataBinding.toolbar,getString(R.string.collection))
+        setToolbar(viewDataBinding.toolbar, getString(R.string.collection))
 
         val fragmentHomeAdapter = CollectionAdapter(
             onItemClick = {
@@ -69,6 +69,10 @@ class CollectionFragment : BaseFragment<FragmentCollectionBinding, CollectionVie
             })
             firstLoad()
 
+            isInsertComplete.observe(this@CollectionFragment, Observer {
+                //todo
+            })
+
             isLoadMore.observe(this@CollectionFragment, Observer {
                 if (it == null) return@Observer
                 endlessScrollListener.isLoading = it
@@ -92,6 +96,7 @@ class CollectionFragment : BaseFragment<FragmentCollectionBinding, CollectionVie
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 searchItem.collapseActionView()
+                viewModel.insertHistory(HistoryItem(0, query))
                 goToSearchFragment(query)
                 return true
             }

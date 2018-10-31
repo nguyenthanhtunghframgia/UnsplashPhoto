@@ -50,7 +50,7 @@ class PhotoDetailFragment : BaseFragment<FragmentPhotoDetailBinding, PhotoDetail
             photoItem.value = arguments?.getParcelable(PHOTO_ITEM)
 
             checkDownloaded(
-                (Environment.getExternalStorageDirectory().toString())
+                StringUtils.getDownloadPath()
                     .plus(photoItem.value?.id.plus(IMAGE_EXTEND))
             )
 

@@ -7,6 +7,7 @@ val itemMapperModule = module(override = true) {
     single { LinksItemMapper() }
     single { UrlsItemMapper() }
     single { UserItemMapper() }
+    single { HistoryItemMapper() }
     single { CoverPhotoItemMapper(get()) }
     single { CollectionItemMapper(get()) }
     single { PhotoItemMapper(get(), get(), get()) }
