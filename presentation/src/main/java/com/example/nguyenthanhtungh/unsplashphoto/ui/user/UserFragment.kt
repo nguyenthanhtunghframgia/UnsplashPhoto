@@ -61,7 +61,25 @@ class UserFragment : BaseFragment<FragmentUserBinding, UserViewModel>() {
         }
 
         viewDataBinding.onClearClick = View.OnClickListener {
-            viewModel.deleteHistory()
+            viewModel.apply {
+
+                deleteHistory()
+
+                isDelete.observe(this@UserFragment, Observer {
+                    when (it) {
+                        true -> DialogUtils.showToast(context, getString(R.string.delete_complete))
+                        false -> DialogUtils.showToast(context, getString(R.string.delete_fail))
+                    }
+                })
+            }
+        }
+
+        viewDataBinding.onDownloadedPhotoClick = View.OnClickListener {
+            DialogUtils.showToast(context, getString(R.string.coming_soon))
+        }
+
+        viewDataBinding.onLikedPhotoClick = View.OnClickListener {
+            DialogUtils.showToast(context, getString(R.string.coming_soon))
         }
 
         viewModel.apply {
@@ -78,13 +96,6 @@ class UserFragment : BaseFragment<FragmentUserBinding, UserViewModel>() {
 
             errorInsertMessage.observe(this@UserFragment, Observer {
                 DialogUtils.showToast(context, it)
-            })
-
-            isDelete.observe(this@UserFragment, Observer {
-                when (it) {
-                    true -> DialogUtils.showToast(context, getString(R.string.delete_complete))
-                    false -> DialogUtils.showToast(context, getString(R.string.delete_fail))
-                }
             })
         }
     }
