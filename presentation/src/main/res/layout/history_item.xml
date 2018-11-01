@@ -25,6 +25,7 @@
             android:gravity="center"
             android:maxLines="1"
             android:minWidth="@dimen/dp_56"
+            android:maxWidth="@dimen/dp_200"
             android:padding="@dimen/dp_8"
             android:text="@{history.query}"
             android:textColor="@android:color/white" />
