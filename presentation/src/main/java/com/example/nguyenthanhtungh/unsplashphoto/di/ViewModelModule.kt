@@ -1,7 +1,7 @@
 package com.example.nguyenthanhtungh.unsplashphoto.di
 
-import com.example.nguyenthanhtungh.unsplashphoto.ui.collectiondetail.CollectionDetailViewModel
 import com.example.nguyenthanhtungh.unsplashphoto.ui.collection.CollectionViewModel
+import com.example.nguyenthanhtungh.unsplashphoto.ui.collectiondetail.CollectionDetailViewModel
 import com.example.nguyenthanhtungh.unsplashphoto.ui.discover.DiscoverViewModel
 import com.example.nguyenthanhtungh.unsplashphoto.ui.editphoto.EditPhotoViewModel
 import com.example.nguyenthanhtungh.unsplashphoto.ui.main.MainViewModel

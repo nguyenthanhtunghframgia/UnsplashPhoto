@@ -5,12 +5,12 @@ import com.example.nguyenthanhtungh.domain.usecase.photo.PhotoUseCase
 import com.example.nguyenthanhtungh.unsplashphoto.base.BaseViewModel
 import com.example.nguyenthanhtungh.unsplashphoto.model.PhotoItem
 import com.example.nguyenthanhtungh.unsplashphoto.model.PhotoItemMapper
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+import com.example.nguyenthanhtungh.unsplashphoto.rx.SchedulerProvider
 
 class CollectionDetailViewModel(
     private val photoItemMapper: PhotoItemMapper,
-    private val photoUseCase: PhotoUseCase
+    private val photoUseCase: PhotoUseCase,
+    private val appSchedulerProvider: SchedulerProvider
 ) : BaseViewModel() {
     var isLoading = MutableLiveData<Boolean>()
     var isLoadMore = MutableLiveData<Boolean>()
@@ -23,8 +23,8 @@ class CollectionDetailViewModel(
 
     private fun getListCollectionPhotoItems(id: String, page: Int) {
         addDisposable(photoUseCase.createObservable(PhotoUseCase.Param(id, page))
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(appSchedulerProvider.io())
+            .observeOn(appSchedulerProvider.ui())
             .doAfterTerminate {
                 isLoadMore.value = false
                 isLoading.value = false
