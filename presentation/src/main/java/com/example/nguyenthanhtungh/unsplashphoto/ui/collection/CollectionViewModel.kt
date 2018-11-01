@@ -9,15 +9,15 @@ import com.example.nguyenthanhtungh.unsplashphoto.model.CollectionItem
 import com.example.nguyenthanhtungh.unsplashphoto.model.CollectionItemMapper
 import com.example.nguyenthanhtungh.unsplashphoto.model.HistoryItem
 import com.example.nguyenthanhtungh.unsplashphoto.model.HistoryItemMapper
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+import com.example.nguyenthanhtungh.unsplashphoto.rx.SchedulerProvider
 
 class CollectionViewModel(
     private val historyItemMapper: HistoryItemMapper,
     private val insertHistoryUseCase: InsertHistoryUseCase,
     private val limitHistoryUseCase: LimitHistoryUseCase,
     private val collectionItemMapper: CollectionItemMapper,
-    private val collectionUseCase: CollectionUseCase
+    private val collectionUseCase: CollectionUseCase,
+    private val appSchedulerProvider: SchedulerProvider
 ) : BaseViewModel() {
     var isLoading = MutableLiveData<Boolean>()
     var isLoadMore = MutableLiveData<Boolean>()
@@ -30,8 +30,8 @@ class CollectionViewModel(
 
     private fun getListCollectionItem(page: Int) {
         addDisposable(collectionUseCase.createObservable(CollectionUseCase.Param(page))
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(appSchedulerProvider.io())
+            .observeOn(appSchedulerProvider.ui())
             .doAfterTerminate {
                 isLoadMore.value = false
                 isLoading.value = false
@@ -96,22 +96,22 @@ class CollectionViewModel(
                     historyItemMapper.mapToDomain(historyItem)
                 )
             )
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(appSchedulerProvider.io())
+                .observeOn(appSchedulerProvider.ui())
                 .subscribe({
                     isInsertComplete.value = true
-                },{
+                }, {
                     isInsertComplete.value = false
                     errorInsertMessage.value = it.message
                 })
         )
         addDisposable(
             limitHistoryUseCase.createObservable(LimitHistoryUseCase.Param())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(appSchedulerProvider.io())
+                .observeOn(appSchedulerProvider.ui())
                 .subscribe({
                     isInsertComplete.value = true
-                },{
+                }, {
                     isInsertComplete.value = false
                     errorInsertMessage.value = it.message
                 })

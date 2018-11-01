@@ -8,15 +8,15 @@ import com.example.nguyenthanhtungh.domain.usecase.history.LimitHistoryUseCase
 import com.example.nguyenthanhtungh.unsplashphoto.base.BaseViewModel
 import com.example.nguyenthanhtungh.unsplashphoto.model.HistoryItem
 import com.example.nguyenthanhtungh.unsplashphoto.model.HistoryItemMapper
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+import com.example.nguyenthanhtungh.unsplashphoto.rx.SchedulerProvider
 
 class UserViewModel(
     private val historyItemMapper: HistoryItemMapper,
     private val insertHistoryUseCase: InsertHistoryUseCase,
     private val limitHistoryUseCase: LimitHistoryUseCase,
     private val getHistoryUseCase: GetHistoryUseCase,
-    private val deleteHistoryUseCase: DeleteHistoryUseCase
+    private val deleteHistoryUseCase: DeleteHistoryUseCase,
+    private val appSchedulerProvider: SchedulerProvider
 ) : BaseViewModel() {
     val errorMessage = MutableLiveData<String>()
     val errorInsertMessage = MutableLiveData<String>()
@@ -28,8 +28,8 @@ class UserViewModel(
     fun getListHistory() {
         addDisposable(
             getHistoryUseCase.createObservable(GetHistoryUseCase.Param())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(appSchedulerProvider.io())
+                .observeOn(appSchedulerProvider.ui())
                 .map { listCollectionItem ->
                     listCollectionItem.map { historyItemMapper.mapToPresentation(it) }
                 }
@@ -42,8 +42,8 @@ class UserViewModel(
     fun deleteHistory() {
         addDisposable(
             deleteHistoryUseCase.createObservable(DeleteHistoryUseCase.Param())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(appSchedulerProvider.io())
+                .observeOn(appSchedulerProvider.ui())
                 .doAfterTerminate {
                     getListHistory()
                 }
@@ -74,22 +74,22 @@ class UserViewModel(
                     historyItemMapper.mapToDomain(historyItem)
                 )
             )
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(appSchedulerProvider.io())
+                .observeOn(appSchedulerProvider.ui())
                 .subscribe({
                     isInsertComplete.value = true
-                },{
+                }, {
                     isInsertComplete.value = false
                     errorInsertMessage.value = it.message
                 })
         )
         addDisposable(
             limitHistoryUseCase.createObservable(LimitHistoryUseCase.Param())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(appSchedulerProvider.io())
+                .observeOn(appSchedulerProvider.ui())
                 .subscribe({
                     isInsertComplete.value = true
-                },{
+                }, {
                     isInsertComplete.value = false
                     errorInsertMessage.value = it.message
                 })

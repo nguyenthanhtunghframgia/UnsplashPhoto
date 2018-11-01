@@ -8,14 +8,14 @@ import com.example.nguyenthanhtungh.unsplashphoto.model.CollectionItem
 import com.example.nguyenthanhtungh.unsplashphoto.model.CollectionItemMapper
 import com.example.nguyenthanhtungh.unsplashphoto.model.PhotoItem
 import com.example.nguyenthanhtungh.unsplashphoto.model.PhotoItemMapper
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+import com.example.nguyenthanhtungh.unsplashphoto.rx.SchedulerProvider
 
 class SearchViewModel(
     private val searchPhotoUseCase: SearchPhotoUseCase,
     private val photoItemMapper: PhotoItemMapper,
     private val searchCollectionUseCase: SearchCollectionUseCase,
-    private val collectionItemMapper: CollectionItemMapper
+    private val collectionItemMapper: CollectionItemMapper,
+    private val appSchedulerProvider: SchedulerProvider
 ) : BaseViewModel() {
     val queryString = MutableLiveData<String>()
     val isLoadingPhoto = MutableLiveData<Boolean>()
@@ -31,8 +31,8 @@ class SearchViewModel(
 
     private fun getListSearchCollection(query: String, page: Int) {
         addDisposable(searchCollectionUseCase.createObservable(SearchCollectionUseCase.Param(query, page))
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(appSchedulerProvider.io())
+            .observeOn(appSchedulerProvider.ui())
             .doAfterTerminate {
                 isLoadingCollection.value = false
             }
@@ -48,8 +48,8 @@ class SearchViewModel(
 
     private fun getListSearchPhoto(query: String, page: Int) {
         addDisposable(searchPhotoUseCase.createObservable(SearchPhotoUseCase.Param(query, page))
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(appSchedulerProvider.io())
+            .observeOn(appSchedulerProvider.ui())
             .doAfterTerminate {
                 isLoadMore.value = false
                 isLoadingPhoto.value = false
