@@ -74,6 +74,14 @@ class UserFragment : BaseFragment<FragmentUserBinding, UserViewModel>() {
             }
         }
 
+        viewDataBinding.onDownloadedPhotoClick = View.OnClickListener {
+            DialogUtils.showToast(context, getString(R.string.coming_soon))
+        }
+
+        viewDataBinding.onLikedPhotoClick = View.OnClickListener {
+            DialogUtils.showToast(context, getString(R.string.coming_soon))
+        }
+
         viewModel.apply {
 
             listHistory.observe(this@UserFragment, Observer {

@@ -1,158 +1,158 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
-        <import type="android.view.View" />
+        <import type="android.view.View"/>
 
         <variable
-            name="onBackPress"
-            type="android.view.View.OnClickListener">
+                name="onBackPress"
+                type="android.view.View.OnClickListener">
 
         </variable>
 
         <variable
-            name="editPhotoViewModel"
-            type="com.example.nguyenthanhtungh.unsplashphoto.ui.editphoto.EditPhotoViewModel">
+                name="editPhotoViewModel"
+                type="com.example.nguyenthanhtungh.unsplashphoto.ui.editphoto.EditPhotoViewModel">
 
         </variable>
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
         <Button
-            android:id="@+id/button_filter"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/dp_56"
-            android:background="@android:color/transparent"
-            android:drawableTop="@drawable/ic_filter"
-            android:scaleType="centerInside"
-            android:text="@string/photo_filter"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/button_crop"
-            app:layout_constraintStart_toStartOf="parent" />
+                android:id="@+id/button_filter"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dp_56"
+                android:background="@android:color/transparent"
+                android:drawableTop="@drawable/ic_filter"
+                android:scaleType="centerInside"
+                android:text="@string/photo_filter"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/button_crop"
+                app:layout_constraintStart_toStartOf="parent"/>
 
         <Button
-            android:id="@+id/button_crop"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/dp_56"
-            android:background="@android:color/transparent"
-            android:drawableTop="@drawable/ic_crop"
-            android:scaleType="centerInside"
-            android:text="@string/photo_crop"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/button_draw"
-            app:layout_constraintStart_toEndOf="@+id/button_filter" />
+                android:id="@+id/button_crop"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dp_56"
+                android:background="@android:color/transparent"
+                android:drawableTop="@drawable/ic_crop"
+                android:scaleType="centerInside"
+                android:text="@string/photo_crop"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/button_draw"
+                app:layout_constraintStart_toEndOf="@+id/button_filter"/>
 
         <Button
-            android:id="@+id/button_draw"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/dp_56"
-            android:background="@android:color/transparent"
-            android:drawableTop="@drawable/ic_draw"
-            android:scaleType="centerInside"
-            android:text="@string/photo_draw"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/button_effects"
-            app:layout_constraintStart_toEndOf="@+id/button_crop" />
+                android:id="@+id/button_draw"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dp_56"
+                android:background="@android:color/transparent"
+                android:drawableTop="@drawable/ic_draw"
+                android:scaleType="centerInside"
+                android:text="@string/photo_draw"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/button_effects"
+                app:layout_constraintStart_toEndOf="@+id/button_crop"/>
 
         <Button
-            android:id="@+id/button_effects"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/dp_56"
-            android:background="@android:color/transparent"
-            android:drawableTop="@drawable/ic_effects"
-            android:scaleType="centerInside"
-            android:text="@string/photo_effects"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/button_add_icon"
-            app:layout_constraintStart_toEndOf="@+id/button_draw" />
+                android:id="@+id/button_effects"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dp_56"
+                android:background="@android:color/transparent"
+                android:drawableTop="@drawable/ic_effects"
+                android:scaleType="centerInside"
+                android:text="@string/photo_effects"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/button_add_icon"
+                app:layout_constraintStart_toEndOf="@+id/button_draw"/>
 
         <Button
-            android:id="@+id/button_add_icon"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/dp_56"
-            android:background="@android:color/transparent"
-            android:drawableTop="@drawable/ic_add_icon"
-            android:scaleType="fitCenter"
-            android:text="@string/photo_add_icon"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/button_effects" />
+                android:id="@+id/button_add_icon"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dp_56"
+                android:background="@android:color/transparent"
+                android:drawableTop="@drawable/ic_add_icon"
+                android:scaleType="fitCenter"
+                android:text="@string/photo_add_icon"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/button_effects"/>
 
         <TextView
-            android:id="@+id/text_divide"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/dp_1"
-            android:layout_marginBottom="@dimen/dp_8"
-            android:background="@android:color/darker_gray"
-            app:layout_constraintBottom_toTopOf="@+id/button_draw"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+                android:id="@+id/text_divide"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dp_1"
+                android:layout_marginBottom="@dimen/dp_8"
+                android:background="@android:color/darker_gray"
+                app:layout_constraintBottom_toTopOf="@+id/button_draw"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
 
         <ImageButton
-            android:id="@+id/button_back"
-            android:layout_width="@dimen/dp_56"
-            android:layout_height="@dimen/dp_56"
-            android:layout_marginStart="@dimen/dp_8"
-            android:layout_marginTop="@dimen/dp_8"
-            android:background="@android:color/transparent"
-            android:onClick="@{onBackPress}"
-            android:scaleType="centerInside"
-            android:src="@drawable/ic_back_black"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+                android:id="@+id/button_back"
+                android:layout_width="@dimen/dp_56"
+                android:layout_height="@dimen/dp_56"
+                android:layout_marginStart="@dimen/dp_8"
+                android:layout_marginTop="@dimen/dp_8"
+                android:background="@android:color/transparent"
+                android:onClick="@{onBackPress}"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_back_black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
 
         <Button
-            android:id="@+id/button_save"
-            android:layout_width="@dimen/dp_56"
-            android:layout_height="@dimen/dp_56"
-            android:layout_marginTop="@dimen/dp_8"
-            android:layout_marginEnd="@dimen/dp_8"
-            android:background="@android:color/transparent"
-            android:gravity="center"
-            android:text="@string/save_edit"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+                android:id="@+id/button_save"
+                android:layout_width="@dimen/dp_56"
+                android:layout_height="@dimen/dp_56"
+                android:layout_marginTop="@dimen/dp_8"
+                android:layout_marginEnd="@dimen/dp_8"
+                android:background="@android:color/transparent"
+                android:gravity="center"
+                android:text="@string/save_edit"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
 
         <Button
-            android:id="@+id/button_redo"
-            android:layout_width="@dimen/dp_56"
-            android:layout_height="@dimen/dp_56"
-            android:layout_marginTop="@dimen/dp_8"
-            android:layout_marginEnd="@dimen/dp_8"
-            android:background="@android:color/transparent"
-            android:gravity="center"
-            android:text="@string/redo"
-            app:layout_constraintEnd_toStartOf="@+id/button_save"
-            app:layout_constraintTop_toTopOf="parent" />
+                android:id="@+id/button_redo"
+                android:layout_width="@dimen/dp_56"
+                android:layout_height="@dimen/dp_56"
+                android:layout_marginTop="@dimen/dp_8"
+                android:layout_marginEnd="@dimen/dp_8"
+                android:background="@android:color/transparent"
+                android:gravity="center"
+                android:text="@string/redo"
+                app:layout_constraintEnd_toStartOf="@+id/button_save"
+                app:layout_constraintTop_toTopOf="parent"/>
 
         <Button
-            android:id="@+id/button_undo"
-            android:layout_width="@dimen/dp_56"
-            android:layout_height="@dimen/dp_56"
-            android:layout_marginTop="@dimen/dp_8"
-            android:layout_marginEnd="@dimen/dp_8"
-            android:background="@android:color/transparent"
-            android:gravity="center"
-            android:text="@string/undo"
-            app:layout_constraintEnd_toStartOf="@+id/button_redo"
-            app:layout_constraintTop_toTopOf="parent" />
+                android:id="@+id/button_undo"
+                android:layout_width="@dimen/dp_56"
+                android:layout_height="@dimen/dp_56"
+                android:layout_marginTop="@dimen/dp_8"
+                android:layout_marginEnd="@dimen/dp_8"
+                android:background="@android:color/transparent"
+                android:gravity="center"
+                android:text="@string/undo"
+                app:layout_constraintEnd_toStartOf="@+id/button_redo"
+                app:layout_constraintTop_toTopOf="parent"/>
 
         <ImageView
-            android:id="@+id/image_photo"
-            imageUrl="@{editPhotoViewModel.photoItem.urls.regular}"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:scaleType="centerInside"
-            app:layout_constraintBottom_toTopOf="@+id/text_divide"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button_back" />
+                android:id="@+id/image_photo"
+                imageUrl="@{editPhotoViewModel.photoItem.urls.regular}"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:scaleType="centerInside"
+                app:layout_constraintBottom_toTopOf="@+id/text_divide"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/button_back"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
