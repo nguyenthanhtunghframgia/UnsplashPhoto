@@ -4,30 +4,31 @@
     <data>
 
         <variable
-                name="collection"
-                type="com.example.nguyenthanhtungh.unsplashphoto.model.CollectionItem">
+            name="collection"
+            type="com.example.nguyenthanhtungh.unsplashphoto.model.CollectionItem">
 
         </variable>
 
     </data>
 
     <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/dp_48"
-            android:background="@android:color/transparent">
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dp_48"
+        android:background="@android:color/transparent">
 
         <TextView
-                android:id="@+id/collection_item_name"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/ic_round_corner_button"
-                android:ellipsize="end"
-                android:gravity="center"
-                android:maxLines="1"
-                android:minWidth="@dimen/dp_56"
-                android:padding="@dimen/dp_8"
-                android:text="@{collection.title}"
-                android:textColor="@android:color/white"/>
+            android:id="@+id/collection_item_name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/ic_round_corner_button"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxWidth="@dimen/dp_200"
+            android:maxLines="1"
+            android:minWidth="@dimen/dp_56"
+            android:padding="@dimen/dp_8"
+            android:text="@{collection.title}"
+            android:textColor="@android:color/white" />
 
     </FrameLayout>
 
