@@ -1,129 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
-        <import type="android.view.View"/>
+        <import type="android.view.View" />
 
         <variable
-                name="onBackPress"
-                type="android.view.View.OnClickListener">
+            name="onBackPress"
+            type="android.view.View.OnClickListener">
 
         </variable>
 
         <variable
-                name="searchViewModel"
-                type="com.example.nguyenthanhtungh.unsplashphoto.ui.search.SearchViewModel">
+            name="searchViewModel"
+            type="com.example.nguyenthanhtungh.unsplashphoto.ui.search.SearchViewModel">
 
         </variable>
 
     </data>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/search_swipe_layout"
+        android:id="@+id/search_swipe_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
             <TextView
-                    android:id="@+id/text_title"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/dp_56"
-                    android:background="@color/colorPrimary"
-                    android:ellipsize="end"
-                    android:gravity="start|center_vertical"
-                    android:paddingStart="@dimen/dp_8"
-                    android:maxLines="1"
-                    android:text="@{@string/result_title + searchViewModel.queryString}"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/sp_24"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/button_back"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                android:id="@+id/text_title"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dp_56"
+                android:background="@color/colorPrimary"
+                android:ellipsize="end"
+                android:gravity="start|center_vertical"
+                android:maxLines="1"
+                android:paddingStart="@dimen/dp_8"
+                android:text="@{@string/result_title + searchViewModel.queryString}"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/sp_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/button_back"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
-                    android:id="@+id/button_back"
-                    android:layout_width="@dimen/dp_56"
-                    android:layout_height="@dimen/dp_56"
-                    android:background="@color/colorPrimary"
-                    android:onClick="@{onBackPress}"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/ic_back"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                android:id="@+id/button_back"
+                android:layout_width="@dimen/dp_56"
+                android:layout_height="@dimen/dp_56"
+                android:background="@color/colorPrimary"
+                android:onClick="@{onBackPress}"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_back"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recycler_collection"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/dp_56"
-                    android:layout_marginStart="@dimen/dp_8"
-                    android:layout_marginTop="@dimen/dp_8"
-                    android:layout_marginEnd="@dimen/dp_8"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/text_title"/>
+                android:id="@+id/recycler_collection"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dp_56"
+                android:layout_marginStart="@dimen/dp_8"
+                android:layout_marginTop="@dimen/dp_8"
+                android:layout_marginEnd="@dimen/dp_8"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_title" />
 
             <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recycler_photo"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_marginTop="@dimen/dp_8"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/recycler_collection"/>
+                android:id="@+id/recycler_photo"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/dp_8"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/recycler_collection" />
 
             <ProgressBar
-                    android:id="@+id/progress_load"
-                    android:layout_width="@dimen/dp_56"
-                    android:layout_height="@dimen/dp_56"
-                    android:visibility="@{searchViewModel.isLoadingPhoto?View.VISIBLE:View.GONE}"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/text_title"/>
+                android:id="@+id/progress_load"
+                android:layout_width="@dimen/dp_56"
+                android:layout_height="@dimen/dp_56"
+                android:visibility="@{searchViewModel.isLoadingPhoto?View.VISIBLE:View.GONE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/text_title" />
 
             <ProgressBar
-                    android:id="@+id/progress_load_more"
-                    android:layout_width="@dimen/dp_56"
-                    android:layout_height="@dimen/dp_56"
-                    android:visibility="@{searchViewModel.isLoadMore?View.VISIBLE:View.GONE}"
-                    app:layout_constraintBottom_toBottomOf="@+id/recycler_photo"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"/>
+                android:id="@+id/progress_load_more"
+                android:layout_width="@dimen/dp_56"
+                android:layout_height="@dimen/dp_56"
+                android:visibility="@{searchViewModel.isLoadMore?View.VISIBLE:View.GONE}"
+                app:layout_constraintBottom_toBottomOf="@+id/recycler_photo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
-                    android:id="@+id/text_collection_empty"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/dp_56"
-                    android:layout_marginStart="@dimen/dp_8"
-                    android:layout_marginTop="@dimen/dp_8"
-                    android:layout_marginEnd="@dimen/dp_8"
-                    android:gravity="center"
-                    android:text="@string/empty_collection_search"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:visibility="@{searchViewModel.isCollectionEmpty?View.VISIBLE:View.GONE}"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/text_title"/>
+                android:id="@+id/text_collection_empty"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dp_56"
+                android:layout_marginStart="@dimen/dp_8"
+                android:layout_marginTop="@dimen/dp_8"
+                android:layout_marginEnd="@dimen/dp_8"
+                android:gravity="center"
+                android:text="@string/empty_collection_search"
+                android:textColor="@color/colorPrimaryDark"
+                android:visibility="@{searchViewModel.isCollectionEmpty?View.VISIBLE:View.GONE}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_title" />
 
             <TextView
-                    android:id="@+id/text_photo_empty"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_marginTop="@dimen/dp_8"
-                    android:gravity="center"
-                    android:text="@string/empty_photo_search"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:visibility="@{searchViewModel.isPhotoEmpty?View.VISIBLE:View.GONE}"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/recycler_collection"/>
+                android:id="@+id/text_photo_empty"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/dp_8"
+                android:gravity="center"
+                android:text="@string/empty_photo_search"
+                android:textColor="@color/colorPrimaryDark"
+                android:visibility="@{searchViewModel.isPhotoEmpty?View.VISIBLE:View.GONE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/recycler_collection" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

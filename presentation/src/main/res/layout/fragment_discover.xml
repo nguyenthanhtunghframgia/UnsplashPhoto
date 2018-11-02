@@ -3,56 +3,56 @@
 
     <data>
 
-        <import type="android.view.View"/>
+        <import type="android.view.View" />
 
         <variable
-                name="discoverViewModel"
-                type="com.example.nguyenthanhtungh.unsplashphoto.ui.discover.DiscoverViewModel">
+            name="discoverViewModel"
+            type="com.example.nguyenthanhtungh.unsplashphoto.ui.discover.DiscoverViewModel">
 
         </variable>
 
     </data>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/swipe_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="@dimen/dp_56"
-            android:background="@android:color/white">
+        android:id="@+id/swipe_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/dp_56"
+        android:background="@android:color/white">
 
         <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/toolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_56"
-                    android:layout_gravity="top"
-                    android:background="@color/colorPrimary"
-                    android:theme="@style/ToolBarStyle">
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_56"
+                android:layout_gravity="top"
+                android:background="@color/colorPrimary"
+                android:theme="@style/ToolBarStyle">
 
             </androidx.appcompat.widget.Toolbar>
 
             <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recycler_discover"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="@dimen/dp_56">
+                android:id="@+id/recycler_discover"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/dp_56">
 
             </androidx.recyclerview.widget.RecyclerView>
 
             <ProgressBar
-                    android:layout_width="@dimen/dp_56"
-                    android:layout_height="@dimen/dp_56"
-                    android:layout_gravity="center_vertical|center_horizontal"
-                    android:visibility="@{discoverViewModel.isLoading?View.VISIBLE:View.GONE}"/>
+                android:layout_width="@dimen/dp_56"
+                android:layout_height="@dimen/dp_56"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:visibility="@{discoverViewModel.isLoading?View.VISIBLE:View.GONE}" />
 
             <ProgressBar
-                    android:layout_width="@dimen/dp_56"
-                    android:layout_height="@dimen/dp_56"
-                    android:layout_gravity="bottom|center_horizontal"
-                    android:visibility="@{discoverViewModel.isLoadMore?View.VISIBLE:View.GONE}"/>
+                android:layout_width="@dimen/dp_56"
+                android:layout_height="@dimen/dp_56"
+                android:layout_gravity="bottom|center_horizontal"
+                android:visibility="@{discoverViewModel.isLoadMore?View.VISIBLE:View.GONE}" />
 
         </FrameLayout>
 

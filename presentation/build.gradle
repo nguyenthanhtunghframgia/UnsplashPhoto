@@ -67,4 +67,6 @@ dependencies {
     //module
     implementation project(":data")
     implementation project(":domain")
+    // pinch to zoom
+    implementation 'com.jsibbold:zoomage:1.2.0'
 }

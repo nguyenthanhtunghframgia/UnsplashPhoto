@@ -9,6 +9,7 @@ import com.example.nguyenthanhtungh.unsplashphoto.databinding.FragmentEditPhotoB
 import com.example.nguyenthanhtungh.unsplashphoto.model.PhotoItem
 import org.koin.android.viewmodel.ext.android.viewModel
 
+
 class EditPhotoFragment : BaseFragment<FragmentEditPhotoBinding, EditPhotoViewModel>() {
 
     companion object {
