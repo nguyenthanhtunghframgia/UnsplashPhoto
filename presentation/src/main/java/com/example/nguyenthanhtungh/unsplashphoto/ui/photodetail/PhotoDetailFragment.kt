@@ -2,15 +2,20 @@ package com.example.nguyenthanhtungh.unsplashphoto.ui.photodetail
 
 import android.Manifest
 import android.app.DownloadManager
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.view.View
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import com.example.nguyenthanhtungh.unsplashphoto.BR
@@ -45,6 +50,8 @@ class PhotoDetailFragment : BaseFragment<FragmentPhotoDetailBinding, PhotoDetail
     override fun initComponent(viewDataBinding: FragmentPhotoDetailBinding) {
 
         hideBottomView()
+
+        createNotificationChannel()
 
         downloadManager = context?.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
 
@@ -105,6 +112,7 @@ class PhotoDetailFragment : BaseFragment<FragmentPhotoDetailBinding, PhotoDetail
                                 DownloadManager.STATUS_SUCCESSFUL -> {
                                     levelDownload.value = LEVEL_DOWNLOADED
                                     DialogUtils.showToast(context, getString(R.string.download_success))
+                                    showNotification(viewModel.photoItem.value)
                                 }
                                 else ->
                                     DialogUtils.showToast(context, getString(R.string.download_fail))
@@ -114,6 +122,32 @@ class PhotoDetailFragment : BaseFragment<FragmentPhotoDetailBinding, PhotoDetail
                 }
             }
         }, intentFilter)
+    }
+
+    private fun showNotification(photoItem: PhotoItem?) {
+        val builder = NotificationCompat.Builder(context ?: return, CHANNEL_ID)
+            .setSmallIcon(R.drawable.ic_download_purple)
+            .setContentTitle(photoItem?.description)
+            .setContentText(getString(R.string.download_success))
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+
+        with(NotificationManagerCompat.from(context ?: return)) {
+            notify(NOTIFICATION_ID, builder.build())
+        }
+    }
+
+    private fun createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val name = getString(R.string.channel_name)
+            val descriptionText = getString(R.string.channel_description)
+            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val channel = NotificationChannel(CHANNEL_ID, name, importance).apply {
+                description = descriptionText
+            }
+            val notificationManager: NotificationManager =
+                activity?.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        }
     }
 
     private fun requestPermission() {
