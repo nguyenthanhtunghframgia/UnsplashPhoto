@@ -81,8 +81,8 @@ class PhotoDetailFragment : BaseFragment<FragmentPhotoDetailBinding, PhotoDetail
                         }
                     })
 
-                    errorMessage.observe(viewLifecycleOwner, Observer {
-                        DialogUtils.showToast(context, it)
+                    errorMessage.observe(viewLifecycleOwner, Observer { message ->
+                        DialogUtils.showToast(context, message)
                         isDownloading.value = false
                         levelDownload.value = LEVEL_DOWNLOADABLE
                     })

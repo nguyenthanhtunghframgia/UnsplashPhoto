@@ -63,4 +63,9 @@ abstract class BaseFragment<ViewBinding : ViewDataBinding, ViewModel : BaseViewM
     }
 
     abstract fun initComponent(viewDataBinding: ViewBinding)
+
+    override fun onDestroy() {
+        super.onDestroy()
+        viewModel.onActivityDestroyed()
+    }
 }

@@ -65,8 +65,8 @@ class UserFragment : BaseFragment<FragmentUserBinding, UserViewModel>() {
 
                 deleteHistory()
 
-                isDelete.observe(viewLifecycleOwner, Observer {
-                    when (it) {
+                isDelete.observe(viewLifecycleOwner, Observer { delete ->
+                    when (delete) {
                         true -> DialogUtils.showToast(context, getString(R.string.delete_complete))
                         false -> DialogUtils.showToast(context, getString(R.string.delete_fail))
                     }

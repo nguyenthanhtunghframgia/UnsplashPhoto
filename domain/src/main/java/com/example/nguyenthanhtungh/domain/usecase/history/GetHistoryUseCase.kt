@@ -16,5 +16,5 @@ class GetHistoryUseCase(private val historyRepository: HistoryRepository) :
     override fun onCleared() {
     }
 
-    class Param()
+    class Param
 }
