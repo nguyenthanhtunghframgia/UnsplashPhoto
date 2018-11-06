@@ -65,29 +65,29 @@ class DiscoverFragment : BaseFragment<FragmentDiscoverBinding, DiscoverViewModel
 
         viewModel.apply {
 
-            isInsertComplete.observe(this@DiscoverFragment, Observer {
+            isInsertComplete.observe(viewLifecycleOwner, Observer {
                 //todo
             })
 
-            errorInsertMessage.observe(this@DiscoverFragment, Observer {
+            errorInsertMessage.observe(viewLifecycleOwner, Observer {
                 DialogUtils.showToast(context, it)
             })
 
-            listDiscoverPhotoItem.observe(this@DiscoverFragment, Observer {
+            listDiscoverPhotoItem.observe(viewLifecycleOwner, Observer {
                 discoverAdapter.submitList(it)
             })
             firstLoad()
 
-            isLoadMore.observe(this@DiscoverFragment, Observer {
+            isLoadMore.observe(viewLifecycleOwner, Observer {
                 if (it == null) return@Observer
                 endlessScrollListener.isLoading = it
             })
 
-            isRefresh.observe(this@DiscoverFragment, Observer {
+            isRefresh.observe(viewLifecycleOwner, Observer {
                 viewBinding.swipeLayout.apply { isRefreshing = it == true }
             })
 
-            errorMessage.observe(this@DiscoverFragment, Observer {
+            errorMessage.observe(viewLifecycleOwner, Observer {
                 DialogUtils.showToast(context, it)
             })
         }

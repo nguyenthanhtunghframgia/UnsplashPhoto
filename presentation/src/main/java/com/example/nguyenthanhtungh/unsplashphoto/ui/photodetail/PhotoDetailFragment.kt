@@ -64,7 +64,7 @@ class PhotoDetailFragment : BaseFragment<FragmentPhotoDetailBinding, PhotoDetail
                     .plus(photoItem.value?.id.plus(IMAGE_EXTEND))
             )
 
-            levelDownload.observe(this@PhotoDetailFragment, Observer {
+            levelDownload.observe(viewLifecycleOwner, Observer {
                 viewDataBinding.photoDetailDownload.setImageLevel(it)
             })
         }
@@ -73,7 +73,7 @@ class PhotoDetailFragment : BaseFragment<FragmentPhotoDetailBinding, PhotoDetail
             if (viewModel.levelDownload.value == LEVEL_DOWNLOADABLE) {
                 requestPermission()
                 viewModel.apply {
-                    isPermissionGranted.observe(this@PhotoDetailFragment, Observer {
+                    isPermissionGranted.observe(viewLifecycleOwner, Observer {
                         when (isPermissionGranted.value) {
                             true -> downloadPhoto(
                                 photoItem.value?.urls?.full ?: return@Observer
@@ -81,7 +81,7 @@ class PhotoDetailFragment : BaseFragment<FragmentPhotoDetailBinding, PhotoDetail
                         }
                     })
 
-                    errorMessage.observe(this@PhotoDetailFragment, Observer {
+                    errorMessage.observe(viewLifecycleOwner, Observer {
                         DialogUtils.showToast(context, it)
                         isDownloading.value = false
                         levelDownload.value = LEVEL_DOWNLOADABLE
@@ -107,7 +107,7 @@ class PhotoDetailFragment : BaseFragment<FragmentPhotoDetailBinding, PhotoDetail
                 if (broadCastId == viewModel.downLoadId.value) {
                     viewModel.apply {
                         getDownloadStatus()
-                        downLoadStatus.observe(this@PhotoDetailFragment, Observer {
+                        downLoadStatus.observe(viewLifecycleOwner, Observer {
                             when (it) {
                                 DownloadManager.STATUS_SUCCESSFUL -> {
                                     levelDownload.value = LEVEL_DOWNLOADED

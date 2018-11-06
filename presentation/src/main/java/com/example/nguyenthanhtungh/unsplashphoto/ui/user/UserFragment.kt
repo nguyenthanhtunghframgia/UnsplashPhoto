@@ -65,7 +65,7 @@ class UserFragment : BaseFragment<FragmentUserBinding, UserViewModel>() {
 
                 deleteHistory()
 
-                isDelete.observe(this@UserFragment, Observer {
+                isDelete.observe(viewLifecycleOwner, Observer {
                     when (it) {
                         true -> DialogUtils.showToast(context, getString(R.string.delete_complete))
                         false -> DialogUtils.showToast(context, getString(R.string.delete_fail))
@@ -84,17 +84,17 @@ class UserFragment : BaseFragment<FragmentUserBinding, UserViewModel>() {
 
         viewModel.apply {
 
-            listHistory.observe(this@UserFragment, Observer {
+            listHistory.observe(viewLifecycleOwner, Observer {
                 userAdapter.submitList(it)
             })
 
             getListHistory()
 
-            isInsertComplete.observe(this@UserFragment, Observer {
+            isInsertComplete.observe(viewLifecycleOwner, Observer {
                 //todo
             })
 
-            errorInsertMessage.observe(this@UserFragment, Observer {
+            errorInsertMessage.observe(viewLifecycleOwner, Observer {
                 DialogUtils.showToast(context, it)
             })
         }

@@ -89,25 +89,25 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>(),
 
             queryString.value = arguments?.getString(QUERY_STRING)
 
-            listSearchCollection.observe(this@SearchFragment, Observer {
+            listSearchCollection.observe(viewLifecycleOwner, Observer {
                 searchCollectionAdapter.submitList(it)
             })
 
-            listSearchPhotos.observe(this@SearchFragment, Observer {
+            listSearchPhotos.observe(viewLifecycleOwner, Observer {
                 searchPhotoAdapter.submitList(it)
             })
             firstLoad(query)
 
-            isLoadMore.observe(this@SearchFragment, Observer {
+            isLoadMore.observe(viewLifecycleOwner, Observer {
                 if (it == true) return@Observer
                 endlessScrollListener.isLoading = it
             })
 
-            isRefresh.observe(this@SearchFragment, Observer {
+            isRefresh.observe(viewLifecycleOwner, Observer {
                 viewBinding.searchSwipeLayout.apply { isRefreshing = it == true }
             })
 
-            errorMessage.observe(this@SearchFragment, Observer {
+            errorMessage.observe(viewLifecycleOwner, Observer {
                 DialogUtils.showToast(context, it)
             })
         }
