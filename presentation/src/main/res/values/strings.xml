@@ -30,7 +30,6 @@
     <string name="result_title">Result for : \u0020</string>
     <string name="coming_soon">Coming soon</string>
     <string name="photos">\u0020 photos</string>
-    <string name="reach_end">No more items</string>
     <string name="channel_name">Download notification</string>
     <string name="channel_description">Download notification</string>
 </resources>

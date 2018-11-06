@@ -24,6 +24,6 @@ object BindAdapter {
     @BindingAdapter("text")
     @JvmStatic
     fun loadText(textView: TextView, text: String?) {
-        textView.setText(text ?: textView.context.getString(R.string.app_name))
+        textView.text = (text ?: textView.context.getString(R.string.app_name))
     }
 }

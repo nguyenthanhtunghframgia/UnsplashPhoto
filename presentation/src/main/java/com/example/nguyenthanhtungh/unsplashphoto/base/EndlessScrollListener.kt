@@ -3,7 +3,7 @@ package com.example.nguyenthanhtungh.unsplashphoto.base
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nguyenthanhtungh.unsplashphoto.util.TOTAL_ITEM_PER_PAGE
 
-class EndlessScrollListener(val onLoadMore: () -> Unit) : RecyclerView.OnScrollListener() {
+class EndlessScrollListener(private val onLoadMore: () -> Unit) : RecyclerView.OnScrollListener() {
     var isLoading = false
 
     override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
