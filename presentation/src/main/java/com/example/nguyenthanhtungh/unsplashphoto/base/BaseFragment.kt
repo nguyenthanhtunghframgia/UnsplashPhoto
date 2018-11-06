@@ -31,7 +31,7 @@ abstract class BaseFragment<ViewBinding : ViewDataBinding, ViewModel : BaseViewM
             root.isClickable = true
             initComponent(viewBinding)
             setVariable(bindingVariable, viewModel)
-            setLifecycleOwner(this@BaseFragment)
+            setLifecycleOwner(viewLifecycleOwner)
             executePendingBindings()
         }
         return viewBinding.root

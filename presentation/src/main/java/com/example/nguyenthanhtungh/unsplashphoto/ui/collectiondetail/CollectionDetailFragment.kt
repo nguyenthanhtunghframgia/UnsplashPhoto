@@ -70,21 +70,21 @@ class CollectionDetailFragment : BaseFragment<FragmentCollectionDetailBinding, C
 
             collectionTitle.value = arguments?.getString(COLLECTION_TITLE)
 
-            listCollectionPhotoItem.observe(this@CollectionDetailFragment, Observer {
+            listCollectionPhotoItem.observe(viewLifecycleOwner, Observer {
                 collectionDetailAdapter.submitList(it)
             })
             firstLoad(id)
 
-            isLoadMore.observe(this@CollectionDetailFragment, Observer {
+            isLoadMore.observe(viewLifecycleOwner, Observer {
                 if (it == null) return@Observer
                 endlessScrollListener.isLoading = it
             })
 
-            isRefresh.observe(this@CollectionDetailFragment, Observer {
+            isRefresh.observe(viewLifecycleOwner, Observer {
                 viewBinding.swipeLayout.apply { isRefreshing = it == true }
             })
 
-            errorMessage.observe(this@CollectionDetailFragment, Observer {
+            errorMessage.observe(viewLifecycleOwner, Observer {
                 DialogUtils.showToast(context, it)
             })
         }

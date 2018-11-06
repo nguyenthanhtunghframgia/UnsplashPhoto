@@ -66,29 +66,29 @@ class CollectionFragment : BaseFragment<FragmentCollectionBinding, CollectionVie
         viewBinding.swipeLayout.setOnRefreshListener(this@CollectionFragment)
 
         viewModel.apply {
-            listCollectionItem.observe(this@CollectionFragment, Observer {
+            listCollectionItem.observe(viewLifecycleOwner, Observer {
                 fragmentHomeAdapter.submitList(it)
             })
             firstLoad()
 
-            isInsertComplete.observe(this@CollectionFragment, Observer {
+            isInsertComplete.observe(viewLifecycleOwner, Observer {
                 //todo
             })
 
-            errorInsertMessage.observe(this@CollectionFragment, Observer {
+            errorInsertMessage.observe(viewLifecycleOwner, Observer {
                 DialogUtils.showToast(context, it)
             })
 
-            isLoadMore.observe(this@CollectionFragment, Observer {
+            isLoadMore.observe(viewLifecycleOwner, Observer {
                 if (it == null) return@Observer
                 endlessScrollListener.isLoading = it
             })
 
-            isRefresh.observe(this@CollectionFragment, Observer {
+            isRefresh.observe(viewLifecycleOwner, Observer {
                 viewBinding.swipeLayout.apply { isRefreshing = it == true }
             })
 
-            errorMessage.observe(this@CollectionFragment, Observer {
+            errorMessage.observe(viewLifecycleOwner, Observer {
                 DialogUtils.showToast(context, it)
             })
         }
