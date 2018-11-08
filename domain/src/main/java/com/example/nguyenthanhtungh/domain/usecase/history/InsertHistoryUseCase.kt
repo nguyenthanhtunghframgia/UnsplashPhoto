@@ -5,13 +5,13 @@ import com.example.nguyenthanhtungh.domain.repository.HistoryRepository
 import com.example.nguyenthanhtungh.domain.usecase.UseCase
 import io.reactivex.Single
 
-class InsertHistoryUseCase(private val historyRepository: HistoryRepository) :
+open class InsertHistoryUseCase(private val historyRepository: HistoryRepository) :
     UseCase<InsertHistoryUseCase.Param, Single<Long>>() {
 
     override fun createObservable(param: Param?): Single<Long> {
         param?.let {
             return Single.defer {
-                Single.just(historyRepository.insertHistory(param.history))
+                Single.just(historyRepository.insertHistory(History(1, param.query)))
             }
         }
         return Single.error(Throwable("Invalid Param"))
@@ -20,5 +20,5 @@ class InsertHistoryUseCase(private val historyRepository: HistoryRepository) :
     override fun onCleared() {
     }
 
-    class Param(val history: History)
+    class Param(val query: String)
 }

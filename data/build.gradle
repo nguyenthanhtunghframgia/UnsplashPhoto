@@ -32,7 +32,7 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
     //gson
-    implementation 'com.google.code.gson:gson:2.8.2'
+    implementation 'com.google.code.gson:gson:2.8.5'
     //retrofit2
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
@@ -47,9 +47,9 @@ dependencies {
     kapt "androidx.room:room-compiler:$room_version"
     implementation "androidx.room:room-rxjava2:$room_version"
     //koin
-    implementation 'org.koin:koin-core:1.0.0'
-    implementation 'org.koin:koin-android:1.0.0'
-    implementation 'org.koin:koin-android-viewmodel:1.0.0'
+    implementation 'org.koin:koin-core:1.0.1'
+    implementation 'org.koin:koin-android:1.0.1'
+    implementation 'org.koin:koin-android-viewmodel:1.0.1'
     //annotation
     implementation 'androidx.annotation:annotation:1.0.0'
     //module

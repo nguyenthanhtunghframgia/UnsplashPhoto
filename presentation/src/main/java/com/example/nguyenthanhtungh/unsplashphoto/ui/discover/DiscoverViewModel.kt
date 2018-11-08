@@ -5,7 +5,6 @@ import com.example.nguyenthanhtungh.domain.usecase.history.InsertHistoryUseCase
 import com.example.nguyenthanhtungh.domain.usecase.history.LimitHistoryUseCase
 import com.example.nguyenthanhtungh.domain.usecase.photo.DiscoverPhotoUseCase
 import com.example.nguyenthanhtungh.unsplashphoto.base.BaseViewModel
-import com.example.nguyenthanhtungh.unsplashphoto.model.HistoryItem
 import com.example.nguyenthanhtungh.unsplashphoto.model.HistoryItemMapper
 import com.example.nguyenthanhtungh.unsplashphoto.model.PhotoItem
 import com.example.nguyenthanhtungh.unsplashphoto.model.PhotoItemMapper
@@ -28,7 +27,7 @@ class DiscoverViewModel(
     val listDiscoverPhotoItem = MutableLiveData<List<PhotoItem>>()
     private var currentPage = MutableLiveData<Int>().apply { value = 0 }
 
-    private fun getListDiscoverPhotoItems(page: Int) {
+    fun getListDiscoverPhotoItems(page: Int) {
         addDisposable(discoverPhotoUseCase.createObservable(DiscoverPhotoUseCase.Param(page))
             .subscribeOn(appSchedulerProvider.io())
             .observeOn(appSchedulerProvider.ui())
@@ -89,13 +88,9 @@ class DiscoverViewModel(
         errorMessage.value = throwable.message
     }
 
-    fun insertHistory(historyItem: HistoryItem) {
+    fun insertHistory(query: String) {
         addDisposable(
-            insertHistoryUseCase.createObservable(
-                InsertHistoryUseCase.Param(
-                    historyItemMapper.mapToDomain(historyItem)
-                )
-            )
+            insertHistoryUseCase.createObservable(InsertHistoryUseCase.Param(query))
                 .subscribeOn(appSchedulerProvider.io())
                 .observeOn(appSchedulerProvider.ui())
                 .subscribe({

@@ -7,7 +7,7 @@ import com.example.nguyenthanhtungh.unsplashphoto.base.ModelItem
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-open class HistoryItem(
+data class HistoryItem(
     val id: Int,
     val query: String? = null
 ) : ModelItem(), Parcelable

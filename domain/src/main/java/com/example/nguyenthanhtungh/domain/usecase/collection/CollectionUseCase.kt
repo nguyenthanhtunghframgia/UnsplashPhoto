@@ -5,7 +5,7 @@ import com.example.nguyenthanhtungh.domain.repository.CollectionRepository
 import com.example.nguyenthanhtungh.domain.usecase.UseCase
 import io.reactivex.Single
 
-class CollectionUseCase(private val collectionRepository: CollectionRepository) :
+open class CollectionUseCase(private val collectionRepository: CollectionRepository) :
     UseCase<CollectionUseCase.Param, Single<List<Collection>>>() {
 
     override fun createObservable(param: Param?): Single<List<Collection>> {

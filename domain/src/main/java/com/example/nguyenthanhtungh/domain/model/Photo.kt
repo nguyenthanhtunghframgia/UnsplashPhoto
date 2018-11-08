@@ -2,7 +2,7 @@ package com.example.nguyenthanhtungh.domain.model
 
 import com.example.nguyenthanhtungh.domain.base.BaseModel
 
-class Photo(
+data class Photo(
     val id: String = "",
     val description: String? = null,
     val user: User? = null,

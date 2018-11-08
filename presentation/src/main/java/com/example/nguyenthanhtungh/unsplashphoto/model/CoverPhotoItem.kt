@@ -7,7 +7,7 @@ import com.example.nguyenthanhtungh.unsplashphoto.base.ModelItem
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-class CoverPhotoItem(
+data class CoverPhotoItem(
     val urlsItem: UrlsItem? = null
 ) : ModelItem(), Parcelable
 

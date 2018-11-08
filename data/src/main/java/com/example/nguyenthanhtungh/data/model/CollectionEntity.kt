@@ -5,7 +5,7 @@ import com.example.nguyenthanhtungh.data.base.ModelEntity
 import com.example.nguyenthanhtungh.domain.model.Collection
 import com.google.gson.annotations.SerializedName
 
-class CollectionEntity(
+data class CollectionEntity(
     @SerializedName("id")
     var id: String = "",
     @SerializedName("title")

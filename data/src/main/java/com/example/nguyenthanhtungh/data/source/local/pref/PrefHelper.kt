@@ -1,5 +1,5 @@
 package com.example.nguyenthanhtungh.data.source.local.pref
 
-class PrefHelper {
+interface PrefHelper {
     //todo
 }

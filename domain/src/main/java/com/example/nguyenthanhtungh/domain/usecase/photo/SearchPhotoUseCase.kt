@@ -5,7 +5,7 @@ import com.example.nguyenthanhtungh.domain.repository.PhotoRepository
 import com.example.nguyenthanhtungh.domain.usecase.UseCase
 import io.reactivex.Single
 
-class SearchPhotoUseCase(private val photoRepository: PhotoRepository) :
+open class SearchPhotoUseCase(private val photoRepository: PhotoRepository) :
     UseCase<SearchPhotoUseCase.Param, Single<List<Photo>>>() {
 
     override fun createObservable(param: Param?): Single<List<Photo>> {

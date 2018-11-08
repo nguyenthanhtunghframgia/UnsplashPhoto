@@ -5,7 +5,7 @@ import com.example.nguyenthanhtungh.data.base.ModelEntity
 import com.example.nguyenthanhtungh.domain.model.CoverPhoto
 import com.google.gson.annotations.SerializedName
 
-class CoverPhotoEntity(
+data class CoverPhotoEntity(
     @SerializedName("urls")
     val urls: UrlsEntity? = null
 ) : ModelEntity()
