@@ -5,7 +5,7 @@ import com.example.nguyenthanhtungh.data.base.ModelEntity
 import com.example.nguyenthanhtungh.domain.model.User
 import com.google.gson.annotations.SerializedName
 
-class UserEntity(
+data class UserEntity(
     @SerializedName("id")
     val id: String? = null,
     @SerializedName("name")

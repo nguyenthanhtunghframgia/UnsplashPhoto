@@ -14,7 +14,6 @@ import com.example.nguyenthanhtungh.unsplashphoto.base.EndlessScrollListener
 import com.example.nguyenthanhtungh.unsplashphoto.base.RecyclerItemDecoration
 import com.example.nguyenthanhtungh.unsplashphoto.databinding.FragmentCollectionBinding
 import com.example.nguyenthanhtungh.unsplashphoto.model.CollectionItem
-import com.example.nguyenthanhtungh.unsplashphoto.model.HistoryItem
 import com.example.nguyenthanhtungh.unsplashphoto.ui.collectiondetail.CollectionDetailFragment
 import com.example.nguyenthanhtungh.unsplashphoto.ui.search.SearchFragment
 import com.example.nguyenthanhtungh.unsplashphoto.util.DialogUtils
@@ -102,7 +101,7 @@ class CollectionFragment : BaseFragment<FragmentCollectionBinding, CollectionVie
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 searchItem.collapseActionView()
-                viewModel.insertHistory(HistoryItem(0, query))
+                viewModel.insertHistory(query ?: "")
                 goToSearchFragment(query)
                 return true
             }

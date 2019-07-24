@@ -1,6 +1,8 @@
 package com.example.nguyenthanhtungh.data.di
 
-import com.example.nguyenthanhtungh.data.model.*
+import com.example.nguyenthanhtungh.data.model.CollectionEntityMapper
+import com.example.nguyenthanhtungh.data.model.HistoryEntityMapper
+import com.example.nguyenthanhtungh.data.model.PhotoEntityMapper
 import com.example.nguyenthanhtungh.data.source.local.dao.HistoryDao
 import com.example.nguyenthanhtungh.data.source.remote.network.ApiService
 import com.example.nguyenthanhtungh.data.source.repository.CollectionRepositoryImpl

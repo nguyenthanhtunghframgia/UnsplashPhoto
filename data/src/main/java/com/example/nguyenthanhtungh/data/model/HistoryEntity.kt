@@ -7,7 +7,7 @@ import com.example.nguyenthanhtungh.data.base.ModelEntity
 import com.example.nguyenthanhtungh.domain.model.History
 
 @Entity(tableName = "history")
-class HistoryEntity(
+data class HistoryEntity(
     @PrimaryKey(autoGenerate = true)
     var id: Int,
     val query: String? = null

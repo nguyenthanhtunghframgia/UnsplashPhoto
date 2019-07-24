@@ -108,7 +108,7 @@ class UserFragment : BaseFragment<FragmentUserBinding, UserViewModel>() {
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 searchItem.collapseActionView()
-                viewModel.insertHistory(HistoryItem(0, query))
+                viewModel.insertHistory(query ?: "")
                 goToSearchFragment(query)
                 return true
             }

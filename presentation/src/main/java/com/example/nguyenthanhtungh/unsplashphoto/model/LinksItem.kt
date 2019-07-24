@@ -7,7 +7,7 @@ import com.example.nguyenthanhtungh.unsplashphoto.base.ModelItem
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-open class LinksItem(
+data class LinksItem(
     val self: String? = null,
     val html: String? = null,
     val download: String? = null,

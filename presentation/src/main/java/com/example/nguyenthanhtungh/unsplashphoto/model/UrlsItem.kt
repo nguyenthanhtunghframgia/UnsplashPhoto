@@ -7,7 +7,7 @@ import com.example.nguyenthanhtungh.unsplashphoto.base.ModelItem
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-open class UrlsItem(
+data class UrlsItem(
     val small: String? = null,
     val thumb: String? = null,
     val raw: String? = null,

@@ -5,7 +5,7 @@ import com.example.nguyenthanhtungh.data.base.ModelEntity
 import com.example.nguyenthanhtungh.domain.model.Urls
 import com.google.gson.annotations.SerializedName
 
-class UrlsEntity(
+data class UrlsEntity(
     @SerializedName("small")
     val small: String? = null,
     @SerializedName("thumb")

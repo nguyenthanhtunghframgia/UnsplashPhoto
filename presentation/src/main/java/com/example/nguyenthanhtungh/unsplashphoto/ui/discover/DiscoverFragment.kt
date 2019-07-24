@@ -13,7 +13,6 @@ import com.example.nguyenthanhtungh.unsplashphoto.base.BaseFragment
 import com.example.nguyenthanhtungh.unsplashphoto.base.EndlessScrollListener
 import com.example.nguyenthanhtungh.unsplashphoto.base.RecyclerItemDecoration
 import com.example.nguyenthanhtungh.unsplashphoto.databinding.FragmentDiscoverBinding
-import com.example.nguyenthanhtungh.unsplashphoto.model.HistoryItem
 import com.example.nguyenthanhtungh.unsplashphoto.model.PhotoItem
 import com.example.nguyenthanhtungh.unsplashphoto.ui.photodetail.PhotoDetailFragment
 import com.example.nguyenthanhtungh.unsplashphoto.ui.search.SearchFragment
@@ -101,7 +100,7 @@ class DiscoverFragment : BaseFragment<FragmentDiscoverBinding, DiscoverViewModel
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 searchItem.collapseActionView()
-                viewModel.insertHistory(HistoryItem(0, query))
+                viewModel.insertHistory(query ?: "")
                 goToSearchFragment(query)
                 return true
             }

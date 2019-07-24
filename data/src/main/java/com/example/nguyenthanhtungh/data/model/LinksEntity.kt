@@ -5,7 +5,7 @@ import com.example.nguyenthanhtungh.data.base.ModelEntity
 import com.example.nguyenthanhtungh.domain.model.Links
 import com.google.gson.annotations.SerializedName
 
-class LinksEntity(
+data class LinksEntity(
     @SerializedName("self")
     val self: String? = null,
     @SerializedName("html")

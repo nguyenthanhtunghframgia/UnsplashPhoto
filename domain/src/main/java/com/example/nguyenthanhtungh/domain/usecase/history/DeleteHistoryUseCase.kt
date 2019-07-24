@@ -5,7 +5,7 @@ import com.example.nguyenthanhtungh.domain.usecase.UseCase
 import io.reactivex.Single
 
 
-class DeleteHistoryUseCase(private val historyRepository: HistoryRepository) :
+open class DeleteHistoryUseCase(private val historyRepository: HistoryRepository) :
     UseCase<DeleteHistoryUseCase.Param, Single<Int>>() {
 
     override fun createObservable(param: Param?): Single<Int> {

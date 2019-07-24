@@ -4,7 +4,7 @@ import com.example.nguyenthanhtungh.domain.repository.HistoryRepository
 import com.example.nguyenthanhtungh.domain.usecase.UseCase
 import io.reactivex.Single
 
-class LimitHistoryUseCase(private val historyRepository: HistoryRepository) :
+open class LimitHistoryUseCase(private val historyRepository: HistoryRepository) :
     UseCase<LimitHistoryUseCase.Param, Single<Int>>() {
 
     override fun createObservable(param: Param?): Single<Int> {

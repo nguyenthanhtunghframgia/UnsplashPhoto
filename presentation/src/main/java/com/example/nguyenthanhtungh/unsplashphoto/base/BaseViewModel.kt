@@ -13,6 +13,5 @@ abstract class BaseViewModel : ViewModel() {
 
     fun onActivityDestroyed() {
         compositeDisposable.dispose()
-        compositeDisposable.clear()
     }
 }

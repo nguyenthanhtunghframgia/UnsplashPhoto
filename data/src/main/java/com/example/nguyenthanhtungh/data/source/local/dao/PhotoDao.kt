@@ -1,5 +1,5 @@
 package com.example.nguyenthanhtungh.data.source.local.dao
 
-class PhotoDao {
+interface PhotoDao {
     //todo
 }

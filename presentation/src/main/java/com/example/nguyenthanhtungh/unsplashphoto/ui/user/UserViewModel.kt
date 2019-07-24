@@ -67,13 +67,9 @@ class UserViewModel(
         errorMessage.value = throwable.message
     }
 
-    fun insertHistory(historyItem: HistoryItem) {
+    fun insertHistory(query: String) {
         addDisposable(
-            insertHistoryUseCase.createObservable(
-                InsertHistoryUseCase.Param(
-                    historyItemMapper.mapToDomain(historyItem)
-                )
-            )
+            insertHistoryUseCase.createObservable(InsertHistoryUseCase.Param(query))
                 .subscribeOn(appSchedulerProvider.io())
                 .observeOn(appSchedulerProvider.ui())
                 .subscribe({

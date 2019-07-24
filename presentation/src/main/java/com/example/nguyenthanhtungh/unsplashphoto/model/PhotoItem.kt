@@ -7,7 +7,7 @@ import com.example.nguyenthanhtungh.unsplashphoto.base.ModelItem
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-class PhotoItem(
+data class PhotoItem(
     val id: String = "",
     val description: String? = null,
     val user: UserItem? = null,

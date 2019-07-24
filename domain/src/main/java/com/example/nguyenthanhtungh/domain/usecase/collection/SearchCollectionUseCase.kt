@@ -1,11 +1,11 @@
 package com.example.nguyenthanhtungh.domain.usecase.collection
 
+import com.example.nguyenthanhtungh.domain.model.Collection
 import com.example.nguyenthanhtungh.domain.repository.CollectionRepository
 import com.example.nguyenthanhtungh.domain.usecase.UseCase
-import com.example.nguyenthanhtungh.domain.model.Collection
 import io.reactivex.Single
 
-class SearchCollectionUseCase(private val collectionRepository: CollectionRepository) :
+open class SearchCollectionUseCase(private val collectionRepository: CollectionRepository) :
     UseCase<SearchCollectionUseCase.Param, Single<List<Collection>>>() {
 
     override fun createObservable(param: Param?): Single<List<Collection>> {
